@@ -13,7 +13,7 @@ export default function NotFound(){
                <p className="text-3xl md:text-4xl font-bold tracking-tight">Oops! Page Not Found.</p>
                <p className="text-lg font-light text-muted-foreground">There was an error. We cannot find page you are looking for.</p>
                <Button asChild size="lg">
-                    <Link href="/blog">Go Back</Link>
+                    <Link href="/">Go Back</Link>
                </Button>
           </div>
      )
