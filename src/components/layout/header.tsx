@@ -25,7 +25,7 @@ export default function Header(){
      return (
           <div className={cn(`fixed w-full top-0 left-0 z-10 transition-all`,!isSticky ? "bg-transparent py-[30px]" : "bg-header py-[18px]",textColorClass)}>
                <div className="inner-width flex items-center justify-between">
-                    <Link href="https://arsentech.github.io" className={cn(`w-[150] h-8 ${!isSticky ? 'bg-[url(/arsentech-dark.svg)]' : 'bg-logo'} bg-center bg-contain hover`,isSticky && "hover:bg-[url(/arsentech-colorful.svg)]",isMobile && "order-[0]")} aria-label="ArsenTech">&nbsp;</Link>
+                    <Link href="https://arsentech.github.io" className={cn(`w-[150] h-8 ${!isSticky ? 'bg-[url(/blog/arsentech-dark.svg)]' : 'bg-logo'} bg-center bg-contain hover`,isSticky && "hover:bg-[url(/blog/arsentech-colorful.svg)]",isMobile && "order-[0]")} aria-label="ArsenTech">&nbsp;</Link>
                     {isMobile && (
                          <NavbarToggler
                               onClick={()=>setToggled(!toggled)}

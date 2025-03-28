@@ -3,7 +3,7 @@
      "name": "ArsenTech's Blog Website",
      "icons": [
           {
-               "src": "/Files/app-icon.png",
+               "src": "/blog/app-icon.png",
                "sizes": "192x192",
                "type": "image/png",
                "purpose": "maskable any"
