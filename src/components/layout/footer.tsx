@@ -1,12 +1,12 @@
 import { SOCIAL_MEDIA_LINKS } from "@/lib/constants"
-import { cn, getBackgroundImageClassName } from "@/lib/utils"
+import { getBackgroundImage} from "@/lib/utils"
 import Link from "next/link"
 import { useState } from "react"
 
 export default function Footer(){
      const [date] = useState(new Date())
      return (
-          <footer className={cn(getBackgroundImageClassName("footer"),"w-full bg-main-footer text-white py-20 text-center")}>
+          <footer className="w-full bg-main-footer text-white py-20 text-center" style={getBackgroundImage("footer")}>
                <div className="inner-width">
                     <div className="mb-5 text-base">
                          <p>&copy; {date.getFullYear()} | Developed By <Link className="underline text-[#E8FDF7] font-medium transition hover:text-[#59facf]" href="https://www.youtube.com/@ArsenTech/about">ArsenTech</Link></p>

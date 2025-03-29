@@ -45,7 +45,6 @@
     --header: 0 0% 95%;
     --header-foreground: 221 15% 25%;
     --image-color: 0;
-    --main-logo: url(/blog/arsentech-light.svg)
   }
   .dark {
     --background: 141 50% 5%;
@@ -76,7 +75,6 @@
     --header: 221 15% 25%;
     --header-foreground: 141 5% 90%;
     --image-color: 1;
-    --main-logo: url(/blog/arsentech-dark.svg)
   }
 }
 
@@ -92,18 +90,6 @@
   }
   ::selection{
     @apply bg-primary text-primary-foreground;
-  }
-  .bg-main-app{
-    @apply bg-[#204829] bg-[linear-gradient(#20482945,#1dd1a188),url(/blog/backgrounds/bg.webp)] bg-no-repeat bg-center bg-fixed bg-cover;
-  }
-  .bg-christmas-app{
-    @apply bg-[#204829] bg-[linear-gradient(#20482945,#1dd1a188),url(/blog/backgrounds/bg-christmas.webp)] bg-no-repeat bg-center bg-fixed bg-cover;
-  }
-  .bg-main-footer{
-    @apply bg-[#204829] bg-[linear-gradient(#20482945,#20482945),url(/blog/backgrounds/bg.webp)] bg-no-repeat bg-center bg-fixed bg-cover;
-  }
-  .bg-christmas-footer{
-    @apply bg-[#204829] bg-[linear-gradient(#20482945,#20482945),url(/blog/backgrounds/bg-christmas.webp)] bg-no-repeat bg-center bg-fixed bg-cover;
   }
   .inner-width{
     @apply max-w-[800px] md:max-w-[1300px] m-auto px-[18px] md:px-10;

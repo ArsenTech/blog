@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { absolutePath } from "@/lib/utils";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -22,10 +23,10 @@ export const metadata: Metadata = {
   ],
   keywords: ["arsentech", "arsentech youtube", "arsentech github", "malware", "malware testing", "windows", "windows experiments", "tech tutorials", "technology", "tech", "arsen tech", "coding", "programming", "coding with arsentech", "arsentech shorts", "remove memz", "remove 000.exe", "avast vs noescape", "antivirus", "linux", "virus testing", "antimalware", "ransomware", "trojan", "trojan malware", "techonologies", "html", "css", "js", "coding languages", "computer", "computer virus", "computer malware", "software", "more arsentech", "chrome", "tech tips", "tech youtuber", "programmer", "coder", "coding tips", "freeware", "software engineer", "software coding", "ms dos", "operating system", "normal people vs coder", "normal people vs programmer", "coding tutorials", "pc", "blog", "arsentech blog", "tech blog", "coding blog"],
   icons: {
-    icon: "/blog/app-icon.png",
-    apple: "/blog/app-icon.png"
+    icon: absolutePath("/app-icon.png"),
+    apple: absolutePath("/app-icon.png")
   },
-  manifest: "/blog/manifest.json"
+  manifest: absolutePath("/manifest.json")
 };
 
 export const viewport: Viewport = {
