@@ -21,7 +21,9 @@ This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus 
 - Dark Mode
 
 ## Bugs and Feature Requests
-If You want to Report Bug, or Request Feature, Write an Issue and I'll be in touch with you soon.
+This is an Entire Roadmap Of the Blog Page:
+### 1.0
+- Added 404 Page
 
 ## Website Speed
 Coming Soon Because This Page Is Under Construction
