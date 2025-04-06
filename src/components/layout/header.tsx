@@ -2,8 +2,8 @@ import { useIsMobile } from "@/hooks/use-is-mobile";
 import { absolutePath, cn, getInitialLogo } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react"
-import NavbarToggler from "../navbar-toggler";
-import ModeToggler from "../mode-toggler";
+import NavbarToggler from "@/components/togglers/navbar-toggler";
+import ModeToggler from "@/components/togglers/mode-toggler";
 import { LINKS } from "@/lib/constants";
 import Image from "next/image";
 import { useTheme } from "next-themes";
@@ -32,7 +32,7 @@ export default function Header(){
      const imgColorClass = isSticky ? "invert-image-color" : "invert"
      const isMobile = useIsMobile();
      return (
-          <header className={cn(`fixed w-full top-0 left-0 z-10 transition-all`,!isSticky ? "bg-transparent py-[30px]" : "bg-header py-[18px]",textColorClass)}>
+          <header className={cn(`fixed w-full top-0 left-0 z-10 transition-all border-none`,!isSticky ? "bg-transparent py-[30px]" : "bg-header py-[18px]",textColorClass)}>
                <div className="inner-width flex items-center justify-between">
                     <Link href="https://arsentech.github.io" className={cn(isMobile && "order-[0]")} aria-label="ArsenTech" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                          <Image src={!isSticky ? absolutePath("/arsentech-dark.svg") : logoImg} alt="logo" width={150} height={32} objectFit="contain"/>

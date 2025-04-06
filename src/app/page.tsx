@@ -1,25 +1,42 @@
+"use client"
+import BlogItem from "@/components/blog/blog-item";
+import { BlogWidget, BlogWidgetCard } from "@/components/blog/blog-widget";
 import PageLayout from "@/components/layout";
-import { SOCIAL_MEDIA_LINKS } from "@/lib/constants";
-import { absolutePath, getBackgroundImage } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
+import LandingSection from "@/components/layout/landing-section";
+import SiteSection from "@/components/layout/section";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 export default function Home() {
   return (
     <PageLayout>
       <main>
-        <section id="#banner" className="text-white flex items-center justify-center flex-col gap-5 h-screen min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
-          <Link href="https://arsentech.github.io">
-            <Image src={absolutePath("/arsentech-dark.svg")} alt="logo" width={300} height={64}/>
-          </Link>
-          <h1 className="text-4xl sm:text-6xl font-bold">Coming Soon...</h1>
-          <p className="text-lg sm:text-xl">We&apos;re working on something exciting. Stay tuned!</p>
-          <div className="flex justify-center flex-wrap gap-6">
-            {SOCIAL_MEDIA_LINKS.map(({Icon,url},i)=>(
-              <Link key={i} href={url} className="text-2xl hover:text-[#59facf] transition"><Icon/></Link>
-            ))}
+        <LandingSection/>
+        <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-3 scroll-p-10">
+          <div className="space-y-5">
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
+            <BlogItem/>
           </div>
-        </section>
+          <div className="space-y-4 relative md:sticky top-0 md:top-[85px] h-fit">
+            <div className="flex items-center gap-3">
+              <Search className="size-6 shrink-0"/>
+              <Input type="text" placeholder="Search tutorials, coding tips..."/>
+            </div>
+            <BlogWidget title="Widget Name">
+              <BlogWidgetCard/>
+              <BlogWidgetCard/>
+              <BlogWidgetCard/>
+            </BlogWidget>
+          </div>
+        </SiteSection>
       </main>
     </PageLayout>
   );

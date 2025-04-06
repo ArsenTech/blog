@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
-import { ButtonProps } from "./ui/button";
+import { ButtonProps } from "@/components/ui/button";
 
 interface NavbarTogglerProps extends ButtonProps{
      lineClass?: string,
-     isActive?: boolean
+     isActive: boolean
 }
 export default function NavbarToggler({
      lineClass,
