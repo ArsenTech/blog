@@ -6,6 +6,8 @@ import Link from "next/link"
 import { buttonVariants } from "../ui/button"
 import CodeBlock from "./md-components/code-block"
 import { cn } from "@/lib/utils"
+import { badgeVariants } from "../ui/badge"
+import { Checkbox } from "../ui/checkbox"
 
 const options: MarkdownToJSX.Options = {
      overrides: {
@@ -37,7 +39,7 @@ const options: MarkdownToJSX.Options = {
           },
           h6: {
                props: {
-                    className: "scroll-m-20 text-base font-semibold tracking-tight"
+                    className: "scroll-m-20 text-sm font-semibold tracking-tight"
                }
           },
           p: {
@@ -45,21 +47,25 @@ const options: MarkdownToJSX.Options = {
                     className: "leading-7 [&:not(:first-child)]:mt-6"
                }
           },
+          a: {
+               component: Link,
+               props: {
+                    className: cn(buttonVariants({variant: "link"}),"px-1 py-0 whitespace-normal text-base")
+               }
+          },
           blockquote: {
                props: {
                     className: "mt-6 border-l-2 pl-6 italic"
                }
           },
-          table: Table,
-          thead: TableHeader,
-          tr: TableRow,
-          th: TableHead,
-          tbody: TableBody,
-          td: TableCell,
-          tfoot: TableFooter,
-          ul: {
+          figure: {
                props: {
-                    className: "marker:text-foreground"
+                    className: "bg-card text-card-foreground border shadow my-3 rounded-md"
+               }
+          },
+          figcaption: {
+               props: {
+                    className: "p-3 mt-0 text-center"
                }
           },
           small: {
@@ -67,14 +73,18 @@ const options: MarkdownToJSX.Options = {
                     className: "text-sm font-medium leading-none"
                }
           },
-          a: {
-               component: Link,
+          kbd: {
                props: {
-                    className: cn(
-                         buttonVariants({variant: "link"}),
-                         "px-1 py-0 whitespace-normal text-base"
-                    )
+                    className: cn(badgeVariants({variant: "outline"}),"px-1.5 shadow")
                }
+          },
+          code: ({ className, children }: React.ComponentProps<"code">) => {
+               const match = /lang-(\w+)/.exec(className || "");
+               return match ? (
+                    <CodeBlock language={match[1]} code={`${children}`}/>
+               ) : (
+                    <code>{children}</code>
+               );
           },
           pre: ({children}: React.ComponentProps<"pre">)=>{
                const isLangClass = React.Children.toArray(children).some(child=>{
@@ -89,15 +99,19 @@ const options: MarkdownToJSX.Options = {
                     <pre>{children}</pre>
                )
           },
-          code: ({ className, children }: { className?: string; children?: string }) => {
-               const match = /lang-(\w+)/.exec(className || "");
-               return match ? (
-                    <CodeBlock language={match[1]} code={`${children}`}/>
-               ) : (
-                    <code>{children}</code>
-               );
+          table: Table,
+          thead: TableHeader,
+          tr: TableRow,
+          th: TableHead,
+          tbody: TableBody,
+          td: TableCell,
+          tfoot: TableFooter,
+          ul: {
+               props: {
+                    className: "marker:text-primary/65"
+               }
           },
-          iframe: ({ src }: { src: string }) => (
+          iframe: ({ src }: React.ComponentProps<"iframe">) => (
                <div className="relative w-full pb-[56.25%]">
                     <iframe src={src} className="absolute inset-0 w-full h-full rounded-md" />
                </div>
@@ -107,6 +121,29 @@ const options: MarkdownToJSX.Options = {
                     className: "border-t border-primary border-dashed"
                }
           },
+          footer: {
+               props: {
+                    className: "border-t p-5 space-y-2"
+               }
+          },
+          li: ({children}: React.ComponentProps<"li">) => {
+               let isChecked = false, hasCheckbox = false;
+               const newChildren = React.Children.map(children,(child)=>{
+                    if(React.isValidElement<HTMLInputElement>(child) && child.props.type==="checkbox") {
+                         hasCheckbox = true;
+                         isChecked = child.props.checked || child.props.defaultChecked || false;
+                         return (
+                              <Checkbox checked={isChecked} className="select-none pointer-events-none mr-2"/>
+                         )
+                    }
+                    return child
+               });
+               return !hasCheckbox ? (
+                    <li>{children}</li>
+               ) : (
+                    <li className="flex items-center gap-1.5 flex-wrap">{newChildren}</li>
+               )
+          }
      }
 }
 
@@ -114,11 +151,11 @@ interface BlogContentProps{
      markdownContent: string
 }
 export default function BlogContent({markdownContent}: BlogContentProps){
-     return (
+     return markdownContent!=="" ? (
           <div className="break-all prose dark:prose-invert prose-code:after:content-normal prose-code:before:content-none">
                <Markdown options={options}>
                     {markdownContent}
                </Markdown>
           </div>
-     )
+     ) : null
 }

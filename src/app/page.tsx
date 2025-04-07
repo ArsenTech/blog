@@ -12,7 +12,7 @@ export default function Home() {
     <PageLayout>
       <main>
         <LandingSection/>
-        <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-3 scroll-p-10">
+        <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-3">
           <div className="space-y-5">
             <BlogItem/>
             <BlogItem/>
