@@ -92,13 +92,19 @@
     @apply bg-primary text-primary-foreground;
   }
   .inner-width{
-    @apply max-w-[800px] md:max-w-[1300px] m-auto px-[18px] md:px-10;
+    @apply max-w-3xl md:max-w-screen-2xl m-auto px-[18px] md:px-10;
   }
   .navbar-menu-mobile{
     @apply fixed h-screen w-full top-0 max-w-[400px] py-20 px-[50px] transition-all text-center z-[1];
   }
   .navbar-menu{
     @apply relative h-fit w-fit top-0 max-w-[100%] py-0 px-0 transition-all;
+  }
+  section{
+    @apply pt-10 pb-14 md:pb-10
+  }
+  :not(pre) > code {
+    @apply relative rounded bg-muted text-foreground px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold
   }
 }
 
