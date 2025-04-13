@@ -1,5 +1,5 @@
 import { useIsMobile } from "@/hooks/use-is-mobile";
-import { absolutePath, cn, getInitialLogo } from "@/lib/utils";
+import { cn, getInitialLogo } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react"
 import NavbarToggler from "../navbar-toggler";
@@ -25,7 +25,7 @@ export default function Header(){
      useEffect(()=>{
           setLogoImg(getInitialLogo(theme))
      },[theme])
-     const handleMouseEnter = () => setLogoImg(absolutePath("/arsentech-colorful.svg"));
+     const handleMouseEnter = () => setLogoImg("/arsentech-colorful.svg");
      const handleMouseLeave = () => setLogoImg(getInitialLogo(theme))
      const textColorClass = isSticky ? "text-header-foreground" : "text-white"
      const bgColorClass = isSticky ? "bg-header-foreground" : "bg-white";
@@ -35,7 +35,7 @@ export default function Header(){
           <header className={cn(`fixed w-full top-0 left-0 z-10 transition-all`,!isSticky ? "bg-transparent py-[30px]" : "bg-header py-[18px]",textColorClass)}>
                <div className="inner-width flex items-center justify-between">
                     <Link href="https://arsentech.github.io" className={cn(isMobile && "order-[0]")} aria-label="ArsenTech" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                         <Image src={!isSticky ? absolutePath("/arsentech-dark.svg") : logoImg} alt="logo" width={150} height={32} objectFit="contain"/>
+                         <Image src={!isSticky ? "/arsentech-dark.svg" : logoImg} alt="logo" width={150} height={32} objectFit="contain"/>
                     </Link>
                     {isMobile && (
                          <NavbarToggler
