@@ -24,6 +24,10 @@ export default function extractTOC(content: string): TOCItem[]{
 
 export const getAllPosts = (): IBlogPost[] => {
      const folder = "src/posts";
+     if (!fs.existsSync(folder)) {
+          console.warn("src/posts does not exist on the server.");
+          return [];
+     }
      const files = fs.readdirSync(folder)
      const markdownPosts = files.filter(val=>val.endsWith(".md"));
      return markdownPosts.map(slug=>{
