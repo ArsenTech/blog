@@ -143,16 +143,18 @@ const options: MarkdownToJSX.Options = {
                ) : (
                     <li className="flex items-center gap-1.5 flex-wrap">{newChildren}</li>
                )
-          }
-     }
+          },
+     },
+     wrapper: React.Fragment
 }
 
 interface BlogContentProps{
-     markdownContent: string
+     markdownContent: string,
+     hasTableOfContents: boolean
 }
-export default function BlogContent({markdownContent}: BlogContentProps){
+export default function BlogContent({markdownContent,hasTableOfContents}: BlogContentProps){
      return markdownContent!=="" ? (
-          <div className="break-all prose dark:prose-invert prose-code:after:content-normal prose-code:before:content-none">
+          <div className={cn("prose dark:prose-invert prose-code:after:content-normal prose-code:before:content-none",!hasTableOfContents ? "max-w-full" : "max-w-5xl")}>
                <Markdown options={options}>
                     {markdownContent}
                </Markdown>

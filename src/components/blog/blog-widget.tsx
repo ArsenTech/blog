@@ -25,7 +25,7 @@ export function BlogWidgetCard({postData}: BlogItemProps){
      return (
           <Link className="inline-block w-full" href={`/posts/${slug}`}>
                <h2 className="text-lg md:text-xl font-semibold">{title}</h2>
-               <p className="text-sm text-muted-foreground">{format(date,"LLL Lo, yyyy")}</p>
+               <p className="text-sm text-muted-foreground">{format(date,"LLL do, yyyy")}</p>
           </Link>
      )
 }

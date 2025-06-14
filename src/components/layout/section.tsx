@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-interface SiteSectionProps extends React.ComponentProps<"section">{
+export interface SiteSectionProps extends React.ComponentProps<"section">{
      innerWidthClass?: string
 }
 export default function SiteSection({children, innerWidthClass, className, ...props}: SiteSectionProps){

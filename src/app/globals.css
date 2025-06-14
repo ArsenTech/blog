@@ -106,6 +106,9 @@
   :not(pre) > code {
     @apply relative rounded bg-muted text-foreground px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold
   }
+  [id] {
+    @apply scroll-mt-20
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

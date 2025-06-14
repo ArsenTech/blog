@@ -14,7 +14,7 @@ export default function BlogItem({postData}: BlogItemProps){
                <h2 className="text-2xl md:text-3xl font-semibold">{title}</h2>
                <p className="text-sm text-muted-foreground">{description}</p>
                <div className="flex justify-between items-center gap-4">
-                    <p className="flex items-center gap-2 font-medium"><Calendar className="size-5"/>{format(date,"LLL Lo, yyyy")}</p>
+                    <p className="flex items-center gap-2 font-medium"><Calendar className="size-5"/>{format(date,"LLL do, yyyy")}</p>
                     <Button asChild variant="ghost">
                          <Link href={`/posts/${slug}`}>Read more <ArrowRight/></Link>
                     </Button>

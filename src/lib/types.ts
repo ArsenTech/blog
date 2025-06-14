@@ -1,8 +1,22 @@
 export interface IBlogPost{
      title: string;
      description: string;
-     slug: string;
+     date: Date;
      tags: string[];
+     published: boolean;
+     featured: boolean;
+     categories: string[];
      content: string;
-     date: Date
+     slug: string;
+}
+
+export type BlogPostMetadata = Omit<IBlogPost,"content" | "slug" | "published" | "featured"> & {
+     published?: boolean;
+     featured?: boolean;
+}
+
+export interface TOCItem{
+     id: string,
+     text: string,
+     level: number
 }
