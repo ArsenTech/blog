@@ -8,6 +8,7 @@ import remarkParse from "remark-parse"
 import {visit} from "unist-util-visit"
 import type {Heading} from "mdast"
 import GithubSlugger from "github-slugger"
+import path from "path";
 
 export default function extractTOC(content: string): TOCItem[]{
      const tree = unified().use(remarkParse).parse(content);
@@ -23,7 +24,7 @@ export default function extractTOC(content: string): TOCItem[]{
 }
 
 export const getAllPosts = (): IBlogPost[] => {
-     const folder = "src/posts";
+     const folder = path.join(process.cwd(), "src/posts");
      if (!fs.existsSync(folder)) {
           console.warn("src/posts does not exist on the server.");
           return [];
