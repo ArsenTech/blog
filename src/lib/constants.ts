@@ -9,7 +9,7 @@ export const LINKS = [
 export const SOCIAL_MEDIA_LINKS = [
      {Icon: SiYoutube, url: "https://www.youtube.com/c/ArsenTech/"},
      {Icon: SiPatreon, url: "https://www.patreon.com/ArsenTech"},
-     {Icon: SiCodepen, url: "https://codepen.io/ArsenJS/"},
+     {Icon: SiCodepen, url: "https://codepen.io/ArsenTech/"},
      {Icon: SiGithub, url: "https://github.com/ArsenTech/"},
      {Icon: SiDeviantart, url: "https://www.deviantart.com/arsen2005"},
      {Icon: SiScratch, url: "https://scratch.mit.edu/users/ArsenTech/"},
