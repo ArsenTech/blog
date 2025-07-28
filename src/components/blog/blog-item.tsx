@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
 import { format } from "date-fns";
-import { IBlogPost } from "@/lib/types";
+import { IBlogPostBase } from "@/lib/types";
 
-export interface BlogItemProps{
-     postData: IBlogPost
+interface BlogItemProps{
+     postData: IBlogPostBase
 }
 export default function BlogItem({postData}: BlogItemProps){
      const {title, description, slug, date} = postData

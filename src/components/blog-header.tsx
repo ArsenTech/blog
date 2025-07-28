@@ -1,9 +1,9 @@
-import { IBlogPost } from "@/lib/types";
+import { IBlogPostBase } from "@/lib/types";
 import { getBackgroundImage } from "@/lib/utils";
 import { Badge } from "./ui/badge";
 
 interface BlogHeaderProps{
-     data: IBlogPost
+     data: IBlogPostBase
 }
 export default function BlogHeader({data}: BlogHeaderProps){
      const {title,description} = data

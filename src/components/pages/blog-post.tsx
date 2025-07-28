@@ -1,12 +1,11 @@
-"use client"
 import BlogHeader from "@/components/blog-header";
-import BlogContent from "@/components/blog/blog-content";
 import SiteSection, { SiteSectionProps } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
-import BlogItem, { BlogItemProps } from "../blog/blog-item";
+import BlogItem from "../blog/blog-item";
 import { cn } from "@/lib/utils";
-import { IBlogPost, TOCItem } from "@/lib/types";
-import TableOfContents from "../blog/toc";
+import { IBlogPostBase, IBlogPostFull } from "@/lib/types";
+import { useMDXComponents } from "@/mdx-components";
+import BlogContent from "../blog/blog-content";
 
 const PostSection: React.FC<SiteSectionProps & {
      sectionTitle: string,
@@ -17,22 +16,17 @@ const PostSection: React.FC<SiteSectionProps & {
      </SiteSection>
 )
 
-interface PostLayoutProps extends BlogItemProps{
-     relatedPosts: IBlogPost[],
-     toc: TOCItem[]
+interface BlogPostProps {
+     postData: IBlogPostFull
+     relatedPosts: IBlogPostBase[],
 }
-export default function PostLayout({postData, relatedPosts, toc}: PostLayoutProps){
-     const {content, tags} = postData;
-     const hasTableOfContents = toc.length!==0;
+export default function BlogPost({postData, relatedPosts}: BlogPostProps){
+     const {content, tags, toc} = postData;
+     const components = useMDXComponents({})
      return (
           <main>
                <BlogHeader data={postData}/>
-               <SiteSection innerWidthClass={cn("space-y-4",hasTableOfContents && "grid grid-cols-1 lg:grid-cols-[1.5fr_3fr] lg:gap-2 lg:gap-6")}>
-                    {hasTableOfContents && (
-                         <TableOfContents data={toc}/>
-                    )}
-                    <BlogContent markdownContent={content} hasTableOfContents={hasTableOfContents}/>
-               </SiteSection>
+               <BlogContent mdxContent={content} toc={toc} components={components}/>
                {tags.length!==0 ? (
                     <PostSection sectionTitle="Tags">
                          <div className="flex items-center gap-2">

@@ -9,8 +9,8 @@ interface HomepageProps{
 export default async function Home({searchParams}: HomepageProps) {
   const {page} = await searchParams;
   const currentPage = page ? +page : 1;
-  const posts = getAllPosts();
-  const categories = getCategories(posts);
+  const posts = await getAllPosts();
+  const categories = await getCategories(posts);
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
   return (
     <PageLayout>

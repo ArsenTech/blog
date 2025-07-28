@@ -1,5 +1,5 @@
 "use client"
-import { IBlogPost } from "@/lib/types"
+import { IBlogPostBase } from "@/lib/types"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import BlogItem from "../blog/blog-item"
@@ -12,7 +12,7 @@ import { MAX_FEATURED_POSTS, POSTS_PER_PAGE } from "@/lib/constants"
 import { Badge } from "../ui/badge"
 
 interface LandingPageProps{
-     posts: IBlogPost[],
+     posts: IBlogPostBase[],
      totalPages: number,
      currentPage: number,
      categories: string[]
@@ -37,7 +37,7 @@ export default function LandingPage({posts, totalPages, currentPage, categories}
                POSTS_PER_PAGE * currentPage
           )
      },[search,posts,currentPage,selected])
-     const featured = posts.filter(post=>post.featured).slice(0,MAX_FEATURED_POSTS)
+     const featured = posts.filter(post=>post.featured).slice(0,MAX_FEATURED_POSTS);
      const toggleCategory = (category: string) => setSelected(prev=>prev?.includes(category) ? prev.filter(val=>val!==category) : [...(prev||[]),category])
      return (
           <main>
