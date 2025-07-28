@@ -1,4 +1,4 @@
-import BlogHeader from "@/components/blog-header";
+import BlogHeader from "@/components/blog/blog-header";
 import SiteSection, { SiteSectionProps } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
 import BlogItem from "../blog/blog-item";

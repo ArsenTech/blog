@@ -1,3 +1,5 @@
+import { LucideProps } from "lucide-react";
+
 export interface IBlogPostBase{
      title: string;
      description: string;
@@ -23,4 +25,13 @@ export interface TOCItem{
      id: string,
      text: string,
      level: number
+}
+
+export type BlockquoteVariant = "note" | "tip" | "important" | "warning" | "caution"
+
+export interface IBlockquoteBox{
+     boxClass: string,
+     lineClass: string,
+     Icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>,
+     iconClass: string
 }

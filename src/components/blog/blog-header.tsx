@@ -1,6 +1,6 @@
 import { IBlogPostBase } from "@/lib/types";
 import { getBackgroundImage } from "@/lib/utils";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 
 interface BlogHeaderProps{
      data: IBlogPostBase
