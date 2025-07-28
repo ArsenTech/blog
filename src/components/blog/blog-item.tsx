@@ -4,7 +4,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { format } from "date-fns";
 import { IBlogPostBase } from "@/lib/types";
 
-interface BlogItemProps{
+export interface BlogItemProps{
      postData: IBlogPostBase
 }
 export default function BlogItem({postData}: BlogItemProps){
