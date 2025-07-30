@@ -9,7 +9,7 @@ import SiteSection from "../layout/section"
 import BlogPagination from "../pagination"
 import { useMemo, useState } from "react"
 import { MAX_FEATURED_POSTS, POSTS_PER_PAGE } from "@/lib/constants"
-import { Badge } from "../ui/badge"
+import { Badge } from "@/components/ui/badge"
 
 interface LandingPageProps{
      posts: IBlogPostBase[],
