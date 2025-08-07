@@ -20,7 +20,7 @@
 - [Features Included](#features-included)
 - [Bugs and Feature Requests](#bugs-and-feature-requests)
 - [Website Speed](#website-speed)
-- [Roadmap](#roadmap)
+- [Versioning](#versioning)
 - [Contributing](#contributing)
 - [Tech](#tech)
 - [Support And Follow ArsenTech](#support-and-follow-arsentech)
@@ -55,10 +55,8 @@ If You want to Report Bug, or Request Feature, Write an Issue and I'll be in tou
 ## Website Speed
 Coming Soon after measuring with different tools (Pingdom, GTMetrix, Pagespeed)
 
-## Roadmap
-- Added 404 Page
-- Added Landing Page with features
-- Added Blog Post Page with features
+## Versioning
+This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog](https://github.com/ArsenTech/blog/blob/main/CHANGELOG.md) for details on each website version.
 
 ## Contributing
 Contributions are Always Welcome! Please read both [Code of Conduct](https://github.com/ArsenTech/blog/blob/main/CODE_OF_CONDUCT.md) and [CONTRIBUTING.md](https://github.com/ArsenTech/blog/blob/main/CONTRIBUTING.md) before contributing.
