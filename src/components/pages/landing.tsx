@@ -9,7 +9,7 @@ import SiteSection from "../layout/section"
 import BlogPagination from "../pagination"
 import { useMemo, useState } from "react"
 import { MAX_FEATURED_POSTS, POSTS_PER_PAGE } from "@/lib/constants"
-import { Badge } from "@/components/ui/badge"
+import CollapsibleFilters from "../blog/blog-widget/filters"
 
 interface LandingPageProps{
      posts: IBlogPostBase[],
@@ -64,22 +64,11 @@ export default function LandingPage({posts, totalPages, currentPage, categories}
                                         ))}
                                    </BlogWidget>
                               ) : null}
-                              {categories.length!==0 ? (
-                                   <BlogWidget title="Filters">
-                                        <div className="flex items-center gap-2 flex-wrap">
-                                             {categories.map(category=>(
-                                                  <Badge
-                                                       className="cursor-pointer text-base" 
-                                                       key={category.toLowerCase()} 
-                                                       onClick={()=>toggleCategory(category)}
-                                                       variant={selected && selected.includes(category) ? "default" : "secondary"}
-                                                  >
-                                                       {category}
-                                                  </Badge>
-                                             ))}
-                                        </div>
-                                   </BlogWidget>
-                              ) : null}
+                              <CollapsibleFilters
+                                   tags={categories}
+                                   onToggleCategory={toggleCategory}
+                                   selected={selected}
+                              />
                          </div>
                     </SiteSection>
                ) : (

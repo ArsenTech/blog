@@ -1,20 +1,10 @@
 import BlogHeader from "@/components/blog/blog-header";
-import SiteSection, { SiteSectionProps } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
 import BlogItem from "../blog/blog-item";
-import { cn } from "@/lib/utils";
 import { IBlogPostBase, IBlogPostFull } from "@/lib/types";
 import { useMDXComponents } from "@/mdx-components";
 import BlogContent from "../blog/blog-content";
-
-const PostSection: React.FC<SiteSectionProps & {
-     sectionTitle: string,
-}> = ({sectionTitle, children, innerWidthClass, ...props}) => (
-     <SiteSection innerWidthClass={cn("flex flex-col gap-5 items-start justify-center",innerWidthClass)} {...props}>
-          <h3 className="scroll-m-20 text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight border-b border-primary pb-2">{sectionTitle}</h3>
-          {children}
-     </SiteSection>
-)
+import PostSection from "../blog/blog-post-section";
 
 interface BlogPostProps {
      postData: IBlogPostFull
@@ -26,7 +16,7 @@ export default function BlogPost({postData, relatedPosts}: BlogPostProps){
      return (
           <main>
                <BlogHeader data={postData}/>
-               <BlogContent mdxContent={content} toc={toc} components={components}/>
+               <BlogContent currTitle={postData.title} mdxContent={content} toc={toc} components={components}/>
                {tags.length!==0 ? (
                     <PostSection sectionTitle="Tags">
                          <div className="flex items-center gap-2">
@@ -36,6 +26,9 @@ export default function BlogPost({postData, relatedPosts}: BlogPostProps){
                          </div>
                     </PostSection>
                ) : null}
+               <PostSection sectionTitle="Comments" collapsible id="comments">
+                    TODO: Add Giscus Comments
+               </PostSection>
                {relatedPosts.length!==0 ? (
                     <PostSection sectionTitle="Related Posts">
                          <div className="space-y-4 w-full">
@@ -45,7 +38,6 @@ export default function BlogPost({postData, relatedPosts}: BlogPostProps){
                          </div>
                     </PostSection>
                ) : null}
-               {/* TODO: Add Giscus Comments with Collapsible Component */}
           </main>
      )
 }

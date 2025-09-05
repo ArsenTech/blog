@@ -2,14 +2,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {format} from "date-fns"
 import Link from "next/link";
-import { BlogItemProps } from "./blog-item";
+import { BlogItemProps } from "../blog-item";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import {Maximize2, Minimize2} from "lucide-react"
 import { useIsMobile } from "@/hooks/use-is-mobile";
 
-type CollapsibleMode = boolean | "mobile"
+export type CollapsibleMode = boolean | "mobile"
 
 interface BlogWidgetProps{
      title: string,

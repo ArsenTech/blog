@@ -1,6 +1,6 @@
 "use client"
 import { useActiveHeading } from "@/hooks/use-active-heading";
-import { BlogWidget } from "./blog-widget";
+import { BlogWidget } from ".";
 import {TOCItem} from "@/lib/types"
 import Link from "next/link";
 import { cn } from "@/lib/utils";
