@@ -1,6 +1,6 @@
 import { TOCItem } from "@/lib/types"
 import { MDXComponents } from "mdx/types"
-import TableOfContents from "./blog-widget/toc";
+import TableOfContents from "./widget/toc";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 import { cn } from "@/lib/utils";
 import SiteSection from "../layout/section";
@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode, {Options as RehypePrettyCodeOptions} from "rehype-pretty-code"
-import BlogAccessibility from "./blog-accessibility";
+import BlogAccessibility from "./accessibility";
 
 interface BlogContentProps{
      mdxContent: string,

@@ -2,14 +2,14 @@
 import { IBlogPostBase } from "@/lib/types"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import BlogItem from "../blog/blog-item"
-import { BlogWidget, BlogWidgetCard } from "../blog/blog-widget"
+import BlogItem from "../blog/item"
+import { BlogWidget, BlogWidgetCard } from "../blog/widget"
 import LandingSection from "../layout/landing-section"
 import SiteSection from "../layout/section"
 import BlogPagination from "../pagination"
 import { useMemo, useState } from "react"
 import { MAX_FEATURED_POSTS, POSTS_PER_PAGE } from "@/lib/constants"
-import CollapsibleFilters from "../blog/blog-widget/filters"
+import CollapsibleFilters from "../blog/widget/filters"
 
 interface LandingPageProps{
      posts: IBlogPostBase[],

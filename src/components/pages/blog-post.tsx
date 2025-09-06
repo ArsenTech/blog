@@ -1,10 +1,10 @@
-import BlogHeader from "@/components/blog/blog-header";
+import BlogHeader from "@/components/blog/header";
 import { Badge } from "@/components/ui/badge";
-import BlogItem from "../blog/blog-item";
+import BlogItem from "../blog/item";
 import { IBlogPostBase, IBlogPostFull } from "@/lib/types";
 import { useMDXComponents } from "@/mdx-components";
-import BlogContent from "../blog/blog-content";
-import PostSection from "../blog/blog-post-section";
+import BlogContent from "../blog/content";
+import PostSection from "../blog/post-section";
 
 interface BlogPostProps {
      postData: IBlogPostFull

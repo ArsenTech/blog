@@ -1,7 +1,7 @@
 "use client"
 import SiteSection, { SiteSectionProps } from "@/components/layout/section";
 import { cn } from "@/lib/utils";
-import { CollapsibleMode } from "../blog/blog-widget";
+import { CollapsibleMode } from "./widget";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";

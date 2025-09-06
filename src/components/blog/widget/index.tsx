@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {format} from "date-fns"
 import Link from "next/link";
-import { BlogItemProps } from "../blog-item";
+import { BlogItemProps } from "../item";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
