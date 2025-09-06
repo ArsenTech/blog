@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 import { CollapsibleMode } from "../blog/blog-widget";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Maximize2, Minimize2 } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 type PostSectionProps = SiteSectionProps & {
      sectionTitle: string,
