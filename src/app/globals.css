@@ -95,7 +95,7 @@
     @apply max-w-3xl md:max-w-screen-2xl m-auto px-[18px] md:px-10;
   }
   .navbar-menu-mobile{
-    @apply fixed h-screen w-full top-0 max-w-[400px] py-20 px-[50px] transition-all text-center z-[1];
+    @apply fixed h-screen w-full top-0 max-w-[400px] py-20 px-[50px] transition-all text-center z-20;
   }
   .navbar-menu{
     @apply relative h-fit w-fit top-0 max-w-[100%] py-0 px-0 transition-all;
