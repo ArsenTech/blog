@@ -43,8 +43,8 @@ export default function LandingPage({posts, totalPages, currentPage, categories}
           <main>
                <LandingSection/>
                {posts.length!==0 ? (
-                    <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-3">
-                         <div className="space-y-5">
+                    <SiteSection id="blog" innerWidthClass="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4">
+                         <div className="space-y-5 mt-4 lg:mt-0">
                               {filteredPosts.map(post=>(
                                    <BlogItem key={post.slug} postData={post}/>
                               ))}
@@ -52,7 +52,7 @@ export default function LandingPage({posts, totalPages, currentPage, categories}
                                    <BlogPagination totalPages={totalPages}/>
                               )}
                          </div>
-                         <div className="space-y-4 relative md:sticky top-0 lg:top-[85px] h-fit">
+                         <div className="space-y-4 relative md:sticky top-0 lg:top-[85px] h-fit -order-1 lg:order-1">
                               <div className="flex items-center gap-3">
                                    <Search className="size-6 shrink-0"/>
                                    <Input type="text" placeholder="Search tutorials, coding tips..." onChange={e=>setSearch(e.target.value)} value={search}/>

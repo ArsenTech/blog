@@ -21,7 +21,7 @@ export default function BlogAccessibility({currTitle}: BlogAccessibilityProps){
           }
      },[])
      return (
-          <div className={cn("sticky top-[69px] w-full not-prose py-3 px-1.5 flex items-center justify-between gap-2 bg-background border-b transition-all",isSticky ? "border-accent" : "border-transparent")}>
+          <div className={cn("sticky z-10 top-[69px] w-full not-prose py-3 mb-3 px-1.5 flex items-center justify-between gap-2 bg-background border-b transition-all",isSticky ? "border-accent" : "border-transparent")}>
                <Breadcrumb>
                     <BreadcrumbList>
                          <BreadcrumbItem>

@@ -7,8 +7,12 @@ import ModeToggler from "@/components/togglers/mode-toggler";
 import { LINKS } from "@/lib/constants";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import HeaderProgressBar from "../blog/reading-progress";
 
-export default function Header(){
+interface HeaderProps{
+     includeProgress?: boolean
+}
+export default function Header({includeProgress=false}: HeaderProps){
      const {theme} = useTheme()
      const [isSticky, setIsSticky] = useState(false);
      const [toggled, setToggled] = useState(false);
@@ -32,7 +36,7 @@ export default function Header(){
      const imgColorClass = isSticky ? "invert-image-color" : "invert"
      const isMobile = useIsMobile();
      return (
-          <header className={cn(`fixed w-full top-0 left-0 z-10 transition-all border-none`,!isSticky ? "bg-transparent py-[30px]" : "bg-header py-[18px]",textColorClass)}>
+          <header className={cn(`fixed w-full top-0 left-0 z-20 transition-all border-none`,!isSticky ? "bg-transparent py-[30px]" : "bg-header py-[18px]",textColorClass)}>
                <div className="inner-width flex items-center justify-between">
                     <Link href="/" className={cn(isMobile && "order-[0]")} aria-label="ArsenTech" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                          <Image src={!isSticky ? "/arsentech-dark.svg" : logoImg} alt="logo" width={150} height={32} className="object-contain"/>
@@ -54,6 +58,7 @@ export default function Header(){
                          className={imgColorClass}
                     />
                </div>
+               {includeProgress && <HeaderProgressBar/>}
           </header>
      )
 }
