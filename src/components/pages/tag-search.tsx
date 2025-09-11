@@ -6,7 +6,7 @@ import BlogItem from "../blog/item"
 import {zodResolver} from "@hookform/resolvers/zod"
 import SiteSection from "../layout/section"
 import { PaginationWithLinks } from "../ui/pagination-with-links"
-import { useMemo, useTransition } from "react"
+import { useEffect, useMemo, useState, useTransition } from "react"
 import { getBackgroundImage } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 import { Form, FormControl, FormField, FormItem } from "../ui/form"
@@ -25,6 +25,10 @@ interface TagSearchProps{
      tag: string
 }
 export default function TagSearch({results, totalPages, currentPage, tag, pageSize}: TagSearchProps){
+     const [loaded, setLoaded] = useState(false)
+     useEffect(()=>{
+          setLoaded(true)
+     },[])
      const filteredPosts = useMemo(()=>{
           const currPosts = results.filter(val=>val.tags.some(tag=>tag.toLowerCase().includes(tag.toLowerCase())))
           return currPosts
@@ -74,14 +78,16 @@ export default function TagSearch({results, totalPages, currentPage, tag, pageSi
                               {entries.map((post,i)=>(
                                    <BlogItem key={`${post.slug}-${i+1}`} postData={post}/>
                               ))}
-                              <PaginationWithLinks
-                                   page={currentPage}
-                                   totalCount={totalPages}
-                                   pageSize={pageSize}
-                                   pageSizeSelectOptions={{
-                                        pageSizeOptions: [5,10,25,50,100]
-                                   }}
-                              />
+                              {loaded && (
+                                   <PaginationWithLinks
+                                        page={currentPage}
+                                        totalCount={totalPages}
+                                        pageSize={pageSize}
+                                        pageSizeSelectOptions={{
+                                             pageSizeOptions: [5,10,25,50,100]
+                                        }}
+                                   />
+                              )}
                          </div>
                     </SiteSection>
                ) : (

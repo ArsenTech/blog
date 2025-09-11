@@ -7,7 +7,7 @@ import { BlogWidget, BlogWidgetCard } from "../blog/widget"
 import LandingSection from "../layout/landing-section"
 import SiteSection from "../layout/section"
 import { PaginationWithLinks } from "../ui/pagination-with-links"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { MAX_FEATURED_POSTS } from "@/lib/constants"
 import CollapsibleFilters from "../blog/widget/filters"
 
@@ -22,6 +22,10 @@ interface LandingPageProps{
 export default function LandingPage({posts, totalPages, currentPage, categories,pageSize, query}: LandingPageProps){
      const [search, setSearch] = useState(query)
      const [selected, setSelected] = useState<string[]>()
+     const [loaded, setLoaded] = useState(false)
+     useEffect(()=>{
+          setLoaded(true)
+     },[])
      const filteredPosts = useMemo(()=>{
           const currPosts = posts.filter(val=>
                val.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -51,15 +55,17 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
                               {entries.map(post=>(
                                    <BlogItem key={post.slug} postData={post}/>
                               ))}
-                              <PaginationWithLinks
-                                   page={currentPage}
-                                   totalCount={totalPages}
-                                   pageSize={pageSize}
-                                   navigationMode="link"
-                                   pageSizeSelectOptions={{
-                                        pageSizeOptions: [5,10,25,50,100]
-                                   }}
-                              />
+                              {loaded && (
+                                   <PaginationWithLinks
+                                        page={currentPage}
+                                        totalCount={totalPages}
+                                        pageSize={pageSize}
+                                        navigationMode="link"
+                                        pageSizeSelectOptions={{
+                                             pageSizeOptions: [5,10,25,50,100]
+                                        }}
+                                   />
+                              )}
                          </div>
                          <div className="space-y-4 relative md:sticky top-0 lg:top-[85px] h-fit">
                               <div className="flex items-center gap-3">
