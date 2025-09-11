@@ -1,4 +1,5 @@
 import { TOCItem } from "@/lib/types"
+import { MDXComponents } from "mdx/types"
 import TableOfContents from "./widget/toc";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 import { cn } from "@/lib/utils";
@@ -8,20 +9,19 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode, {Options as RehypePrettyCodeOptions} from "rehype-pretty-code"
 import BlogAccessibility from "./accessibility";
-import { useMDXComponents } from "@/mdx-components";
 
 interface BlogContentProps{
      mdxContent: string,
      toc: TOCItem[],
-     currTitle: string,
+     components: MDXComponents,
+     currTitle: string
 }
 const options: RehypePrettyCodeOptions = {
      theme: "material-theme-darker",
      bypassInlineCode: true,
 };
-export default function BlogContent({mdxContent, toc, currTitle}: BlogContentProps){
+export default function BlogContent({mdxContent, toc, components, currTitle}: BlogContentProps){
      const hasTableOfContents = toc.length!==0;
-     const components = useMDXComponents({})
      return (
           <SiteSection innerWidthClass={cn("space-y-4",hasTableOfContents && "grid grid-cols-1 lg:grid-cols-[1.5fr_3fr] gap-4")}>
                {hasTableOfContents && (

@@ -1,6 +1,5 @@
 import PageLayout from "@/components/layout";
 import BlogPost from "@/components/pages/blog-post";
-import BlogProgressProvider from "@/contexts/reading-progress";
 import { getPostBySlug, getRelatedPosts } from "@/lib/helpers";
 import { notFound } from "next/navigation";
 
@@ -13,10 +12,8 @@ export default async function SinglePostPage({params}: SinglePostPageProps){
     if(!currPost || !currPost.published) notFound();
     const relatedPosts = await getRelatedPosts(slug, currPost.tags)
     return (
-      <BlogProgressProvider>
-        <PageLayout includeProgress>
-          <BlogPost postData={currPost} relatedPosts={relatedPosts}/>
-        </PageLayout>
-      </BlogProgressProvider>
+      <PageLayout>
+        <BlogPost postData={currPost} relatedPosts={relatedPosts}/>
+      </PageLayout>
     )
 }
