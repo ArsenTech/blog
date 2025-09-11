@@ -7,7 +7,7 @@ import {toString} from "mdast-util-to-string"
 import GithubSlugger from "github-slugger"
 import matter from "gray-matter"
 import fs from "fs";
-import { MAX_RELATED_POSTS } from "./constants";
+import { MAX_RELATED_POSTS } from "../constants";
 import path from "path";
 
 const postsFolder = path.join(process.cwd(), "src", "posts");
@@ -76,4 +76,9 @@ export const getRelatedPosts = async(currentSlug: string, tags: string[]): Promi
 export async function getCategories<T extends IBlogPostBase>(posts?: ReadonlyArray<T>): Promise<string[]>{
      const arr = !posts ? await getAllPosts() : posts
      return [...new Set(arr.flatMap(val=>!val ? [] : val.categories))]
+}
+
+export async function getPostsByTag(tag: string){
+     const posts = await getAllPosts()
+     return posts.filter(post=>post.tags.includes(tag))
 }

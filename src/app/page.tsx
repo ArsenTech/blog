@@ -5,18 +5,26 @@ import { getAllPosts, getCategories } from "@/lib/helpers";
 import generateRSS from "@/lib/rss";
 
 interface HomepageProps{
-  searchParams: Promise<{page?: string}>
+  searchParams: Promise<{query?: string, page?: string, pageSize?:string}>
 }
 export default async function Home({searchParams}: HomepageProps) {
-  const {page} = await searchParams;
-  const currentPage = page ? +page : 1;
+  const {page, pageSize, query} = await searchParams;
+  const currentPage = page ? parseInt(page) : 1;
+  const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_PER_PAGE;
   const posts = await getAllPosts();
   const categories = await getCategories(posts);
-  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
+  const totalPages = Math.ceil(posts.length / postsPerPage)
   await generateRSS(posts)
   return (
     <PageLayout>
-      <LandingPage posts={posts} currentPage={currentPage} totalPages={totalPages} categories={categories}/>
+      <LandingPage
+        pageSize={postsPerPage}
+        posts={posts}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        categories={categories}
+        query={query || ""}
+      />
     </PageLayout>
   );
 }

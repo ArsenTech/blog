@@ -5,7 +5,6 @@ export const LINKS = [
      {name: "About", url: "https://arsentech.github.io/#about"},
      {name: "Contact", url: "https://arsentech.github.io/#contact"}
 ]
-
 export const SOCIAL_MEDIA_LINKS = [
      {Icon: SiYoutube, url: "https://www.youtube.com/c/ArsenTech/"},
      {Icon: SiPatreon, url: "https://www.patreon.com/ArsenTech"},
@@ -17,5 +16,7 @@ export const SOCIAL_MEDIA_LINKS = [
 ]
 
 export const POSTS_PER_PAGE = 10
+export const POSTS_IN_SEARCH = 5
 export const MAX_RELATED_POSTS = 3
 export const MAX_FEATURED_POSTS = 5
+export const SITE_URL = process.env.NODE_ENV==="production" ? "https://arsentech-blog.vercel.app" : "http://localhost:3000"

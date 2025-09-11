@@ -6,19 +6,21 @@ import BlogItem from "../blog/item"
 import { BlogWidget, BlogWidgetCard } from "../blog/widget"
 import LandingSection from "../layout/landing-section"
 import SiteSection from "../layout/section"
-import BlogPagination from "../pagination"
+import { PaginationWithLinks } from "../ui/pagination-with-links"
 import { useMemo, useState } from "react"
-import { MAX_FEATURED_POSTS, POSTS_PER_PAGE } from "@/lib/constants"
+import { MAX_FEATURED_POSTS } from "@/lib/constants"
 import CollapsibleFilters from "../blog/widget/filters"
 
 interface LandingPageProps{
      posts: IBlogPostBase[],
      totalPages: number,
      currentPage: number,
-     categories: string[]
+     pageSize: number,
+     categories: string[],
+     query: string
 }
-export default function LandingPage({posts, totalPages, currentPage, categories}: LandingPageProps){
-     const [search, setSearch] = useState("")
+export default function LandingPage({posts, totalPages, currentPage, categories,pageSize, query}: LandingPageProps){
+     const [search, setSearch] = useState(query)
      const [selected, setSelected] = useState<string[]>()
      const filteredPosts = useMemo(()=>{
           const currPosts = posts.filter(val=>
@@ -32,11 +34,12 @@ export default function LandingPage({posts, totalPages, currentPage, categories}
                          post.categories.includes(category)
                     )
                ): currPosts;
-          return flairFilters.slice(
-               POSTS_PER_PAGE * (currentPage-1),
-               POSTS_PER_PAGE * currentPage
-          )
-     },[search,posts,currentPage,selected])
+          return flairFilters;
+     },[search,posts,selected])
+     const entries = filteredPosts.slice(
+          (currentPage - 1) * pageSize,
+          currentPage + pageSize
+     )
      const featured = posts.filter(post=>post.featured).slice(0,MAX_FEATURED_POSTS);
      const toggleCategory = (category: string) => setSelected(prev=>prev?.includes(category) ? prev.filter(val=>val!==category) : [...(prev||[]),category])
      return (
@@ -45,12 +48,18 @@ export default function LandingPage({posts, totalPages, currentPage, categories}
                {posts.length!==0 ? (
                     <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-3">
                          <div className="space-y-5">
-                              {filteredPosts.map(post=>(
+                              {entries.map(post=>(
                                    <BlogItem key={post.slug} postData={post}/>
                               ))}
-                              {totalPages>1 && (
-                                   <BlogPagination totalPages={totalPages}/>
-                              )}
+                              <PaginationWithLinks
+                                   page={currentPage}
+                                   totalCount={totalPages}
+                                   pageSize={pageSize}
+                                   navigationMode="link"
+                                   pageSizeSelectOptions={{
+                                        pageSizeOptions: [5,10,25,50,100]
+                                   }}
+                              />
                          </div>
                          <div className="space-y-4 relative md:sticky top-0 lg:top-[85px] h-fit">
                               <div className="flex items-center gap-3">
