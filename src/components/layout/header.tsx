@@ -7,6 +7,7 @@ import ModeToggler from "@/components/togglers/mode-toggler";
 import { LINKS } from "@/lib/constants";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { Progress } from "../ui/progress";
 
 export default function Header(){
      const {theme} = useTheme()
@@ -53,6 +54,9 @@ export default function Header(){
                     <ModeToggler
                          className={imgColorClass}
                     />
+               </div>
+               <div className="absolute bottom-0 left-0 w-full">
+                    <Progress className="rounded-none"/>
                </div>
           </header>
      )
