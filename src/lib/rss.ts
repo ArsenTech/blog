@@ -43,7 +43,7 @@ export default async function generateRSS(allPosts: IBlogPostBase[]){
           })
      })
 
-     fs.writeFileSync("./public/rss.xml", feed.rss2())
-     fs.writeFileSync("./public/rss.json", feed.json1())
-     fs.writeFileSync("./public/atom.xml", feed.atom1())
+     fs.writeFileSync(new URL("../../public/rss.xml",import.meta.url), feed.rss2())
+     fs.writeFileSync(new URL("../../public/rss.json",import.meta.url), feed.json1())
+     fs.writeFileSync(new URL("../../public/atom.xml",import.meta.url), feed.atom1())
 }
