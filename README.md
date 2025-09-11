@@ -38,16 +38,18 @@ This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus 
     - Table of Contents with ScrollSpy
     - Tags
     - Related Posts
-    - Giscus Comments + Reactions (GitHub Discussions)
+    - Giscus Interactions (Comments + Reactions) using GitHub Discussions
 - Search and Filter Feature
 - Copy Code Button in Markdown
-<!-- - SEO Metadata (Title, Description, Tags)
 - RSS Feed (/feed.xml)
-- Sitemap (/sitemap.xml)
-- Tag Pages (/tag/[slug])
 - Breadcrumbs (Optional for UX/SEO)
 - Alert Boxes support
-- Collapsible widgets (Flairs, Table of Contents) -->
+- Collapsible widgets (Flairs, Table of Contents)
+<!--
+- SEO Metadata (Title, Description, Tags)
+- Sitemap (/sitemap.xml)
+- Tag Pages (/tag/[slug])
+ -->
 
 ## Bugs and Feature Requests
 If You want to Report Bug, or Request Feature, Write an Issue and I'll be in touch with you soon.

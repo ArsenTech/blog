@@ -37,8 +37,8 @@ export default function BlogAccessibility({currTitle}: BlogAccessibilityProps){
                          </BreadcrumbItem>
                     </BreadcrumbList>
                </Breadcrumb>
-               <Button variant="secondary" asChild title="Comments" size="icon">
-                    <Link href="#comments"><MessageSquareText/></Link>
+               <Button variant="secondary" asChild title="Interactions" size="icon">
+                    <Link href="#interactions"><MessageSquareText/></Link>
                </Button>
           </div>
      )

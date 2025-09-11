@@ -5,6 +5,7 @@ import { IBlogPostBase, IBlogPostFull } from "@/lib/types";
 import { useMDXComponents } from "@/mdx-components";
 import BlogContent from "../blog/content";
 import PostSection from "../blog/post-section";
+import BlogInteractions from "../blog/interactions";
 
 interface BlogPostProps {
      postData: IBlogPostFull
@@ -26,9 +27,6 @@ export default function BlogPost({postData, relatedPosts}: BlogPostProps){
                          </div>
                     </PostSection>
                ) : null}
-               <PostSection sectionTitle="Comments" collapsible id="comments">
-                    TODO: Add Giscus Comments
-               </PostSection>
                {relatedPosts.length!==0 ? (
                     <PostSection sectionTitle="Related Posts">
                          <div className="space-y-4 w-full">
@@ -38,6 +36,7 @@ export default function BlogPost({postData, relatedPosts}: BlogPostProps){
                          </div>
                     </PostSection>
                ) : null}
+               <BlogInteractions postTitle={postData.title}/>
           </main>
      )
 }
