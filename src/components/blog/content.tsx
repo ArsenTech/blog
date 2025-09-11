@@ -27,7 +27,7 @@ export default function BlogContent({mdxContent, toc, components, currTitle}: Bl
                {hasTableOfContents && (
                     <TableOfContents data={toc}/>
                )}
-               <article className={cn("prose dark:prose-invert prose-code:after:content-normal prose-code:before:content-none !mt-0",!hasTableOfContents ? "max-w-full" : "max-w-5xl")}>
+               <article className={cn("prose dark:prose-invert prose-code:after:content-normal prose-code:before:content-none !mt-0",!hasTableOfContents ? "max-w-full" : "max-w-5xl")} id="blog-content">
                     <BlogAccessibility currTitle={currTitle}/>
                     <div className="px-1">
                          <MDXRemote

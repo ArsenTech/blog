@@ -9,19 +9,18 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Progress } from "../ui/progress";
 
-export default function Header(){
+interface HeaderProps {
+  progress?: number; // 0–100
+}
+export default function Header({progress}: HeaderProps){
      const {theme} = useTheme()
      const [isSticky, setIsSticky] = useState(false);
      const [toggled, setToggled] = useState(false);
      const [logoImg, setLogoImg] = useState(getInitialLogo(theme))
      useEffect(()=>{
-          function handleScroll(this: Window) {
-               setIsSticky(this.scrollY > 20)
-          }
+          const handleScroll = () => setIsSticky(window.scrollY > 20)
           window.addEventListener("scroll",handleScroll)
-          return () => {
-               window.removeEventListener("scroll",handleScroll)
-          }
+          return () => window.removeEventListener("scroll",handleScroll)
      },[])
      useEffect(()=>{
           setLogoImg(getInitialLogo(theme))
@@ -55,9 +54,11 @@ export default function Header(){
                          className={imgColorClass}
                     />
                </div>
-               <div className="absolute bottom-0 left-0 w-full">
-                    <Progress className="rounded-none"/>
-               </div>
+               {!!progress && (
+                    <div className="absolute bottom-0 left-0 w-full">
+                         <Progress value={progress} className="rounded-none"/>
+                    </div>
+               )}
           </header>
      )
 }
