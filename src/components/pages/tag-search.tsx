@@ -1,7 +1,7 @@
 "use client"
 import { IBlogPostBase } from "@/lib/types"
 import {zodResolver} from "@hookform/resolvers/zod"
-import { useMemo, useTransition } from "react"
+import { useMemo } from "react"
 import { getBackgroundImage } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 import * as z from "zod"
@@ -38,7 +38,6 @@ export default function TagSearch({results, totalPages, currentPage, tag, pageSi
           return currPosts
      },[results])
      const router = useRouter()
-     const [isPending, startTransition] = useTransition()
      const entries = filteredPosts.slice(
           (currentPage - 1) * pageSize,
           currentPage + pageSize
@@ -50,9 +49,7 @@ export default function TagSearch({results, totalPages, currentPage, tag, pageSi
           }
      })
      function onSubmit(values: z.infer<typeof searchSchema>) {
-          startTransition(()=>{
-               router.push(`/?query=${values.query}&page=1&pageSize=${pageSize}`)
-          })
+          router.push(`/?query=${values.query}&page=1&pageSize=${pageSize}`)
      }
      return (
           <main>
@@ -66,7 +63,6 @@ export default function TagSearch({results, totalPages, currentPage, tag, pageSi
                     currentPage={currentPage}
                     pageSize={pageSize}
                     tag={tag}
-                    isPending={isPending}
                     form={form}
                     onSubmit={onSubmit}
                />

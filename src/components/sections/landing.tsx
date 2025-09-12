@@ -6,10 +6,8 @@ import BlogItem from "../blog/item"
 import { BlogWidget, BlogWidgetCard } from "../blog/widget"
 import SiteSection from "../layout/section"
 import { PaginationWithLinks } from "../ui/pagination-with-links"
-import { useEffect, useState } from "react"
 import CollapsibleFilters from "../blog/widget/filters"
 import NoSearchResults from "../shrug"
-import PaginationLoader from "../loaders/ui/pagination"
 
 export interface LandingSectionProps{
      entries: IBlogPostBase[],
@@ -24,10 +22,6 @@ export interface LandingSectionProps{
      setSelected: React.Dispatch<React.SetStateAction<string[]>>
 }
 export default function LandingSection({entries, search, setSearch, selected, setSelected, featured, categories, currentPage, pageSize, totalPages}: LandingSectionProps){
-     const [loaded, setLoaded] = useState(false)
-     useEffect(()=>{
-          setLoaded(true)
-     },[])
      const toggleCategory = (category: string) => setSelected(prev=>prev?.includes(category) ? prev.filter(val=>val!==category) : [...(prev||[]),category])
      return entries.length!==0 ? (
           <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-3">
@@ -42,17 +36,15 @@ export default function LandingSection({entries, search, setSearch, selected, se
                          {entries.map(post=>(
                               <BlogItem key={post.slug} postData={post}/>
                          ))}
-                         {loaded ? (
-                              <PaginationWithLinks
-                                   page={currentPage}
-                                   totalCount={totalPages}
-                                   pageSize={pageSize}
-                                   navigationMode="link"
-                                   pageSizeSelectOptions={{
-                                        pageSizeOptions: [5,10,25,50,100]
-                                   }}
-                              />
-                         ) : <PaginationLoader/>}
+                         <PaginationWithLinks
+                              page={currentPage}
+                              totalCount={totalPages}
+                              pageSize={pageSize}
+                              navigationMode="link"
+                              pageSizeSelectOptions={{
+                                   pageSizeOptions: [5,10,25,50,100]
+                              }}
+                         />
                          </>
                     )}
                </div>
