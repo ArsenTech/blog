@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { cn, getInitialLogo } from "@/lib/utils";
 import Link from "next/link";
