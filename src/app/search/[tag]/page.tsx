@@ -5,7 +5,6 @@ import { getAllTags, getPostsByTag } from "@/lib/helpers"
 import { absoluteURL } from "@/lib/helpers/seo"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { cache } from "react"
 
 interface PageProps{
      params: Promise<{tag: string}>,
@@ -13,13 +12,9 @@ interface PageProps{
 }
 
 export const revalidate = 86400
-const cached = {
-     getTags: cache(getAllTags),
-     getPostsByTag: cache(getPostsByTag)
-}
 
 export const generateStaticParams = async() => {
-     const allTags = await cached.getTags(POSTS_IN_SEARCH);
+     const allTags = await getAllTags(POSTS_IN_SEARCH);
      return allTags.map(tag => ({tag}))
 }
 
@@ -27,7 +22,7 @@ export const generateMetadata = async({params, searchParams}: PageProps): Promis
      const {tag} = await params
      const {page, pageSize} = await searchParams;
      const tagDecoded = decodeURIComponent(tag)
-     const results = await cached.getPostsByTag(tagDecoded)
+     const results = await getPostsByTag(tagDecoded)
      if(!results) return notFound();
      const currentPage = page ? parseInt(page) : 1;
      const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_IN_SEARCH;
@@ -84,7 +79,7 @@ export default async function TagsPage({params, searchParams}: PageProps){
      const currentPage = page ? parseInt(page) : 1;
      const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_IN_SEARCH;
      const tagDecoded = decodeURIComponent(tag)
-     const results = await cached.getPostsByTag(tagDecoded)
+     const results = await getPostsByTag(tagDecoded)
      const totalPages = Math.ceil(results.length / postsPerPage)
      return (
           <PageLayout>

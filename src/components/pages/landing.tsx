@@ -1,16 +1,15 @@
 "use client"
 import { IBlogPostBase } from "@/lib/types"
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import BlogItem from "../blog/item"
-import { BlogWidget, BlogWidgetCard } from "../blog/widget"
-import LandingSection from "../layout/landing-section"
-import SiteSection from "../layout/section"
-import { PaginationWithLinks } from "../ui/pagination-with-links"
-import { useEffect, useMemo, useState } from "react"
+import { getBackgroundImage } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Rss } from "lucide-react";
+import { useMemo, useState } from "react"
 import { MAX_FEATURED_POSTS } from "@/lib/constants"
-import CollapsibleFilters from "../blog/widget/filters"
-import NoSearchResults from "../shrug"
+import LandingLoader from "../loaders/landing-loader"
+import dynamic from "next/dynamic"
+import { LandingSectionProps } from "../sections/landing";
+import LandingH1 from "../h1-animated-text";
 
 interface LandingPageProps{
      posts: IBlogPostBase[],
@@ -18,15 +17,23 @@ interface LandingPageProps{
      currentPage: number,
      pageSize: number,
      categories: string[],
-     query: string
+     query: string,
 }
+
+export function LandingSection(props: LandingSectionProps) {
+     const Inner = dynamic(() => import("../sections/landing"), {
+          ssr: false,
+          loading: () => <LandingLoader count={props.entries.slice(
+               (props.currentPage - 1) * props.pageSize,
+               props.currentPage + props.pageSize
+          ).length} />
+     })
+     return <Inner {...props} />
+}
+
 export default function LandingPage({posts, totalPages, currentPage, categories,pageSize, query}: LandingPageProps){
      const [search, setSearch] = useState(query)
-     const [selected, setSelected] = useState<string[]>()
-     const [loaded, setLoaded] = useState(false)
-     useEffect(()=>{
-          setLoaded(true)
-     },[])
+     const [selected, setSelected] = useState<string[]>([])
      const filteredPosts = useMemo(()=>{
           const currPosts = posts.filter(val=>
                val.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -43,64 +50,35 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
      },[search,posts,selected])
      const entries = filteredPosts.slice(
           (currentPage - 1) * pageSize,
-          currentPage + pageSize
+          currentPage * pageSize
      )
      const featured = posts.filter(post=>post.featured).slice(0,MAX_FEATURED_POSTS);
-     const toggleCategory = (category: string) => setSelected(prev=>prev?.includes(category) ? prev.filter(val=>val!==category) : [...(prev||[]),category])
      return (
           <main>
-               <LandingSection/>
-               {posts.length!==0 ? (
-                    <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-3">
-                         <div className="space-y-5">
-                              <h3 className="scroll-m-20 text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight border-b border-primary pb-2">{search==="" ? "Latest Posts" : "Search Results"}</h3>
-                              {entries.length<=0 ? (
-                                   <div className="flex !mt-0 flex-col items-center justify-center gap-3 h-full w-full">
-                                        <NoSearchResults tag={search}/>
-                                   </div>
-                              ) : (
-                                   <>
-                                   {entries.map(post=>(
-                                        <BlogItem key={post.slug} postData={post}/>
-                                   ))}
-                                   {loaded && (
-                                        <PaginationWithLinks
-                                             page={currentPage}
-                                             totalCount={totalPages}
-                                             pageSize={pageSize}
-                                             navigationMode="link"
-                                             pageSizeSelectOptions={{
-                                                  pageSizeOptions: [5,10,25,50,100]
-                                             }}
-                                        />
-                                   )}
-                                   </>
-                              )}
-                         </div>
-                         <div className="space-y-4 relative md:sticky top-0 lg:top-[85px] h-fit">
-                              <div className="flex items-center gap-3">
-                                   <Search className="size-6 shrink-0"/>
-                                   <Input type="text" placeholder="Search tutorials, coding tips..." onChange={e=>setSearch(e.target.value)} value={search}/>
-                              </div>
-                              {featured.length!==0 ? (
-                                   <BlogWidget title="Featured Posts">
-                                        {featured.map(post=>(
-                                             <BlogWidgetCard key={post.slug} postData={post}/>
-                                        ))}
-                                   </BlogWidget>
-                              ) : null}
-                              <CollapsibleFilters
-                                   tags={categories}
-                                   onToggleCategory={toggleCategory}
-                                   selected={selected}
-                              />
-                         </div>
-                    </SiteSection>
-               ) : (
-                    <SiteSection>
-                         <p className="text-lg md:text-xl lg:text-2xl font-semibold text-center text-muted-foreground">No blog posts available yet. Check back soon!</p>
-                    </SiteSection>
-               )}
+               <section id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-screen min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
+                    <LandingH1/>
+                    <p className="text-lg sm:text-xl">Learn about cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place.</p>
+                    <div className="flex items-center gap-2">
+                         <Button size="lg" variant="outline" asChild>
+                              <Link href="#blog">Explore blog</Link>
+                         </Button>
+                         <Button className="size-10" variant="secondary" asChild>
+                              <Link href="/rss.xml"><Rss/></Link>
+                         </Button>
+                    </div>
+               </section>
+               <LandingSection
+                    entries={entries}
+                    featured={featured}
+                    categories={categories}
+                    currentPage={currentPage}
+                    pageSize={pageSize}
+                    totalPages={totalPages}
+                    search={search}
+                    setSearch={setSearch}
+                    selected={selected}
+                    setSelected={setSelected}
+               />
           </main>
      )
 }

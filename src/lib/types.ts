@@ -16,7 +16,7 @@ export interface IBlogPostFull extends IBlogPostBase {
      toc: TOCItem[];
 }
 
-export type BlogPostMetadata = Omit<IBlogPostBase,"slug" | "published" | "featured"> & {
+export type BlogPostMetadata = Omit<IBlogPostBase,"published" | "featured"> & {
      published?: boolean;
      featured?: boolean;
 }

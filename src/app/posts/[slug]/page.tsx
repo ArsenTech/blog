@@ -5,27 +5,21 @@ import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/helpers";
 import { absoluteURL } from "@/lib/helpers/seo";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache } from "react";
 
 interface SinglePostPageProps{
   params: Promise<{slug: string}>
 }
 
 export const revalidate = 86400
-const cached = {
-  getCurrentPost: cache(getPostBySlug),
-  getRelatedPosts: cache(getRelatedPosts),
-  getAllSlugs: cache(getAllSlugs)
-}
 
 export const generateStaticParams = async() => {
-  const allSlugs = await cached.getAllSlugs();
+  const allSlugs = await getAllSlugs();
   return allSlugs.map(slug => ({slug}))
 }
 
 export const generateMetadata = async({params}: SinglePostPageProps): Promise<Metadata> => {
   const {slug} = await params;
-  const currPost = await cached.getCurrentPost(slug);
+  const currPost = await getPostBySlug(slug);
   if(!currPost || !currPost.published) return notFound();
   const ogImage = absoluteURL(`/api/og?title=${encodeURIComponent(currPost.title)}&description=${encodeURIComponent(currPost.description)}&date=${currPost.date.toISOString()}`)
   return {
@@ -72,9 +66,9 @@ export const generateMetadata = async({params}: SinglePostPageProps): Promise<Me
 
 export default async function SinglePostPage({params}: SinglePostPageProps){
   const {slug} = await params;
-  const currPost = await cached.getCurrentPost(slug);
+  const currPost = await getPostBySlug(slug);
   if(!currPost || !currPost.published) notFound();
-  const relatedPosts = await cached.getRelatedPosts(slug, currPost.tags)
+  const relatedPosts = await getRelatedPosts(slug, currPost.tags)
   return (
     <PageLayout>
       <BlogPost postData={currPost} relatedPosts={relatedPosts}/>

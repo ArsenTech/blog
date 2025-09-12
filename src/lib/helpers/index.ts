@@ -1,4 +1,4 @@
-import { TOCItem, IBlogPostBase, IBlogPostFull } from "@/lib/types";
+import { TOCItem, IBlogPostBase, IBlogPostFull, BlogPostMetadata } from "@/lib/types";
 import {unified} from "unified"
 import remarkParse from "remark-parse"
 import {visit} from "unist-util-visit"
@@ -6,9 +6,10 @@ import type {Heading} from "mdast"
 import {toString} from "mdast-util-to-string"
 import GithubSlugger from "github-slugger"
 import matter from "gray-matter"
-import fs from "fs";
+import {promises as fs} from "fs";
 import { MAX_RELATED_POSTS } from "../constants";
 import path from "path";
+import { cache } from "react";
 
 const postsFolder = path.join(process.cwd(), "src", "posts");
 
@@ -26,8 +27,8 @@ export default function extractTOC(content: string): TOCItem[]{
      return headings
 }
 
-export const getAllPosts = async(): Promise<IBlogPostBase[]> => {
-     const files = fs.readdirSync(postsFolder);
+export const getAllPosts = cache(async(): Promise<IBlogPostBase[]> => {
+     const files = await fs.readdir(postsFolder);
      const posts = await Promise.all(
           files.map(async file =>{
                const blog = await getPostBySlug(path.parse(file).name.replace(".mdx", ""))
@@ -37,20 +38,20 @@ export const getAllPosts = async(): Promise<IBlogPostBase[]> => {
                return rest
           })
      );
-     return posts.filter((post): post is IBlogPostBase=> post !== null && post.published)
-}
+     return posts.filter((post): post is IBlogPostBase=> post !== null && post.published).sort((a, b) => b.date.getTime() - a.date.getTime());
+})
 
-export const getPostBySlug = async(slug: string): Promise<IBlogPostFull | null> => {
+export const getPostBySlug = cache(async(slug: string): Promise<IBlogPostFull | null> => {
      try {
           const fullPath = path.join(postsFolder, `${slug}.mdx`);
-          const contents = await fs.promises.readFile(fullPath, "utf8");
+          const contents = await fs.readFile(fullPath, "utf8");
           const toc = extractTOC(contents);
-          const { data: frontmatter, content } = matter(contents)
+          const { data: frontmatter, content } = matter(contents) as unknown as {data: BlogPostMetadata, content: string}
           return {
                title: frontmatter.title,
-               slug: path.parse(fullPath).name.replace(".mdx", ""),
+               slug: frontmatter.slug ?? slug,
                description: frontmatter.description,
-               date: new Date(frontmatter.date),
+               date: frontmatter.date ? new Date(frontmatter.date) : new Date(),
                tags: frontmatter.tags ?? [],
                categories: frontmatter.categories ?? [],
                published: frontmatter.published ?? true,
@@ -63,32 +64,35 @@ export const getPostBySlug = async(slug: string): Promise<IBlogPostFull | null> 
           console.error(e);
           return null;
      }
-}
+})
 
-export const getRelatedPosts = async(currentSlug: string, tags: string[]): Promise<IBlogPostBase[]> => {
+export const getRelatedPosts = cache(async(currentSlug: string, tags: string[]): Promise<IBlogPostBase[]> => {
      const posts = await getAllPosts()
-     return posts.filter(post=>{
-          if(!post || post.slug===currentSlug) return false;
-          return post.tags.some(tag=>tags.includes(tag))
-     }).filter(post=>post!==null).slice(0,MAX_RELATED_POSTS)
-}
+     const related = posts.filter(post => post.slug !== currentSlug && post.tags.some(tag => tags.includes(tag)));
+     const seen = new Set<string>();
+     return related.filter(p => {
+          if (seen.has(p.slug)) return false;
+          seen.add(p.slug);
+          return true;
+     }).slice(0, MAX_RELATED_POSTS);
+})
 
-export async function getCategories<T extends IBlogPostBase>(posts?: ReadonlyArray<T>): Promise<string[]>{
+export const getCategories = cache(async(posts?: ReadonlyArray<IBlogPostBase>): Promise<string[]> => {
      const arr = !posts ? await getAllPosts() : posts
-     return [...new Set(arr.flatMap(val=>!val ? [] : val.categories))]
-}
+     return [...new Set(arr.flatMap(post => post.categories))];
+})
 
-export async function getPostsByTag(tag: string){
-     const posts = await getAllPosts()
-     return posts.filter(post=>post.tags.includes(tag))
-}
+export const getAllTags = cache(async(limit?: number) => {
+     const posts = await getAllPosts();
+     return [...new Set(posts.flatMap(post => post.tags))].slice(0, limit);
+});
 
-export async function getAllTags(limit?: number){
-     const posts = await getAllPosts()
-     return [...new Set(posts.flatMap(post=>post.tags).slice(0,limit))]
-}
+export const getPostsByTag = cache(async(tag: string) => {
+     const posts = await getAllPosts();
+     return posts.filter(post =>post.tags.some(t => t.toLowerCase() === tag.toLowerCase()));
+});
 
-export async function getAllSlugs(limit?: number){
+export const getAllSlugs = cache(async(limit?: number) => {
      const posts = await getAllPosts()
      return posts.map(post=>post.slug).slice(0,limit)
-}
+})
