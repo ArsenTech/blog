@@ -3,16 +3,29 @@ import fs from "fs"
 import path from "path"
 import { getAllPosts } from "@/lib/helpers"
 import { SITE_URL } from "@/lib/constants"
+import { absoluteURL } from "@/lib/helpers/seo"
 
 const generateRSS = async() => {
      const feed = new Feed({
-          title: "ArsenTech Blog",
-          description: "The latest tech articles from ArsenTech",
           id: SITE_URL,
-          link: SITE_URL,
+          title: "ArsenTech Blog",
+          description: "Learn about cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place.",
+          generator: "Feed for Node.js",
           language: "en",
-          favicon: `${SITE_URL}/favicon.ico`,
-          copyright: `All rights reserved ${new Date().getFullYear()}`,
+          link: SITE_URL,
+          image: absoluteURL("/app-icon.png"),
+          favicon: absoluteURL("/favicon.ico"),
+          copyright: `All rights reserved ${new Date().getFullYear()}, ArsenTech`,
+          category: "Tech",
+          author: {
+               name: "ArsenTech",
+               link: "https://arsentech.github.io",
+          },
+          feedLinks: {
+               rss2: absoluteURL(`/rss.xml`),
+               json: absoluteURL(`/rss.json`),
+               atom: absoluteURL(`/atom.xml`),
+          },
      })
 
      const posts = await getAllPosts()
@@ -20,10 +33,15 @@ const generateRSS = async() => {
      posts.forEach(post => {
           feed.addItem({
                title: post.title,
-               id: `${SITE_URL}/posts/${post.slug}`,
-               link: `${SITE_URL}/posts/${post.slug}`,
                description: post.description,
-               date: new Date(post.date),
+               id: absoluteURL(`/posts/${post.slug}`),
+               link: absoluteURL(`/posts/${post.slug}`),
+               date: post.date,
+               category: post.categories.map(cat=>({name: cat})),
+               author: [{
+                    name: "ArsenTech",
+                    link: "https://arsentech.github.io",
+               }]
           })
      })
 
