@@ -82,3 +82,13 @@ export async function getPostsByTag(tag: string){
      const posts = await getAllPosts()
      return posts.filter(post=>post.tags.includes(tag))
 }
+
+export async function getAllTags(limit?: number){
+     const posts = await getAllPosts()
+     return [...new Set(posts.flatMap(post=>post.tags).slice(0,limit))]
+}
+
+export async function getAllSlugs(limit?: number){
+     const posts = await getAllPosts()
+     return posts.map(post=>post.slug).slice(0,limit)
+}

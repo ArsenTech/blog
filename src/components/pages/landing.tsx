@@ -10,6 +10,7 @@ import { PaginationWithLinks } from "../ui/pagination-with-links"
 import { useEffect, useMemo, useState } from "react"
 import { MAX_FEATURED_POSTS } from "@/lib/constants"
 import CollapsibleFilters from "../blog/widget/filters"
+import NoSearchResults from "../shrug"
 
 interface LandingPageProps{
      posts: IBlogPostBase[],
@@ -52,19 +53,28 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
                {posts.length!==0 ? (
                     <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-3">
                          <div className="space-y-5">
-                              {entries.map(post=>(
-                                   <BlogItem key={post.slug} postData={post}/>
-                              ))}
-                              {loaded && (
-                                   <PaginationWithLinks
-                                        page={currentPage}
-                                        totalCount={totalPages}
-                                        pageSize={pageSize}
-                                        navigationMode="link"
-                                        pageSizeSelectOptions={{
-                                             pageSizeOptions: [5,10,25,50,100]
-                                        }}
-                                   />
+                              <h3 className="scroll-m-20 text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight border-b border-primary pb-2">{search==="" ? "Latest Posts" : "Search Results"}</h3>
+                              {entries.length<=0 ? (
+                                   <div className="flex !mt-0 flex-col items-center justify-center gap-3 h-full w-full">
+                                        <NoSearchResults tag={search}/>
+                                   </div>
+                              ) : (
+                                   <>
+                                   {entries.map(post=>(
+                                        <BlogItem key={post.slug} postData={post}/>
+                                   ))}
+                                   {loaded && (
+                                        <PaginationWithLinks
+                                             page={currentPage}
+                                             totalCount={totalPages}
+                                             pageSize={pageSize}
+                                             navigationMode="link"
+                                             pageSizeSelectOptions={{
+                                                  pageSizeOptions: [5,10,25,50,100]
+                                             }}
+                                        />
+                                   )}
+                                   </>
                               )}
                          </div>
                          <div className="space-y-4 relative md:sticky top-0 lg:top-[85px] h-fit">

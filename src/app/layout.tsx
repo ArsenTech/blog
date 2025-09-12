@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { KEYWORDS } from "@/lib/constants";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -14,13 +15,11 @@ export const metadata: Metadata = {
     absolute: "Blog | ArsenTech's Website"
   },
   description: "Welcome to ArsenTech's Official Blog Website — your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds.",
-  authors: [
-    {
-      name: "ArsenTech",
-      url: "https://arsentech.github.io/"
-    }
-  ],
-  keywords: ["arsentech", "arsentech youtube", "arsentech github", "malware", "malware testing", "windows", "windows experiments", "tech tutorials", "technology", "tech", "arsen tech", "coding", "programming", "coding with arsentech", "arsentech shorts", "remove memz", "remove 000.exe", "avast vs noescape", "antivirus", "linux", "virus testing", "antimalware", "ransomware", "trojan", "trojan malware", "techonologies", "html", "css", "js", "coding languages", "computer", "computer virus", "computer malware", "software", "more arsentech", "chrome", "tech tips", "tech youtuber", "programmer", "coder", "coding tips", "freeware", "software engineer", "software coding", "ms dos", "operating system", "normal people vs coder", "normal people vs programmer", "coding tutorials", "pc", "blog", "arsentech blog", "tech blog", "coding blog"],
+  authors: {
+    name: "ArsenTech",
+    url: "https://arsentech.github.io/"
+  },
+  keywords: KEYWORDS,
   icons: {
     icon: "/app-icon.png",
     apple: "/app-icon.png"

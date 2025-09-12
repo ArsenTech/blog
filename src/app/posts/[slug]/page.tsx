@@ -1,6 +1,7 @@
 import PageLayout from "@/components/layout";
 import BlogPost from "@/components/pages/blog-post";
-import { getPostBySlug, getRelatedPosts } from "@/lib/helpers";
+import { KEYWORDS } from "@/lib/constants";
+import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/helpers";
 import { absoluteURL } from "@/lib/helpers/seo";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -10,16 +11,27 @@ interface SinglePostPageProps{
   params: Promise<{slug: string}>
 }
 
-const getCurrentPost = cache(getPostBySlug)
+export const revalidate = 86400
+const cached = {
+  getCurrentPost: cache(getPostBySlug),
+  getRelatedPosts: cache(getRelatedPosts),
+  getAllSlugs: cache(getAllSlugs)
+}
+
+export const generateStaticParams = async() => {
+  const allSlugs = await cached.getAllSlugs();
+  return allSlugs.map(slug => ({slug}))
+}
 
 export const generateMetadata = async({params}: SinglePostPageProps): Promise<Metadata> => {
   const {slug} = await params;
-  const currPost = await getCurrentPost(slug);
+  const currPost = await cached.getCurrentPost(slug);
   if(!currPost || !currPost.published) return notFound();
+  const ogImage = absoluteURL(`/api/og?title=${encodeURIComponent(currPost.title)}&description=${encodeURIComponent(currPost.description)}&date=${currPost.date.toISOString()}`)
   return {
     title: currPost.title,
     description: currPost.description,
-    keywords: currPost.tags,
+    keywords: [...currPost.tags,...KEYWORDS],
     authors: [
       {
         name: "ArsenTech",
@@ -35,30 +47,34 @@ export const generateMetadata = async({params}: SinglePostPageProps): Promise<Me
       type: "article",
       publishedTime: currPost.date.toISOString(),
       authors: "ArsenTech",
+      tags: currPost.tags,
       images: {
-        url: absoluteURL(`/api/og?title=${currPost.title}&description=${currPost.description}&date=${currPost.date}`),
+        url: ogImage,
         width: 1200,
         height: 630
       }
     },
     twitter: {
-      images: {
-        url: absoluteURL(`/api/og?title=${currPost.title}&description=${currPost.description}&date=${currPost.date}`),
+      images: [{
+        url: ogImage,
         width: 1200,
         height: 630
-      },
+      }],
       card: "summary_large_image",
       title: currPost.title,
       description: currPost.description,
     },
+    alternates: {
+      canonical: absoluteURL(`/posts/${slug}`)
+    }
   }
 }
 
 export default async function SinglePostPage({params}: SinglePostPageProps){
   const {slug} = await params;
-  const currPost = await getCurrentPost(slug);
+  const currPost = await cached.getCurrentPost(slug);
   if(!currPost || !currPost.published) notFound();
-  const relatedPosts = await getRelatedPosts(slug, currPost.tags)
+  const relatedPosts = await cached.getRelatedPosts(slug, currPost.tags)
   return (
     <PageLayout>
       <BlogPost postData={currPost} relatedPosts={relatedPosts}/>

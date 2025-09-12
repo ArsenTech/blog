@@ -10,7 +10,7 @@ export interface BlogItemProps{
 export default function BlogItem({postData}: BlogItemProps){
      const {title, description, slug, date} = postData
      return (
-          <div className="space-y-3 pb-3 mb-3 border-b last:border-b-0 last:pb-0 last:mb-0">
+          <div className="space-y-3 pb-3 mb-3 border-b border-b-accent last:border-b-0 last:pb-0 last:mb-0">
                <h2 className="text-2xl md:text-3xl font-semibold">{title}</h2>
                <p className="text-sm text-muted-foreground">{description}</p>
                <div className="flex justify-between items-center gap-4">
