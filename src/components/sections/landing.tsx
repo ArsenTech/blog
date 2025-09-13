@@ -24,7 +24,7 @@ export interface LandingSectionProps{
 export default function LandingSection({entries, search, setSearch, selected, setSelected, featured, categories, currentPage, pageSize, totalPages}: LandingSectionProps){
      const toggleCategory = (category: string) => setSelected(prev=>prev?.includes(category) ? prev.filter(val=>val!==category) : [...(prev||[]),category])
      return entries.length!==0 ? (
-          <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-3">
+          <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4">
                <div className="space-y-5">
                     <h3 className="scroll-m-20 text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight border-b border-primary pb-2">{search==="" ? "Latest Posts" : "Search Results"}</h3>
                     {entries.length<=0 ? (

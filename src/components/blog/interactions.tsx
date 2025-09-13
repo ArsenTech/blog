@@ -10,9 +10,8 @@ export default function BlogInteractions({postTitle}: BlogInteractionsProps){
      const {theme,systemTheme} = useTheme();
      const currTheme = theme==="system" ? systemTheme : theme;
      return (
-          <PostSection sectionTitle="Interactions" collapsible>
+          <PostSection sectionTitle="Interactions" collapsible="mobile" id="interactions">
                <Giscus
-                    id="interactions"
                     repo="arsentech/blog"
                     repoId="R_kgDOOQZTMQ"
                     category="Blog comments"

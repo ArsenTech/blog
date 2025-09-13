@@ -23,7 +23,7 @@ const options: RehypePrettyCodeOptions = {
 export default function BlogContent({mdxContent, toc, components, currTitle}: BlogContentProps){
      const hasTableOfContents = toc.length!==0;
      return (
-          <SiteSection innerWidthClass={cn("space-y-4",hasTableOfContents && "grid grid-cols-1 lg:grid-cols-[1.5fr_3fr] gap-4")}>
+          <SiteSection className="!px-0 !pt-10 !pb-0 md:!pb-10" innerWidthClass={cn("space-y-4",hasTableOfContents && "grid grid-cols-1 lg:grid-cols-[1.5fr_3fr] gap-4")}>
                {hasTableOfContents && (
                     <TableOfContents data={toc}/>
                )}
