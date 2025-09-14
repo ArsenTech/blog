@@ -45,11 +45,7 @@ This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus 
 - Breadcrumbs (Optional for UX/SEO)
 - Alert Boxes support
 - Collapsible widgets (Flairs, Table of Contents)
-<!--
-- SEO Metadata (Title, Description, Tags)
-- Sitemap (/sitemap.xml)
-- Tag Pages (/tag/[slug])
- -->
+- SEO (Title, Description, Metadata, Tags, Sitemap, Tag Search Page)
 
 ## Bugs and Feature Requests
 If You want to Report Bug, or Request Feature, Write an Issue and I'll be in touch with you soon.
