@@ -53,7 +53,7 @@ export default function TagSearch({results, totalPages, currentPage, tag, pageSi
      }
      return (
           <main>
-               <section id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-[20vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
+               <section id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-[50vh] md:h-[25vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
                     <h1 className="inline-flex justify-center items-center flex-col gap-3 text-4xl sm:text-5xl lg:text-6xl font-bold">ArsenTech Blog</h1>
                     <p className="text-lg sm:text-xl">Top {results.length} posts tagged with &quot;{tag}&quot;</p>
                </section>

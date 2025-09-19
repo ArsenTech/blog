@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export function useActiveHeading(ids: string[]) {
      const [activeId, setActiveId] = useState<string | null>(null);
-  
+
      useEffect(() => {
           const observer = new IntersectionObserver(
                (entries) => {
@@ -21,6 +21,5 @@ export function useActiveHeading(ids: string[]) {
           });
           return () => observer.disconnect();
      }, [ids]);
-
      return activeId;
 }

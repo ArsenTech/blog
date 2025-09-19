@@ -1,0 +1,78 @@
+---
+title: "How to Make Bootable USB + Restore Later On Any PC"
+description: "Learn how to make Bootable USB for OS installation (or recovery purposes) and restore it to normal on Windows"
+date: "2025-06-03"
+tags: ["usb", "rufus", "bootable", "windows","linux", "linux usb", "rufus usb", "windows pe", "windows usb", "bootable usb", "bootable linux", "bootable windows"]
+published: true
+featured: false
+categories: ["Tutorial","Bootable USB","Windows","Linux","Rufus"]
+---
+## Introduction
+
+Creating a bootable USB is one of the easiest ways to install or repair an operating system (Like Windows or Linux).  
+In this guide, you'll learn how to create a bootable USB using **Rufus** and other tools,  
+and how to restore it back to normal afterwards so you can use it as regular storage.
+
+If you prefer watching instead of reading, here's the full video guide, [Watch the future On YouTube](https://youtu.be/n_I6Eavmxuo)
+
+### Requirements
+- A USB flash drive (recommend 8GB or larger)
+- Rufus (or another tool)
+- ISO file for Windows/Linux
+- A PC running Windows
+
+## Step 1 - Download Rufus
+Go to the [Rufus' official page](https://rufus.ie/en/), scroll down to the downloads page, and download the latest version of Rufus.
+
+### Portable VS Installer
+
+#### Installation Requirements
+|Feature|Rufus|Rufus Portable|
+|-|-|-|
+|Installation Type|.exe file, no formal installation required|No installation, runs directly from USB|
+
+#### Configuration and Usage
+
+|Feature|Rufus|Rufus Portable|
+|-|-|-|
+|Configuration Storage|Stores user preferences in the registry|Stores settings locally in the same folder|
+User Privileges|May require admin rights for some features|Typically requires only standard user privileges|
+
+#### Ideal Use Cases
+|Use Case|Rufus|Rufus Portable|
+|-|-|-|
+|Primary Device Usage|Best for dedicated workstations|Ideal for IT professionals or users on the go|
+|Clean Operation|Leaves minimal traces on the system|Leaves no traces, ensuring a clean experience|
+
+## Step 2 – USB and ISO setup
+Now Insert the correct USB drive to PC (recommended minimum size: 8GB), so Rufus will detect it automatically, and choose the correct device for Bootable USB.
+
+> [!WARNING]
+> If you choose a USB to make it bootable, Rufus will format these drives. Formatting may cause data loss, so make sure you backup everything in the USB to the safe folder in either `C:` drive or `D:` drive
+
+Now Add the Windows / Linux ISO file into the Boot selection option, then do configurations on the following options
+- Partition Scheme (**MBR** or **GPT**)
+- Target System (**BIOS** or **UEFI**),
+- Bootable USB's volume label (e.g. `MX Linux Installer` or `WinPE Recovery`),
+- File System (**FAT32** or **NTFS**)
+
+## Step 3 - Create the Bootable USB
+Click the `START` button and wait for few minutes (depending on ISO size and USB file transfer speed).
+
+Once the Progress bar says **"READY"**, eject the USB from the PC. Now you've successfully created a Bootable USB!
+
+## Restoring the USB to Normal
+- Why USB sometimes shows smaller size after making bootable
+- How to format USB in File Explorer
+- If formatting doesn't work → use **Diskpart** (step-by-step commands)
+- USB returns to full normal storage use
+
+## Alternatives to Rufus
+- Balena Etcher (cross-platform)
+- Ventoy (multi-boot ISO USB)
+- Linux `dd` command
+
+## Conclusion
+- Recap the steps
+- Emphasize backup importance
+- Encourage readers to share or comment if they had success/issues

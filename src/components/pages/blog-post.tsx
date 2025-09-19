@@ -2,7 +2,6 @@ import BlogHeader from "@/components/blog/header";
 import { Badge } from "@/components/ui/badge";
 import BlogItem from "../blog/item";
 import { IBlogPostBase, IBlogPostFull } from "@/lib/types";
-import { useMDXComponents } from "@/mdx-components";
 import BlogContent from "../blog/content";
 import PostSection from "../blog/post-section";
 import BlogInteractions from "../blog/interactions";
@@ -13,15 +12,14 @@ interface BlogPostProps {
 }
 export default function BlogPost({postData, relatedPosts}: BlogPostProps){
      const {content, tags, toc} = postData;
-     const components = useMDXComponents({})
      return (
           <main>
                <BlogHeader data={postData}/>
-               <BlogContent currTitle={postData.title} mdxContent={content} toc={toc} components={components}/>
+               <BlogContent currTitle={postData.title} mdxContent={content} toc={toc}/>
                {tags.length!==0 ? (
                     <PostSection sectionTitle="Tags">
-                         <div className="flex items-center gap-2">
-                              {tags.slice(0,8).map((tag,i)=>(
+                         <div className="flex items-center gap-2 flex-wrap">
+                              {tags.slice(0,8).sort((a,b)=>a.length-b.length).map((tag,i)=>(
                                    <Badge key={`tag-${i+1}`}>{tag}</Badge>
                               ))}
                          </div>

@@ -1,7 +1,6 @@
 "use client"
 import SiteSection, { SiteSectionProps } from "@/components/layout/section";
 import { cn } from "@/lib/utils";
-import { CollapsibleMode } from "./widget";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 
 type PostSectionProps = SiteSectionProps & {
      sectionTitle: string,
-     collapsible?: CollapsibleMode
+     collapsible?: boolean | "mobile"
 }
 export default function PostSection({sectionTitle, children, innerWidthClass, collapsible=false, ...props}: PostSectionProps){
      const isMobile = useIsMobile("tablet");

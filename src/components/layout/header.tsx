@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 import { Progress } from "../ui/progress";
 
 interface HeaderProps {
-  progress?: number; // 0–100
+     progress?: number;
 }
 export default function Header({progress}: HeaderProps){
      const {theme, systemTheme} = useTheme()
