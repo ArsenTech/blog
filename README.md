@@ -38,11 +38,12 @@
             </ul>
         </li>
         <li><a href="#star-history">Star History</a></li>
+        <li><a href="#license">License</a></li>
     </ol>
 </details>
 
 ## About
-This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds.
+This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech-related curious minds.
 ### Features Included
 - Theme Toggler (Light/Dark Mode)
 - Landing Page
