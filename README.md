@@ -14,6 +14,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![Discussions][discussions-shield]][discussions-url]
 [![project_license][license-shield]][license-url]
 ![GitHub Created At][created-at-shield]
 ![GitHub repo size][repo-size-shield]
@@ -113,6 +114,8 @@ Contributions are Always Welcome! Please read both [Code of Conduct][code-of-con
 [contributing-url]: https://github.com/ArsenTech/blog/blob/main/CONTRIBUTING.md
 [changelog-url]: https://github.com/ArsenTech/blog/blob/main/CHANGELOG.md
 [website-url]: https://arsentech.github.io
+[discussions-shield]: https://img.shields.io/github/discussions/ArsenTech/blog?style=for-the-badge&color=22b455
+[discussions-url]: https://github.com/ArsenTech/blog/discussions
 [version-shield]: https://img.shields.io/github/package-json/v/ArsenTech/blog?style=for-the-badge
 
 <!-- Languages -->
