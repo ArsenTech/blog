@@ -7,7 +7,7 @@ import ModeToggler from "@/components/togglers/mode-toggler";
 import { LINKS } from "@/lib/constants";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { Progress } from "../ui/progress";
+import { Progress } from "@/components/ui/progress";
 
 interface HeaderProps {
      progress?: number;

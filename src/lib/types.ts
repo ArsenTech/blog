@@ -35,3 +35,9 @@ export interface IBlockquoteBox{
      Icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>,
      iconClass: string
 }
+
+export interface IBlogPostData{
+     title: string,
+     text: string,
+     url: string
+}

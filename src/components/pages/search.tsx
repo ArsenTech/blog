@@ -25,18 +25,26 @@ export function SearchResultsSection(props: SearchSectionProps) {
      return <Inner {...props} />
 }
 
-interface TagSearchProps{
+interface SearchPropsBase{
      results: IBlogPostBase[],
      totalPages: number,
      currentPage: number,
      pageSize: number,
-     tag: string
+     mode: "tag" | "category"
 }
-export default function TagSearch({results, totalPages, currentPage, tag, pageSize}: TagSearchProps){
-     const filteredPosts = useMemo(()=>{
-          const currPosts = results.filter(val=>val.tags.some(tag=>tag.toLowerCase().includes(tag.toLowerCase())))
-          return currPosts
-     },[results])
+
+type SearchProps = (SearchPropsBase & {mode: "tag", tag: string}) | (SearchPropsBase & {mode: "category", category: string})
+
+export default function Search(props: SearchProps){
+     const {results, totalPages, currentPage, pageSize, mode} = props;
+     const keyword = mode==="tag" ? props.tag : props.category;
+     const filteredPosts = useMemo(()=>
+          mode==="tag"
+               ? results.filter(val=>
+                    val.tags.some(keyword=>keyword.toLowerCase().includes(keyword.toLowerCase()))
+               )
+               : results.filter(val=>val.categories.some(c=>c.toLowerCase().includes(keyword.toLowerCase())))
+     ,[results, keyword, mode])
      const router = useRouter()
      const entries = filteredPosts.slice(
           (currentPage - 1) * pageSize,
@@ -44,9 +52,7 @@ export default function TagSearch({results, totalPages, currentPage, tag, pageSi
      )
      const form = useForm<z.infer<typeof searchSchema>>({
           resolver: zodResolver(searchSchema),
-          defaultValues: {
-               query: tag
-          }
+          defaultValues: { query: keyword }
      })
      function onSubmit(values: z.infer<typeof searchSchema>) {
           router.push(`/?query=${values.query}&page=1&pageSize=${pageSize}`)
@@ -55,14 +61,18 @@ export default function TagSearch({results, totalPages, currentPage, tag, pageSi
           <main>
                <section id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-[50vh] md:h-[25vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
                     <h1 className="inline-flex justify-center items-center flex-col gap-3 text-4xl sm:text-5xl lg:text-6xl font-bold">ArsenTech Blog</h1>
-                    <p className="text-lg sm:text-xl">Top {results.length} posts tagged with &quot;{tag}&quot;</p>
+                    <p className="text-lg sm:text-xl">
+                         {mode === "tag"
+                              ? `Top ${results.length} posts tagged with "${keyword}"`
+                              : `Top ${results.length} posts in "${keyword}" category`}
+                    </p>
                </section>
                <SearchResultsSection
                     entries={entries}
                     totalPages={totalPages}
                     currentPage={currentPage}
                     pageSize={pageSize}
-                    tag={tag}
+                    tag={keyword}
                     form={form}
                     onSubmit={onSubmit}
                />

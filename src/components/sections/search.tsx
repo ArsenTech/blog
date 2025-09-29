@@ -4,12 +4,12 @@ import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import BlogItem from "../blog/item"
 import SiteSection from "../layout/section"
-import { PaginationWithLinks } from "../ui/pagination-with-links"
-import { Form, FormControl, FormField, FormItem } from "../ui/form"
+import { PaginationWithLinks } from "@/components/ui/pagination-with-links"
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import * as z from "zod"
 import { UseFormReturn } from "react-hook-form"
 import NoSearchResults from "../shrug"
-import { searchSchema } from "../pages/tag-search"
+import { searchSchema } from "../pages/search"
 
 export interface SearchSectionProps{
      entries: IBlogPostBase[],

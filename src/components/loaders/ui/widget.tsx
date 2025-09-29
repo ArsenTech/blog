@@ -1,5 +1,5 @@
 "use client"
-import { Skeleton } from "../../ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface WidgetLoaderWrapperProps{
      children: React.ReactNode

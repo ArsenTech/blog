@@ -1,28 +1,28 @@
 import PageLayout from "@/components/layout"
-import TagSearch from "@/components/pages/tag-search"
+import Search from "@/components/pages/search"
 import { KEYWORDS, POSTS_IN_SEARCH } from "@/lib/constants"
-import { getAllTags, getPostsByTag } from "@/lib/helpers"
+import { getAllCategories, getPostsByCategory } from "@/lib/helpers"
 import { absoluteURL } from "@/lib/helpers/seo"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 interface PageProps{
-     params: Promise<{tag: string}>,
+     params: Promise<{category: string}>,
      searchParams: Promise<{page?: string, pageSize?:string}>
 }
 
 export const revalidate = 86400
 
 export const generateStaticParams = async() => {
-     const allTags = await getAllTags(POSTS_IN_SEARCH);
-     return allTags.map(tag => ({tag}))
+     const allCategories = await getAllCategories(POSTS_IN_SEARCH);
+     return allCategories.map(category => ({category}));
 }
 
 export const generateMetadata = async({params, searchParams}: PageProps): Promise<Metadata> =>{
-     const {tag} = await params
+     const {category} = await params
      const {page, pageSize} = await searchParams;
-     const tagDecoded = decodeURIComponent(tag)
-     const results = await getPostsByTag(tagDecoded)
+     const categoryDecoded = decodeURIComponent(category);
+     const results = await getPostsByCategory(categoryDecoded)
      if(!results) return notFound();
      const currentPage = page ? parseInt(page) : 1;
      const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_IN_SEARCH;
@@ -30,8 +30,8 @@ export const generateMetadata = async({params, searchParams}: PageProps): Promis
      const now = new Date()
 
      const meta = {
-          title: `Top ${results.length} posts tagged with "${tagDecoded}" - Updated ${now.getFullYear()}`,
-          description: `Explore ${results.length} blog posts tagged with "${tagDecoded}" — from coding tutorials to tech insights`,
+          title: `Top ${results.length} "${categoryDecoded}" blog posts - Updated ${now.getFullYear()}`,
+          description: `Explore {results.length} posts from the "${categoryDecoded}" category — from coding tutorials to tech insights`,
      }
 
      const ogImage = absoluteURL(`/api/og?title=${encodeURIComponent(meta.title)}&description=${encodeURIComponent(meta.description)}&date=${now.toISOString()}`)
@@ -39,15 +39,15 @@ export const generateMetadata = async({params, searchParams}: PageProps): Promis
      return {
           title: meta.title,
           description: meta.description,
-          keywords: [tagDecoded,...KEYWORDS],
+          keywords: [categoryDecoded,...KEYWORDS],
           pagination: {
-               previous: currentPage > 1 ? absoluteURL(`/search/${tag}?page=${currentPage - 1}`) : undefined,
-               next: currentPage < totalPages ? absoluteURL(`/search/${tag}?page=${currentPage + 1}`) : undefined
+               previous: currentPage > 1 ? absoluteURL(`/categories/${category}?page=${currentPage - 1}`) : undefined,
+               next: currentPage < totalPages ? absoluteURL(`/categories/${category}?page=${currentPage + 1}`) : undefined
           },
           openGraph: {
                title: meta.title,
                description: meta.description,
-               url: absoluteURL(`/search/${tag}`),
+               url: absoluteURL(`/categories/${category}`),
                siteName: "ArsenTech Blog",
                locale: "en_US",
                type: "website",
@@ -68,24 +68,25 @@ export const generateMetadata = async({params, searchParams}: PageProps): Promis
                description: meta.description,
           },
           alternates: {
-               canonical: absoluteURL(`/search/${tag}`)
+               canonical: absoluteURL(`/categories/${category}`)
           }
      }
 }
 
-export default async function TagsPage({params, searchParams}: PageProps){
-     const {tag} = await params
+export default async function CategoriesPage({params, searchParams}: PageProps){
+     const {category} = await params
      const {page, pageSize} = await searchParams;
      const currentPage = page ? parseInt(page) : 1;
      const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_IN_SEARCH;
-     const tagDecoded = decodeURIComponent(tag)
-     const results = await getPostsByTag(tagDecoded)
+     const categoryDecoded = decodeURIComponent(category);
+     const results = await getPostsByCategory(categoryDecoded)
      const totalPages = Math.ceil(results.length / postsPerPage)
      return (
           <PageLayout>
-               <TagSearch
+               <Search
+                    mode="category"
                     pageSize={postsPerPage}
-                    tag={tagDecoded}
+                    category={categoryDecoded}
                     results={results}
                     totalPages={totalPages}
                     currentPage={currentPage}

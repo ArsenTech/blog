@@ -1,6 +1,7 @@
 import { IBlogPostBase } from "@/lib/types";
 import { getBackgroundImage } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface BlogHeaderProps{
      data: IBlogPostBase
@@ -18,7 +19,7 @@ export default function BlogHeader({data}: BlogHeaderProps){
                                    className="cursor-pointer text-base" 
                                    key={category.toLowerCase()}
                               >
-                                   {category}
+                                   <Link href={`/categories/${category.toLowerCase()}`}>{category}</Link>
                               </Badge>
                          ))}
                     </div>

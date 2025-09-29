@@ -1,4 +1,4 @@
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import BlogItemLoader from "./ui/blog-item";
 import PaginationLoader from "./ui/pagination";
 import SearchLoader from "./ui/search";

@@ -62,7 +62,7 @@ This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus 
 - Breadcrumbs (Optional for UX/SEO)
 - Alert Boxes support
 - Collapsible widgets (Flairs, Table of Contents)
-- SEO (Title, Description, Metadata, Tags, Sitemap, Tag Search Page)
+- SEO (Title, Description, Metadata, Tags, Sitemap, Search Pages)
 ### Website Speed
 Coming Soon after measuring with different tools (Pingdom, GTMetrix, Pagespeed)
 ### Built with

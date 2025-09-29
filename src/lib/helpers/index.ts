@@ -96,3 +96,13 @@ export const getAllSlugs = cache(async(limit?: number) => {
      const posts = await getAllPosts()
      return posts.map(post=>post.slug).slice(0,limit)
 })
+
+export const getAllCategories = cache(async(limit?: number) => {
+     const posts = await getAllPosts();
+     return [...new Set(posts.flatMap(post => post.categories))].slice(0, limit);
+})
+
+export const getPostsByCategory = cache(async(category: string) => {
+     const posts = await getAllPosts();
+     return posts.filter(post =>post.categories.some(cat => cat.toLowerCase() === category.toLowerCase()));
+});

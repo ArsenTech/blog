@@ -1,4 +1,4 @@
-import { TOCItem } from "@/lib/types"
+import { IBlogPostData, TOCItem } from "@/lib/types"
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
@@ -10,16 +10,16 @@ import { useMDXComponents } from "@/mdx-components";
 interface BlogContentProps{
      mdxContent: string,
      toc: TOCItem[],
-     currTitle: string
+     data: IBlogPostData
 }
 const options: RehypePrettyCodeOptions = {
      theme: "material-theme-darker",
      bypassInlineCode: true,
 };
-export default function BlogContent({mdxContent, toc, currTitle}: BlogContentProps){
+export default function BlogContent({mdxContent, toc, data}: BlogContentProps){
      const components = useMDXComponents({})
      return (
-          <BlogDataWrapper currTitle={currTitle} toc={toc}>
+          <BlogDataWrapper metaData={data} toc={toc}>
                <MDXRemote
                     source={mdxContent}
                     components={components}

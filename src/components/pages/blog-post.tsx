@@ -5,6 +5,8 @@ import { IBlogPostBase, IBlogPostFull } from "@/lib/types";
 import BlogContent from "../blog/content";
 import PostSection from "../blog/post-section";
 import BlogInteractions from "../blog/interactions";
+import Link from "next/link";
+import { absoluteURL } from "@/lib/helpers/seo";
 
 interface BlogPostProps {
      postData: IBlogPostFull
@@ -12,15 +14,26 @@ interface BlogPostProps {
 }
 export default function BlogPost({postData, relatedPosts}: BlogPostProps){
      const {content, tags, toc} = postData;
+     const blogPostData = {
+          title: postData.title,
+          text: postData.description,
+          url: absoluteURL(`/posts/${postData.slug}`)
+     }
      return (
           <main>
                <BlogHeader data={postData}/>
-               <BlogContent currTitle={postData.title} mdxContent={content} toc={toc}/>
+               <BlogContent
+                    data={blogPostData}
+                    mdxContent={content}
+                    toc={toc}
+               />
                {tags.length!==0 ? (
                     <PostSection sectionTitle="Tags">
                          <div className="flex items-center gap-2 flex-wrap">
                               {tags.slice(0,8).sort((a,b)=>a.length-b.length).map((tag,i)=>(
-                                   <Badge key={`tag-${i+1}`}>{tag}</Badge>
+                                   <Badge key={`tag-${i+1}`}>
+                                        <Link href={`/tags/${tag.toLowerCase()}`}>{tag}</Link>
+                                   </Badge>
                               ))}
                          </div>
                     </PostSection>

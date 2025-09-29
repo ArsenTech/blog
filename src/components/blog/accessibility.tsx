@@ -1,6 +1,6 @@
 "use client"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { MessageSquareText, TableOfContents } from "lucide-react";
+import { MessageSquareText, Share2, TableOfContents } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -10,9 +10,10 @@ interface BlogAccessibilityProps{
      currTitle: string,
      setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
      isTablet: boolean,
-     hasTOC: boolean
+     hasTOC: boolean,
+     onShare: () => void
 }
-export default function BlogAccessibility({currTitle, setIsOpen, isTablet, hasTOC}: BlogAccessibilityProps){
+export default function BlogAccessibility({currTitle, setIsOpen, isTablet, hasTOC, onShare}: BlogAccessibilityProps){
      const [isSticky, setIsSticky] = useState(false);
      useEffect(()=>{
           function handleScroll(this: Window) {
@@ -40,11 +41,14 @@ export default function BlogAccessibility({currTitle, setIsOpen, isTablet, hasTO
                          </BreadcrumbItem>
                     </BreadcrumbList>
                </Breadcrumb>
-               <div className="flex items-center gap-2.5">
-                    {(isTablet && hasTOC) && <Button variant="secondary" title="Table of Contents" size="icon" onClick={()=>setIsOpen(true)}>
+               <div className="flex items-center justify-end gap-2 flex-wrap">
+                    {(isTablet && hasTOC) && <Button variant="secondary" className="size-8 md:size-9" title="Table of Contents" onClick={()=>setIsOpen(true)}>
                          <TableOfContents/>
                     </Button>}
-                    <Button variant="secondary" asChild title="Interactions" size="icon">
+                    <Button variant="secondary" onClick={onShare} title="Share Post" className="size-8 md:size-9">
+                         <Share2/>
+                    </Button>
+                    <Button variant="secondary" asChild title="Interactions" className="size-8 md:size-9">
                          <Link href="#interactions"><MessageSquareText/></Link>
                     </Button>
                </div>

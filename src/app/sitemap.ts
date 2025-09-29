@@ -1,14 +1,20 @@
 import { SITE_URL } from "@/lib/constants";
-import { getAllSlugs, getAllTags, getPostBySlug } from "@/lib/helpers";
+import { getAllCategories, getAllSlugs, getAllTags, getPostBySlug } from "@/lib/helpers";
 import { absoluteURL } from "@/lib/helpers/seo";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
      const allTags = await getAllTags();
      const allSlugs = await getAllSlugs();
-     console.log(allTags, allSlugs);
+     const allCategories = await getAllCategories();
      const searchTagPages: MetadataRoute.Sitemap = allTags.map(tag=>({
-          url: absoluteURL(`/search/${tag}`),
+          url: absoluteURL(`/tags/${tag}`),
+          lastModified: new Date(),
+          changeFrequency: "weekly",
+          priority: 0.7
+     }))
+     const searchCategoryPages: MetadataRoute.Sitemap = allCategories.map(category=>({
+          url: absoluteURL(`/categories/${category}`),
           lastModified: new Date(),
           changeFrequency: "weekly",
           priority: 0.7
@@ -31,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
                priority: 1
           },
           ...searchPostPages,
-          ...searchTagPages
+          ...searchTagPages,
+          ...searchCategoryPages
      ]
 }
