@@ -10,6 +10,7 @@ import LandingLoader from "../loaders/landing-loader"
 import dynamic from "next/dynamic"
 import { LandingSectionProps } from "../sections/landing";
 import LandingH1 from "../h1-animated-text";
+import SiteSection from "../site-section";
 
 interface LandingPageProps{
      posts: IBlogPostBase[],
@@ -55,7 +56,7 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
      const featured = posts.filter(post=>post.featured).slice(0,MAX_FEATURED_POSTS);
      return (
           <main>
-               <section id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-screen min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
+               <SiteSection id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-screen min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
                     <LandingH1/>
                     <p className="text-lg sm:text-xl">Learn about cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place.</p>
                     <div className="flex items-center gap-2">
@@ -66,7 +67,7 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
                               <Link href="/rss.xml"><Rss/></Link>
                          </Button>
                     </div>
-               </section>
+               </SiteSection>
                <LandingSection
                     entries={entries}
                     featured={featured}

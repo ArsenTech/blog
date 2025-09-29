@@ -3,10 +3,11 @@ import BlogItemLoader from "./ui/blog-item";
 import PaginationLoader from "./ui/pagination";
 import SearchLoader from "./ui/search";
 import WidgetLoaderWrapper from "./ui/widget";
+import SiteSection from "../site-section";
 
 export default function LandingLoader({count = 10}: {count?: number}){
      return (
-          <section className="scroll-mt-10" aria-hidden="true">
+          <SiteSection className="scroll-mt-10" aria-hidden="true">
                <div className="inner-width space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4">
                     <div className="space-y-5">
                          <div className="w-1/2 h-[45px] pb-2 border-b border-primary/10">
@@ -38,6 +39,6 @@ export default function LandingLoader({count = 10}: {count?: number}){
                          </WidgetLoaderWrapper>
                     </div>
                </div>
-          </section>
+          </SiteSection>
      )
 }

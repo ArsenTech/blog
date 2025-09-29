@@ -46,7 +46,7 @@ export default function Header({progress}: HeaderProps){
                               isActive={toggled}
                          />
                     )}
-                    <div className={cn("navbar-menu-mobile md:navbar-menu",isSticky ? "bg-header" : "bg-[#353b48]","md:bg-transparent",toggled ? "left-0" : "-left-full","md:left-0")}>
+                    <div className={cn("fixed md:relative h-screen md:h-fit w-full md:w-fit top-0 max-w-[400px] md:max-w-full py-20 md:py-0 px-[50px] md:px-0 transition-all text-center z-20",isSticky ? "bg-header" : "bg-[#353b48]","md:bg-transparent",toggled ? "left-0" : "-left-full","md:left-0")}>
                          {LINKS.map(({url,name},i)=>(
                               <Link key={i} className={cn("block md:inline text-3xl md:text-base my-[30px] md:my-0 font-medium ml-[30px] transition-all",isSticky ? "hover:text-primary" : 'hover:text-[#92e5a1]')} href={url}>{name}</Link>
                          ))}

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import BlogItem from "../blog/item"
 import { BlogWidget, BlogWidgetCard } from "../blog/widget"
 import SiteSection from "../layout/section"
-import { PaginationWithLinks } from "@/components/ui/pagination-with-links"
+import { PaginationWithLinks } from "@/components/pagination-with-links"
 import CollapsibleFilters from "../blog/widget/filters"
 import NoSearchResults from "../shrug"
 

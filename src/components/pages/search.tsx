@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form"
 import SearchResultsLoader from "../loaders/search-loader"
 import dynamic from "next/dynamic"
 import { SearchSectionProps } from "../sections/search"
+import SiteSection from "../site-section"
  
 export const searchSchema = z.object({
      query: z.string().trim()
@@ -59,14 +60,14 @@ export default function Search(props: SearchProps){
      }
      return (
           <main>
-               <section id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-[50vh] md:h-[25vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
+               <SiteSection id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-[50vh] md:h-[25vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
                     <h1 className="inline-flex justify-center items-center flex-col gap-3 text-4xl sm:text-5xl lg:text-6xl font-bold">ArsenTech Blog</h1>
                     <p className="text-lg sm:text-xl">
                          {mode === "tag"
                               ? `Top ${results.length} posts tagged with "${keyword}"`
                               : `Top ${results.length} posts in "${keyword}" category`}
                     </p>
-               </section>
+               </SiteSection>
                <SearchResultsSection
                     entries={entries}
                     totalPages={totalPages}

@@ -6,10 +6,10 @@ export interface SiteSectionProps extends React.ComponentProps<"section">{
 }
 export default function SiteSection({children, innerWidthClass, className, ...props}: SiteSectionProps){
      return (
-          <section className={cn("scroll-mt-10",className)} {...props}>
+          <SiteSection className={cn("scroll-mt-10",className)} {...props}>
                <div className={cn("inner-width",innerWidthClass)}>
                     {children}
                </div>
-          </section>
+          </SiteSection>
      )
 }

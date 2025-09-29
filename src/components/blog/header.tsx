@@ -2,6 +2,7 @@ import { IBlogPostBase } from "@/lib/types";
 import { getBackgroundImage } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import SiteSection from "../site-section";
 
 interface BlogHeaderProps{
      data: IBlogPostBase
@@ -9,7 +10,7 @@ interface BlogHeaderProps{
 export default function BlogHeader({data}: BlogHeaderProps){
      const {title,description} = data
      return (
-          <section className="text-white flex items-center justify-center flex-col gap-5 h-screen md:h-[45vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
+          <SiteSection className="text-white flex items-center justify-center flex-col gap-5 h-screen md:h-[45vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">{title}</h1>
                <p className="text-lg sm:text-xl">{description}</p>
                {data.categories.length!==0 ? (
@@ -24,6 +25,6 @@ export default function BlogHeader({data}: BlogHeaderProps){
                          ))}
                     </div>
                ) : null}
-          </section>
+          </SiteSection>
      )
 }
