@@ -13,6 +13,7 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
+
 [![Issues][issues-shield]][issues-url]
 [![Discussions][discussions-shield]][discussions-url]
 [![project_license][license-shield]][license-url]
@@ -84,7 +85,7 @@ Contributions are Always Welcome! Please read both [Code of Conduct][code-of-con
 [![Star History Chart][star-history-chart]][star-history-url]
 
 ## License
-Distributed under the MIT License. See `LICENSE.md` for more information.
+Distributed under the MIT License. See [LICENSE.md][license-url] for more information.
 
 ## Support And Follow
 [![YouTube][yt-shield]][yt-url]
