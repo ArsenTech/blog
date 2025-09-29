@@ -1,4 +1,3 @@
-import PageLayout from "@/components/layout";
 import LandingPage from "@/components/pages/landing";
 import { POSTS_PER_PAGE } from "@/lib/constants";
 import { getAllPosts, getCategories } from "@/lib/helpers";
@@ -14,15 +13,13 @@ export default async function Home({searchParams}: HomepageProps) {
   const categories = await getCategories(posts);
   const totalPages = Math.ceil(posts.length / postsPerPage)
   return (
-    <PageLayout>
-      <LandingPage
-        pageSize={postsPerPage}
-        posts={posts}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        categories={categories}
-        query={query || ""}
-      />
-    </PageLayout>
+    <LandingPage
+      pageSize={postsPerPage}
+      posts={posts}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      categories={categories}
+      query={query || ""}
+    />
   );
 }

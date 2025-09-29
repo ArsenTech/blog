@@ -1,4 +1,3 @@
-import PageLayout from "@/components/layout"
 import Search from "@/components/pages/search"
 import { KEYWORDS, POSTS_IN_SEARCH } from "@/lib/constants"
 import { getAllCategories, getPostsByCategory } from "@/lib/helpers"
@@ -82,15 +81,13 @@ export default async function CategoriesPage({params, searchParams}: PageProps){
      const results = await getPostsByCategory(categoryDecoded)
      const totalPages = Math.ceil(results.length / postsPerPage)
      return (
-          <PageLayout>
-               <Search
-                    mode="category"
-                    pageSize={postsPerPage}
-                    category={categoryDecoded}
-                    results={results}
-                    totalPages={totalPages}
-                    currentPage={currentPage}
-               />
-          </PageLayout>
+          <Search
+               mode="category"
+               pageSize={postsPerPage}
+               category={categoryDecoded}
+               results={results}
+               totalPages={totalPages}
+               currentPage={currentPage}
+          />
      )
 }
