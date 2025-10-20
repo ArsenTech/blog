@@ -19,6 +19,7 @@
 [![project_license][license-shield]][license-url]
 ![GitHub Created At][created-at-shield]
 ![GitHub repo size][repo-size-shield]
+![Vercel Deployment][vercel-stats-shield]
 
 <details>
     <summary>Table of Contents</summary>
@@ -122,6 +123,7 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [discussions-shield]: https://img.shields.io/github/discussions/ArsenTech/blog?style=for-the-badge&color=22b455
 [discussions-url]: https://github.com/ArsenTech/blog/discussions
 [version-shield]: https://img.shields.io/github/package-json/v/ArsenTech/blog?style=for-the-badge
+[vercel-stats-shield]: https://vercelbadge.vercel.app/api/ArsenTech/blog?style=for-the-badge
 
 <!-- Languages -->
 [nextjs-shield]: https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
