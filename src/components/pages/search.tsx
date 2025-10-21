@@ -6,19 +6,25 @@ import { getBackgroundImage } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
-import SearchResultsLoader from "../loaders/search-loader"
 import dynamic from "next/dynamic"
-import { SearchSectionProps } from "../sections/search"
-import SiteSection from "../site-section"
+import AppSection from "../site-section"
+import { SearchIcon } from "lucide-react"
+import SiteSection from "../layout/section"
+import { PaginationWithLinks } from "@/components/pagination-with-links"
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
+import NoSearchResults from "../shrug"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
+import { BlogPostsProps } from "../blog-posts"
+import PostsLoader from "../loaders/posts"
  
 export const searchSchema = z.object({
      query: z.string().trim()
 })
 
-export function SearchResultsSection(props: SearchSectionProps) {
-     const Inner = dynamic(() => import("../sections/search"), {
+function BlogPosts(props: BlogPostsProps) {
+     const Inner = dynamic(() => import("../blog-posts"), {
           ssr: false,
-          loading: () => <SearchResultsLoader count={props.entries.slice(
+          loading: () => <PostsLoader count={props.posts.slice(
                (props.currentPage - 1) * props.pageSize,
                props.currentPage + props.pageSize
           ).length} />
@@ -60,23 +66,62 @@ export default function Search(props: SearchProps){
      }
      return (
           <main>
-               <SiteSection id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-[50vh] md:h-[25vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
+               <AppSection id="banner" className="text-white flex items-center justify-center flex-col gap-5 h-[50vh] md:h-[25vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
                     <h1 className="inline-flex justify-center items-center flex-col gap-3 text-4xl sm:text-5xl lg:text-6xl font-bold">ArsenTech Blog</h1>
                     <p className="text-lg sm:text-xl">
                          {mode === "tag"
                               ? `Top ${results.length} posts tagged with "${keyword}"`
                               : `Top ${results.length} posts in "${keyword}" category`}
                     </p>
-               </SiteSection>
-               <SearchResultsSection
-                    entries={entries}
-                    totalPages={totalPages}
-                    currentPage={currentPage}
-                    pageSize={pageSize}
-                    tag={keyword}
-                    form={form}
-                    onSubmit={onSubmit}
-               />
+               </AppSection>
+               {entries.length!==0 ? (
+                    <SiteSection className="min-h-[56vh]" id="search" innerWidthClass="flex flex-col items-center justify-center gap-6">
+                         <Form {...form}>
+                              <form onSubmit={form.handleSubmit(onSubmit)} className="w-full flex items-center gap-3">
+                                   <FormField
+                                        control={form.control}
+                                        name="query"
+                                        render={({field})=>(
+                                             <FormItem className="w-full">
+                                                  <InputGroup>
+                                                       <FormControl>
+                                                            <InputGroupInput {...field} placeholder="Search tutorials, coding tips..."/>
+                                                       </FormControl>
+                                                       <InputGroupAddon>
+                                                            <SearchIcon/>
+                                                       </InputGroupAddon>
+                                                       <InputGroupAddon align="inline-end">{entries.length} {entries.length<=1 ? "result" : "results"}</InputGroupAddon>
+                                                  </InputGroup>
+                                             </FormItem>
+                                        )}
+                                   />
+                              </form>
+                         </Form>
+                         <div className="space-y-5 w-full">
+                              <BlogPosts
+                                   posts={entries}
+                                   currentPage={currentPage}
+                                   pageSize={pageSize}
+                              />
+                              <PaginationWithLinks
+                                   page={currentPage}
+                                   totalCount={totalPages}
+                                   pageSize={pageSize}
+                                   pageSizeSelectOptions={{
+                                        pageSizeOptions: [5,10,25,50,100]
+                                   }}
+                              />
+                         </div>
+                    </SiteSection>
+               ) : (
+                    <SiteSection className="min-h-[50vh] flex items-center justify-center" innerWidthClass="flex flex-col items-center justify-center gap-3">
+                         <NoSearchResults
+                              tag={keyword}
+                              form={form}
+                              onSubmit={onSubmit}
+                         />
+                    </SiteSection>
+               )}
           </main>
      )
 }

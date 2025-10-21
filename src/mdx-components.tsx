@@ -3,11 +3,11 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { buttonVariants } from "@/components/ui/button";
-import { badgeVariants } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { MDXComponents } from "mdx/types";
 import CodeBlockWrapper from "./components/code-block";
 import { Blockquote } from "./components/blockquote-box";
+import { Kbd, KbdGroup } from "./components/ui/kbd";
 
 export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
   h1: (props) => <h1 className="scroll-m-40 text-4xl font-extrabold tracking-tight lg:text-5xl" {...props} />,
@@ -20,7 +20,8 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
   a: (props) => <Link className={cn(buttonVariants({ variant: "link" }), "px-1 py-0 whitespace-normal text-base")} {...props} />,
   blockquote: (props) => <Blockquote {...props}/>,
   small: (props) => <small className="text-sm font-medium leading-none" {...props} />,
-  kbd: (props) => <kbd className={cn(badgeVariants({ variant: "outline" }), "px-1.5 shadow")} {...props} />,
+  Kbd: Kbd,
+  KbdGroup: KbdGroup,
   table: Table,
   thead: TableHeader,
   tr: TableRow,

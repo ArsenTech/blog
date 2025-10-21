@@ -1,3 +1,4 @@
+import PageLayout from "@/components/layout";
 import BlogPost from "@/components/pages/blog-post";
 import { KEYWORDS } from "@/lib/constants";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/helpers";
@@ -69,9 +70,11 @@ export default async function SinglePostPage({params}: SinglePostPageProps){
   if(!currPost || !currPost.published) notFound();
   const relatedPosts = await getRelatedPosts(slug, currPost.tags)
   return (
-    <BlogPost
-      postData={currPost}
-      relatedPosts={relatedPosts}
-    />
+    <PageLayout>
+      <BlogPost
+        postData={currPost}
+        relatedPosts={relatedPosts}
+      />
+    </PageLayout>
   )
 }

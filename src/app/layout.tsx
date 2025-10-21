@@ -3,7 +3,6 @@ import { Sora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { KEYWORDS } from "@/lib/constants";
-import PageLayout from "@/components/layout";
 import { Toaster } from "@/components/ui/sonner";
 
 const sora = Sora({
@@ -49,9 +48,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <PageLayout>
-            {children}
-          </PageLayout>
+          {children}
           <Toaster position="bottom-right" richColors />
         </ThemeProvider>
       </body>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group";
 
 interface BlogAccessibilityProps{
      currTitle: string,
@@ -45,12 +46,15 @@ export default function BlogAccessibility({currTitle, setIsOpen, isTablet, hasTO
                     {(isTablet && hasTOC) && <Button variant="secondary" className="size-8 md:size-9" title="Table of Contents" onClick={()=>setIsOpen(true)}>
                          <TableOfContents/>
                     </Button>}
-                    <Button variant="secondary" onClick={onShare} title="Share Post" className="size-8 md:size-9">
-                         <Share2/>
-                    </Button>
-                    <Button variant="secondary" asChild title="Interactions" className="size-8 md:size-9">
-                         <Link href="#interactions"><MessageSquareText/></Link>
-                    </Button>
+                    <ButtonGroup>
+                         <Button variant="secondary" onClick={onShare} title="Share Post" className="size-8 md:size-9">
+                              <Share2/>
+                         </Button>
+                         <ButtonGroupSeparator/>
+                         <Button variant="secondary" asChild title="Interactions" className="size-8 md:size-9">
+                              <Link href="#interactions"><MessageSquareText/></Link>
+                         </Button>
+                    </ButtonGroup>
                </div>
           </div>
      )

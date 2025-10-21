@@ -1,3 +1,4 @@
+import PageLayout from "@/components/layout"
 import Search from "@/components/pages/search"
 import { KEYWORDS, POSTS_IN_SEARCH } from "@/lib/constants"
 import { getAllTags, getPostsByTag } from "@/lib/helpers"
@@ -81,13 +82,15 @@ export default async function TagsPage({params, searchParams}: PageProps){
      const results = await getPostsByTag(tagDecoded)
      const totalPages = Math.ceil(results.length / postsPerPage)
      return (
-          <Search
-               mode="tag"
-               pageSize={postsPerPage}
-               tag={tagDecoded}
-               results={results}
-               totalPages={totalPages}
-               currentPage={currentPage}
-          />
+          <PageLayout>
+               <Search
+                    mode="tag"
+                    pageSize={postsPerPage}
+                    tag={tagDecoded}
+                    results={results}
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+               />
+          </PageLayout>
      )
 }
