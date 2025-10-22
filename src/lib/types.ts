@@ -9,7 +9,7 @@ export interface IBlogPostBase{
      featured: boolean;
      categories: string[];
      slug: string;
-     author: string;
+     author: { name: string, url: string }
 }
 
 export interface IBlogPostFull extends IBlogPostBase {
@@ -17,9 +17,11 @@ export interface IBlogPostFull extends IBlogPostBase {
      toc: TOCItem[];
 }
 
-export type BlogPostMetadata = Omit<IBlogPostBase,"published" | "featured"> & {
+export type BlogPostMetadata = Omit<IBlogPostBase,"published" | "featured" | "author"> & {
      published?: boolean;
      featured?: boolean;
+     author: string,
+     authorURL: string
 }
 
 export interface TOCItem{

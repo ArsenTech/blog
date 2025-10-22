@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 const sora = Sora({
   variable: "--font-sora",
+  fallback: ["system-ui", "Segoe UI", 'Segoe UI', "Roboto", "Oxygen", "Ubuntu", "Cantarell", 'Open Sans', 'Helvetica Neue', "Tahoma", "Geneva", "Verdana", "Arial", "Helvetica", "sans-serif"],
   subsets: ['latin',"latin-ext"]
 })
 

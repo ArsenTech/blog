@@ -56,7 +56,10 @@ export const getPostBySlug = cache(async(slug: string): Promise<IBlogPostFull | 
                categories: frontmatter.categories ?? [],
                published: frontmatter.published ?? true,
                featured: frontmatter.featured ?? false,
-               author: frontmatter.author ?? "ArsenTech",
+               author: {
+                    name: frontmatter.author ?? "ArsenTech",
+                    url: frontmatter.authorURL ?? "https://github.com/ArsenTech"
+               },
                toc,
                content
           };

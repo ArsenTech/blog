@@ -28,6 +28,10 @@ export const generateMetadata = async({params}: SinglePostPageProps): Promise<Me
     keywords: [...currPost.tags,...KEYWORDS],
     authors: [
       {
+        name: currPost.author.name,
+        url: currPost.author.url
+      },
+      {
         name: "ArsenTech",
         url: "https://arsentech.github.io/"
       }

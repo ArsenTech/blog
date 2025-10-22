@@ -18,7 +18,7 @@ export default function BlogItem({postData}: BlogItemProps){
                <p className="text-xs sm:text-sm text-muted-foreground">{description}</p>
                <div className="flex justify-between items-center gap-4 flex-wrap">
                     <p className="text-sm md:text-md lg:text-base flex items-center gap-5 font-medium">
-                         <span className="flex items-center gap-2.5"><User/>{author}</span>
+                         <span className="flex items-center gap-2.5"><User/><Link className="text-foreground hover:text-primary hover:underline underline-offset-4" href={author.url}>{author.name}</Link></span>
                          <span className="flex items-center gap-2.5"><Calendar className="size-5"/>{format(date,"LLL do, yyyy")}</span>
                     </p>
                     {!isMobile ? (

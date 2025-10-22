@@ -38,10 +38,16 @@ const generateRSS = async() => {
                link: absoluteURL(`/posts/${post.slug}`),
                date: post.date,
                category: post.categories.map(cat=>({name: cat})),
-               author: [{
-                    name: "ArsenTech",
-                    link: "https://arsentech.github.io",
-               }]
+               author: [
+                    {
+                         name: post.author.name,
+                         link: post.author.url
+                    },
+                    {
+                         name: "ArsenTech",
+                         link: "https://arsentech.github.io",
+                    }
+               ]
           })
      })
 

@@ -16,7 +16,7 @@ export default function BlogHeader({data}: BlogHeaderProps){
                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">{title}</h1>
                <p className="text-lg sm:text-xl">{description}</p>
                <div className="flex items-center justify-center gap-5 flex-wrap text-base sm:text-lg md:text-xl">
-                    <span className="flex items-center gap-2.5"><User/>{author}</span>
+                    <span className="flex items-center gap-2.5"><User/><Link href={author.url} className="hover:underline underline-offset-4">{author.name}</Link></span>
                     <span className="flex items-center gap-2.5"><Calendar className="size-5"/>{format(date,"LLL do, yyyy")}</span>
                </div>
                {data.categories.length!==0 ? (
