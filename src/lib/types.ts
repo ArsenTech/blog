@@ -9,6 +9,7 @@ export interface IBlogPostBase{
      featured: boolean;
      categories: string[];
      slug: string;
+     author: string;
 }
 
 export interface IBlogPostFull extends IBlogPostBase {

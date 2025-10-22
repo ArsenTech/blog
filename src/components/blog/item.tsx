@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, User } from "lucide-react";
 import { format } from "date-fns";
 import { IBlogPostBase } from "@/lib/types";
 import { useIsMobile } from "@/hooks/use-is-mobile";
@@ -10,14 +10,17 @@ export interface BlogItemProps{
      postData: IBlogPostBase
 }
 export default function BlogItem({postData}: BlogItemProps){
-     const {title, description, slug, date} = postData;
+     const {title, description, slug, date, author} = postData;
      const isMobile = useIsMobile();
      return (
           <div className="space-y-3 pb-3 mb-3 border-b border-b-accent last:border-b-0 last:pb-0 last:mb-0">
                <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold hover:text-primary"><Link href={`/posts/${slug}`}>{title}</Link></h2>
                <p className="text-xs sm:text-sm text-muted-foreground">{description}</p>
-               <div className="flex justify-between items-center gap-4">
-                    <p className="text-sm md:text-md lg:text-base flex items-center gap-2 font-medium"><Calendar className="size-5"/>{format(date,"LLL do, yyyy")}</p>
+               <div className="flex justify-between items-center gap-4 flex-wrap">
+                    <p className="text-sm md:text-md lg:text-base flex items-center gap-5 font-medium">
+                         <span className="flex items-center gap-2.5"><User/>{author}</span>
+                         <span className="flex items-center gap-2.5"><Calendar className="size-5"/>{format(date,"LLL do, yyyy")}</span>
+                    </p>
                     {!isMobile ? (
                          <Button asChild variant="ghost">
                               <Link href={`/posts/${slug}`}>Read more <ArrowRight/></Link>
