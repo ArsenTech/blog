@@ -1,5 +1,5 @@
 <p align="center">
-    <img src=".github/main-blog.png">
+    <img src=".github/main-blog.png" alt="Project Logo">
 </p>
 <h1 align="center">ArsenTech's Official Blog Page</h1>
 <p align="center">Welcome to the Repository of ArsenTech's Blog Page</p>
