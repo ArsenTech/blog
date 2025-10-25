@@ -34,5 +34,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           sha: ${{ github.sha }}
           state: "failure"
-    name: "Vercel - arsentech-blog: lint"
           name: "Vercel - arsentech-blog: lint"
