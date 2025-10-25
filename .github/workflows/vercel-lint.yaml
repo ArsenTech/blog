@@ -35,6 +35,3 @@ jobs:
           sha: ${{ github.sha }}
           state: "failure"
           name: "Vercel - arsentech-blog: lint"
-          ref: ${{ github.sha }}
-          state: failure
-          name: "Vercel - arsentech-blog: lint"
