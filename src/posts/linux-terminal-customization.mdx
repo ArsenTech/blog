@@ -53,43 +53,41 @@ Oh-my-posh lets you customize your shell with beautiful prompt themes.
 > [!NOTE]
 > If you're unsure about your CPU architecture, run `uname -m`, and then download the correct executable
 
-If the download of `themes.zip` is finished, create a folder in `/home/<username>` (or `~` alias) called ".poshthemes". Copy `themes.zip` from Downloads, and paste it into `~/.poshthemes`.
-
-Right click on the zip file, and select **Extract here** (or **Extract** > **Extract archive here** if you use KDE plasme). After that, move every single `.json` file to `.poshthemes` and delete the extracted folder.
+#### Extracting themes
+Once **themes.zip** has finished downloading, create the folder:
+```bash
+mkdir -p ~/.poshthemes # or mkdir -p /home/<username>/.poshthemes
+```
+then run the following command:
+```bash
+unzip ~/Downloads/themes.zip -d ~/.poshthemes
+```
+This extracts all .omp.json theme files.
 
 > [!TIP]
-> To save more time, use
-> `unzip ~/Downloads/themes.zip -d ~/.poshthemes`
-> which does the same action without wasting some time.
+Using the unzip command saves time compared to extracting through the file manager.
 
-After that, rename the executable to `oh-my-posh` and copy the executable using the following commands:
+#### Installing the binary
+After that, rename the executable to `oh-my-posh` and choose where to place it.
 
-#### Pasting in `~/.local/bin`
-If you want to copy it to `~/.local/bin`, use
+- Install to `~/.local/bin` (Recommended)
 ```bash
 cp ~/Downloads/oh-my-posh ~/.local/bin
-```
-then run
-```bash
 chmod +x ~/.local/bin/oh-my-posh
 ```
-#### Pasting in `/usr/bin`
-If you want to copy it to the `/usr/bin` folder, use
+- Install to `/usr/bin` (system-wide)
 ```bash
 sudo cp ~/Downloads/oh-my-posh /usr/bin
-```
-then run
-```bash
 sudo chmod +x /usr/bin/oh-my-posh
 ```
-The oh-my-posh is installed successfully. Make sure to type `oh-my-posh` and hit <kbd>Enter</kbd> to verify the installation.
+Make sure to type `oh-my-posh` and hit <kbd>Enter</kbd> to verify the installation.
 
 ### Method 2
-If you want to save some time, run the following command:
+To install oh-my-posh quickly, run the following command:
 ```bash
 curl -s https://ohmyposh.dev/install.sh | bash -s
 ```
-to install `oh-my-posh` without consuming some time, but themes will be installed in the `~/.cache/oh-my-posh/themes` folder.
+And themes will be installed in the `~/.cache/oh-my-posh/themes` folder.
 
 ## Step 3 - Changing the Terminal Font
 Go to the [Nerd Fonts Download Page](https://www.nerdfonts.com/font-downloads) and choose the preferred Nerd font (e.g. **Fira Code Nerd Font**) to download.
