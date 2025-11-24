@@ -13,7 +13,7 @@ export default function BlogHeader({data}: BlogHeaderProps){
      const {title,description,author,date} = data
      return (
           <SiteSection className="text-white flex items-center justify-center flex-col gap-5 h-screen md:h-[45vh] min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
-               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">{title}</h1>
+               <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold">{title}</h1>
                <p className="text-lg sm:text-xl">{description}</p>
                <div className="flex items-center justify-center gap-5 flex-wrap text-base sm:text-lg md:text-xl">
                     <span className="flex items-center gap-2.5"><User/><Link href={author.url} className="hover:underline underline-offset-4">{author.name}</Link></span>

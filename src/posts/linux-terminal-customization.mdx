@@ -1,0 +1,141 @@
+---
+title: "How to Make Your Linux Terminal Look Cool & Modern"
+description: "This guide shows how to customize your Linux Terminal to look modern, beautiful, and cool. It's ideal for Linux users and those new to Linux operating system"
+date: "2025-11-24"
+tags: ["oh my posh", "oh-my-posh", "bash", "nerd fonts", "linux", "linux shell", "fish shell", "bash shell", "fish linux", "nerd-fonts", "nerd fonts linux", "oh my posh linux"]
+published: true
+featured: false
+categories: ["Tutorial","Terminal","Bash","Linux","Shell"]
+author: ArsenTech
+authorURL: https://github.com/ArsenTech
+---
+## Introduction
+Do you want to make your Linux terminal to look modern, cool, professional, and beautiful? This guide will help you make your Linux terminal look modern using the fish shell, oh-my-posh, neofetch, and Nerd Fonts. It's ideal for Linux users and those new to the Linux operating system! 🐧
+
+If you prefer watching instead of reading, watch the full video guide on YouTube:
+- [Linux Terminal Tutorial](https://youtu.be/Sf1zejQUC7Y)
+- [Linux Mint Terminal Tutorial](https://youtu.be/joCLQhCqP4E) (If you use Linux Mint)
+
+## Step 1 - Installing the Fish Shell
+Open the preferred terminal, then type the following command:
+<CMDBlock
+     shell="bash"
+     data={{
+          Debian: "sudo apt-get install fish",
+          "Debian (Alt Method)": "sudo apt install fish",
+          Arch: "sudo pacman -S fish",
+          Fedora: "sudo dnf install fish"
+     }}
+/>
+Type the password and hit `Y` to install the fish shell.
+
+After that, type `fish` to make sure the fish terminal is working.
+
+## Step 2 - Installing Oh-my-posh
+Oh-my-posh allows you to have customized Linux shell with your preferred theme.
+
+### Method 1
+Go to the [Github Repo](https://github.com/JanDeDobbeleer/oh-my-posh) of oh-my-posh, then **Releases**. Then download one of these executables:
+- `posh-linux-amd64` - Choose this option if your Linux distro was installed on the x64 architecture,
+- `posh-linux-arm` - For `arm` architecture users,
+- `posh-linux-arm64` - for the `arm64` architecture users.
+
+Then Download themes by clicking on `themes.zip`.
+
+> [!NOTE]
+> If you're unsure which architecture you use, use the `uname -m` command to check the architecture, and download the correct executable.
+
+If the download of `themes.zip` is finished, create a folder in `/home/<username>` (or `~` alias) called ".poshthemes". Copy `themes.zip` from Downloads, and paste it into `~/.poshthemes`.
+
+Right click on the zip file, and select **Extract here** (or **Extract** > **Extract archive here** if you use KDE plasme). After that, move every single `.json` file to `.poshthemes` and delete the extracted folder.
+
+> [!TIP]
+> To save more time, use
+> ```bash
+> unzip ~/Downloads/themes.zip -d ~/.poshthemes
+> ```
+> which does the same action without wasting some time.
+
+After that, rename the executable to `oh-my-posh` and copy the executable using the following commands:
+
+#### Pasting in `~/.local/bin`
+If you want to copy it to `~/.local/bin`, use
+```bash
+cp ~/Downloads/oh-my-posh ~/.local/bin
+```
+then run
+```bash
+chmod +x ~/.local/bin/oh-my-posh
+```
+#### Pasting in `/usr/bin`
+If you want to copy it to the `/usr/bin` folder, use
+```bash
+sudo cp ~/Downloads/oh-my-posh /usr/bin
+```
+then run
+```bash
+sudo chmod +x /usr/bin/oh-my-posh
+```
+The oh-my-posh is installed successfully. Make sure to type `oh-my-posh` and hit <kbd>Enter</kbd> to verify the installation.
+
+### Method 2
+If you want to save some time, run the following command:
+```bash
+curl -s https://ohmyposh.dev/install.sh | bash -s
+```
+to install `oh-my-posh` without consuming some time, but themes will be installed in the `~/.cache/oh-my-posh/themes` folder.
+
+## Step 3 - Changing the Terminal Font
+Go to the [Nerd Fonts Download Page](https://www.nerdfonts.com/font-downloads) and choose the preferred Nerd font (e.g. **Fira Code Nerd Font**) to download.
+
+Use the following command to extract these fonts into the folder and update the font references:
+``` bash
+# <font-name> = FiraCode for example (Downloaded font name)
+unzip ~/Downloads/<font-name>.zip -d ~/.local/share/fonts
+sudo fc-cache -f -v
+```
+
+### Changing font settings
+- **KDE**: Open System settings, then Appearance -> Fonts. Change the "Fixed Width" to the Downloaded Nerd font (In this case: Fira Code Nerd Font)
+- **Linux Mint**: Open System settings, then Font Selection. Change Monospace into the Downloaded Nerd font (In this case: Fira Code Nerd Font)
+
+## Step 4 - Profile Configuration
+Open the preferred file explorer, then go to `~/.config/fish`. Open the `config.fish` with the text editor, and add the following (above the if statement):
+```fish
+oh-my-posh init fish -c ~/.poshthemes/<theme>.omp.json | source
+```
+Or if you used the [second method](#method-2), use the following:
+```fish
+oh-my-posh init fish -c ~~/.cache/oh-my-posh/themes/<theme>.omp.json | source
+```
+
+### KDE Plasma
+Go to the Terminal settings and then "Create New Profile".
+
+Add the preferred name for the profile, then set the command to `/bin/fish` (or `/usr/bin/fish`).
+
+Finally, check the "Default Profile" option, then click on **Apply** and **OK**
+
+### Linux Mint
+Right click on the terminal, and select "Preferences".
+
+Click on the `+` Button and Add the preferred name for the profile.
+
+Go to the "Commands Section", check the "Run a custom command instead of my shell" option, and type `fish` as a custom command.
+
+After that, open the dropdown menu, and select "Set as default".
+And With that, We've configured the oh-my-posh shell!
+
+## Adding neofetch
+Use the following command to install neofetch
+<CMDBlock
+     shell="bash"
+     data={{
+          Debian: "sudo apt-get install neofetch",
+          "Debian (Alt Method)": "sudo apt install neofetch",
+          Arch: "sudo pacman -S neofetch",
+          Fedora: "sudo dnf install neofetch"
+     }}
+/>
+
+Then Open the preferred file explorer, then go to `~/.config/fish`. Open the `config.fish` with the text editor, and add `neofetch` above the oh-my-posh command to set the neofetch.
