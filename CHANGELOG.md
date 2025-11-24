@@ -24,8 +24,13 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Made Table of Contents widget mobile compatible
 - Made Badges Clickable
 - Updated Pagination
+- Updated components using the Latest ShadCN components
 ### Removed
 - “Coming Soon” placeholder
+### Added Posts
+- Linux Terminal Tutorial
+- Windows 10 Terminal Tutorial
+- Bootable USB Tutorial
 
 ## [0.1.1] - 2025-06-14 (Pre-release) 
 ### Added
