@@ -15,7 +15,7 @@ export const SOCIAL_MEDIA_LINKS = [
      {Icon: SiOdysee, url: "https://odysee.com/@ArsenTech"},
 ]
 
-export const POSTS_PER_PAGE = 10
+export const POSTS_PER_PAGE = 8
 export const POSTS_IN_SEARCH = 5
 export const MAX_RELATED_POSTS = 3
 export const MAX_FEATURED_POSTS = 5
