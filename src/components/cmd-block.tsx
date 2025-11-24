@@ -13,7 +13,7 @@ export default function CMDBlock({shell = "text", data}: CMDBlockProps){
      const cmdTypes = commands.map(val=>val[0]);
      return (
           <Tabs defaultValue={cmdTypes[0]}>
-               <TabsList className="w-full">
+               <TabsList className="w-full flex-wrap">
                     {cmdTypes.map(type=>(
                          <TabsTrigger value={type} key={type} className="flex-1">{type}</TabsTrigger>
                     ))}
