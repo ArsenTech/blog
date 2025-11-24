@@ -104,7 +104,7 @@ oh-my-posh init fish -c ~/.poshthemes/<theme>.omp.json | source
 ```
 Or if you used the [second method](#method-2), use the following:
 ```fish
-oh-my-posh init fish -c ~~/.cache/oh-my-posh/themes/<theme>.omp.json | source
+oh-my-posh init fish -c ~/.cache/oh-my-posh/themes/<theme>.omp.json | source
 ```
 
 ### KDE Plasma
@@ -157,3 +157,27 @@ Use the following command to install neofetch
 />
 
 Then Open the preferred file explorer, then go to `~/.config/fish`. Open the `config.fish` with the text editor, and add `neofetch` above the oh-my-posh command to set the neofetch.
+
+## Root Terminal Customization
+While the user terminal customization is complete, we're customizing the root terminal now. Use the following command to enter the root terminal:
+```bash
+sudo su # Enters the root terminal, but requires password to enter
+``
+Then type the password.
+
+First, extract `themes.zip` into the newly created folder:
+```bash
+unzip /home/<username>/Downloads/themes.zip -d ~/.poshthemes
+```
+Then open the `config.fish` with nano:
+```bash
+nano ~/.config/config.fish
+```
+Now add the oh-my-posh command above the if statement:
+```fish
+oh-my-posh init fish -c ~/.poshthemes/<theme>.omp.json | source
+```
+Or if you used the [second method](#method-2), use the following:
+```fish
+oh-my-posh init fish -c /home/<username>/.cache/oh-my-posh/themes/<theme>.omp.json | source
+```
