@@ -181,3 +181,25 @@ Or if you used the [second method](#method-2), use the following:
 ```fish
 oh-my-posh init fish -c /home/<username>/.cache/oh-my-posh/themes/<theme>.omp.json | source
 ```
+After that, save the file by pressing
+<KbdGroup>
+     <Kbd>Ctrl</Kbd>
+     <span>+</span>
+     <Kbd>S</Kbd>
+</KbdGroup>
+And close nano by pressing
+<KbdGroup>
+     <Kbd>Ctrl</Kbd>
+     <span>+</span>
+     <Kbd>X</Kbd>
+</KbdGroup>
+Use the following command to change the shell:
+```bash
+chsh -s /bin/fish
+```
+Then restart the root terminal by using these commands:
+```
+exit
+sudo su
+```
+The root terminal is successfully customized!
