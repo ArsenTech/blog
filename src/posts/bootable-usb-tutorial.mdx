@@ -1,11 +1,11 @@
 ---
 title: "How to Create a Bootable USB (and Restore It to Normal) on Any PC"
 description: "This guide shows how to create a bootable USB for Windows or Linux, and how to restore a USB to full capacity afterward. It requires no command-line experience."
-date: "2025-06-03"
-tags: ["usb", "rufus", "bootable", "windows","linux", "linux usb", "rufus usb", "windows pe", "windows usb", "bootable usb", "bootable linux", "bootable windows"]
+date: "2025-09-19"
+tags: ["usb", "rufus", "bootable", "windows", "linux", "linux usb", "rufus usb", "windows pe", "windows usb", "bootable usb", "bootable linux", "bootable windows"]
 published: true
 featured: false
-categories: ["Tutorial","Bootable USB","Windows","Linux","Rufus"]
+categories: ["Tutorial", "Bootable USB", "Windows", "Linux", "Rufus"]
 author: ArsenTech
 authorURL: https://github.com/ArsenTech
 ---
@@ -13,9 +13,9 @@ authorURL: https://github.com/ArsenTech
 
 Creating a bootable USB is one of the easiest ways to install or repair an operating system (Like Windows or Linux).  
 In this guide, you'll learn how to create a bootable USB using **Rufus** and other tools,  
-and how to restore it back to normal afterwards so you can use it as regular storage.
+And how to restore it to normal afterwards, so you can use it as regular storage.
 
-If you prefer watching instead of reading, here's the full video guide, [Watch the video On YouTube](https://youtu.be/n_I6Eavmxuo)
+If you prefer watching instead of reading, here's the full video guide: [Watch the video on YouTube](https://youtu.be/n_I6Eavmxuo)
 
 ### Requirements
 - A USB flash drive (recommend 8GB or larger)
@@ -50,12 +50,12 @@ Go to the [Rufus' official page](https://rufus.ie/en/), scroll down to the downl
 Now insert the correct USB drive into your PC (recommended minimum size: 8GB), so Rufus will detect it automatically, and choose the correct device for Bootable USB.
 
 > [!WARNING]
-> If you choose a USB to make it bootable, Rufus will format these drives. **Formatting may cause data loss**, so make sure you backup everything in the USB to the safe folder in either `C:` drive or `D:` drive
+> If you choose a USB to make it bootable, Rufus will format these drives. **Formatting may cause data loss**, so make sure you back up everything in the USB to the safe folder in either the `C:` drive or `D:` drive
 
 Now add the Windows or Linux ISO file under the Boot selection option, then configure the following settings:
 - Partition Scheme (**MBR** or **GPT**)
 - Target System (**BIOS** or **UEFI**),
-- Bootable USB's volume label (e.g. `MX Linux Installer` or `WinPE Recovery`),
+- Bootable USB's volume label (e.g., `MX Linux Installer` or `WinPE Recovery`),
 - File System (**FAT32** or **NTFS**)
 
 ## Step 3 - Create the Bootable USB
@@ -70,7 +70,7 @@ This happens because bootable tools (like Rufus, Ventoy, or manual ISO writers) 
 
 The good news is it isn't damaged — You just need to **remove the bootable partitions and reformat the drive** to use its full storage again.
 
-Below are three simple methods you can use to restore your USB back to normal size (reusable USB drive):
+Below are three simple methods you can use to restore your USB to normal size (reusable USB drive):
 ### Method 1: Using Diskpart (Command Prompt)
 Open the run command by pressing the following keys:
 <KbdGroup>
@@ -80,12 +80,12 @@ Open the run command by pressing the following keys:
 </KbdGroup>
 And type `cmd`.
 
-Type `diskpart` and hit Enter <Kbd>⏎</Kbd>, and then click on `Yes` if the UAC prompt appeared.
+Type `diskpart` and hit Enter <Kbd>⏎</Kbd>, and then click on `Yes` if the UAC prompt appears.
 
 Now run the following commands in DiskPart:
 ```cmd
 list disk
-select disk 1   :: Replace "1" with the number of your USB drive
+select disk 1 :: Replace "1" with the number of your USB drive
 clean
 create partition primary
 format fs=fat32 label=USB quick
@@ -123,7 +123,7 @@ Each of these tools has its pros and cons:
 ## Conclusion
 Creating a bootable USB is one of the simplest ways to install or repair your operating system — and restoring it afterwards ensures your USB stays usable for years. Always double-check your disk before formatting!
 
-Found this guide helpful? Consider sharing it with a friend or leaving a comment — your feedback helps others too!
+Found this guide helpful? Consider sharing it with a friend or leaving a comment — your feedback helps others, too!
 
 > GitHub [@ArsenTech][github-url] &nbsp;&middot;&nbsp;
 > YouTube [@ArsenTech][yt-url] &nbsp;&middot;&nbsp;
