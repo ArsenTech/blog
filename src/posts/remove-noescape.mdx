@@ -1,0 +1,160 @@
+---
+title: "How to Remove NoEscape.exe"
+description: "This guide will help you remove the trojan malware \"NoEscape.exe\" without any antivirus software or any help on your infected Windows PC."
+date: "2025-11-25"
+tags: ["noescape", "malware", "noescape.exe", "remove noescape", "delete noescape", "noescape removal", "noescape malware", "remove noescape.exe", "delete noescape.exe", "noescape.exe removal", "noescape.exe malware", "how to remove noescape", "how to delete noescape", "how to get rid of noescape"]
+published: true
+featured: false
+categories: ["Malware Removal", "Windows", "Cybersecurity", "Troubleshooting"]
+author: ArsenTech
+authorURL: https://github.com/ArsenTech
+---
+## Introduction
+Did your PC get infected by NoEscape.exe, and you can't figure out how to remove it? This guide will help you remove that malware without any antivirus software or any help!
+
+> [!WARNING]
+> Do not download malware or execute unknown scripts on a real machine.
+> All demonstrations on ArsenTech are performed inside isolated virtual machines.
+> Readers should follow the tutorial carefully and fully understand the steps before removing malware.
+
+If you prefer watching instead of reading, here's the full video guide: [Watch the video on YouTube](https://youtu.be/Y1iH7j_AFQY)
+
+## Step 1 - Recovery Using Windows PE[^1]
+
+[^1]: Windows Preinstallation Environment
+
+Before removing NoEscape.exe, you must boot into a **safe offline environment**, such as **Windows PE (Windows Preinstallation Environment)**. This ensures that the malware cannot run while you are repairing the system.
+
+### What You Need
+- A clean computer
+- A USB flash drive
+- A Windows PE ISO (from trusted sources)
+- A bootable USB tool (Rufus, Ventoy, etc.)
+
+### Steps
+1. Create a Windows PE bootable USB (see the Bootable USB blog post if you need help).
+2. Insert the USB into the infected PC.
+3. Boot the PC and enter the Boot Menu (usually F2, F8, F11, F12, or Esc depending on manufacturer).
+4. Select the USB and boot into Windows PE.
+
+Once inside Windows PE, open Command Prompt and type `regedit`. This will allow you to manually repair the damaged registry entries injected by NoEscape.exe.
+
+> [!IMPORTANT]
+> Windows PE is required because NoEscape.exe modifies registry entries while Windows is running.
+> Editing them while the system is offline prevents the malware from interfering or reapplying its changes.
+
+## Step 2 - Registry Repair (Critical Step)
+> [!CAUTION]
+> Only modify the registry keys shown below. Editing unrelated values may corrupt Windows and cause boot failure.
+
+Inside the Registry Editor:
+1. Select HKEY_LOCAL_MACHINE
+2. Click File → Load Hive
+
+You will now load the registry hives from the infected Windows installation:
+
+### Hives To Load
+
+| Hive Name (You Choose) | Physical File Path                    | Represents                     |
+| ---------------------- | ------------------------------------- | ------------------------------ |
+| **InfectedPCSoftware** | `C:\Windows\System32\config\SOFTWARE` | `HKLM\SOFTWARE` of infected PC |
+| **InfectedPCSystem**   | `C:\Windows\System32\config\SYSTEM`   | `HKLM\SYSTEM` of infected PC   |
+| **InfectedPCUser**     | `C:\Users\<username>\NTUSER.DAT`      | `HKCU` of infected PC's user   |
+
+This loads the infected system's registry into Windows PE.
+
+### Registry Change 1 - Fix EXE File Hijack
+Navigate to:
+```
+InfectedPCSoftware/Classes/exefile/shell/open/command
+```
+Change the **(Default)** entry:
+| Before                           | After     |
+| -------------------------------- | --------- |
+| `C:\Windows\winnt32.exe "%1" %*` | `"%1" %*` |
+
+Repeat the same fix here:
+```
+InfectedPCSoftware/Classes/exefile/shell/runas/command
+```
+> [!NOTE]
+> `C:\Windows\winnt32.exe` is a malicious executable planted by NoEscape.exe to hijack every `.exe` you open.
+
+### Registry Change 2 - Repair Winlogon Hijack
+Navigate to:
+```
+InfectedPCSoftware/Microsoft/Windows NT/CurrentVersion/Winlogon
+```
+Update or Delete Values:
+| Name               | Before                                                    | After                              |
+| ------------------ | --------------------------------------------------------- | ---------------------------------- |
+| `Userinit`         | `C:\Windows\system32\userinit.exe,C:\Windows\winnt32.exe` | `C:\Windows\system32\userinit.exe` |
+| `DisableCAD`       | `1`                                                       | *(Delete)*                         |
+| `AutoRestartShell` | `1`                                                       | *(Delete)*                         |
+| `AutoAdminLogon`   | `1`                                                       | *(Delete)*                         |
+
+These entries are used by NoEscape.exe to retain control after login.
+
+### Registry Change 3 - Restore System Policies
+Navigate to:
+```
+InfectedPCSoftware/Microsoft/Windows/CurrentVersion/Policies/System
+```
+Perform the following actions:
+1. Set `EnableLUA` to `1`
+2. Delete `shutdownwithoutlogon`
+
+### Registry Change 4 - Restore Windows Logon UI
+Navigate to:
+```
+InfectedPCSoftware/Policies/Microsoft/Windows/System
+```
+And delete `DisableLogonBackgroundImage`
+
+### Registry Change 5 - Reset Keyboard Layout (Removes Key Remapping)
+Navigate to:
+```
+InfectedPCSystem/CurrentControlSet/Control/Keyboard Layout/
+```
+If **CurrentControlSet** doesn't exist, use this instead:
+```
+InfectedPCSystem/ControlSet001/Control/Keyboard Layout
+```
+And delete `Scancode Map`. This restores correct keyboard input.
+
+### Registry Change 6 - Fix User Profile Modifications
+Navigate to:
+```
+InfectedPCUser/Control Panel
+```
+Remove these modifications:
+| Name                       | Before | After      |
+| -------------------------- | ------ | ---------- |
+| `Mouse/SwapMouseButtons`   | `1`    | *(Delete)* |
+| `Desktop/AutoColorization` | `1`    | *(Delete)* |
+
+### Registry Change 7 - Re-enable Registry Editing (UAC Policies)
+Navigate to:
+```
+HKCU/Software/Microsoft/Windows/CurrentVersion/Policies/System
+```
+And Delete `DisableRegistryTools`. This re-enables Regedit on the repaired system.
+
+### Registry Change 8 - Re-enable Command Prompt
+Navigate to:
+```
+HKCU/Software/Policies/Microsoft/Windows/System
+```
+And delete `DisableCMD`. This restores access to CMD on the infected user account.
+
+### Final Step - Unload Hives Properly
+
+Before shutting down Windows PE:
+1. Select each loaded hive (InfectedPCSoftware, InfectedPCSystem, InfectedPCUser)
+2. Go to `File → Unload Hive`
+3. Confirm
+
+This ensures the registry is saved correctly.
+
+Now restart the computer normally.
+If the registry was repaired correctly, Windows should boot without NoEscape.exe reactivating.
