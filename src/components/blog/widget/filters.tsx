@@ -3,6 +3,7 @@ import { BlogWidget } from ".";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface CollapsibleFiltersProps{
      tags: string[],
@@ -36,7 +37,7 @@ export default function CollapsibleFilters({tags, onToggleCategory, selected}: C
                     ))}
                </div>
                {isOverflowing && (
-                    <Button variant="ghost" onClick={()=>setExpanded(!expanded)}>See {expanded ? "less" : "more"}</Button>
+                    <Button variant="ghost" onClick={()=>setExpanded(!expanded)}>See {expanded ? "less" : "more"} {expanded ? <ChevronUp/> : <ChevronDown/>}</Button>
                )}
           </BlogWidget>
      ) : null
