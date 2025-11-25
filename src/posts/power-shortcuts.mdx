@@ -1,8 +1,8 @@
 ---
 title: "How to Make Shutdown, Restart & Lock Shortcuts on Any Windows PC"
-description: "This guide shows how to make shortcuts to access the power options (Shutdown, Restart, Lock, Sleep) quickly."
+description: "This guide shows how to make shortcuts to access the power options (Shutdown, Restart, Lock, Sleep, Logout) quickly."
 date: "2025-11-25"
-tags: ["shutdown", "restart", "lock", "windows", "sleep", "hibernate", "shortcuts", "windows shortcuts", "power shortcuts", "shortcut", "shutdown shortcut", "restart shortcut"]
+tags: ["shutdown", "restart", "lock", "windows", "sleep", "shortcuts", "windows shortcuts", "power shortcuts", "shortcut", "shutdown shortcut", "restart shortcut", "logout"]
 published: true
 featured: false
 categories: ["Tutorial", "Tips and Tricks", "Windows"]
@@ -15,7 +15,23 @@ Power options on Windows like
 - Restart
 - Hibernate
 - Lock
+- Logout
 - Sleep
-are essential features to turn your PC off (or restart). This guide will help you make such shortcuts to make it easily accessible all without clicking on the start menu.
+
+are essential features to turn your PC off, restart your PC (if something bad happens), or put the PC in a sleep mode. This guide will help you make such shortcuts to make it easily accessible all without clicking on the start menu.
 
 If you prefer watching instead of reading, here's the full video guide: [Watch the video on YouTube](https://youtu.be/vCDfiFOG6jg?si=RSIMk0EVZNoMBZUr)
+
+## Step 1 - Creating shortcuts
+Start by right clicking on the desktop, then create a new shortcut by clicking on **New -> Shortcut**. Type the command in the location field, and name the shortcut after clicking on Next. Click finish to finish the process.
+
+### Shortcut locations:
+|Name|Location|
+|-|-|
+|Shutdown|`Shutdown.exe /s /t 00`|
+|Restart|`Shutdown.exe /r /t 00`|
+|Lock|`Rundll32.exe User32.dll,LockWorkStation`|
+|Sleep|`rundll32.exe powrprof.dll,SetSuspendState 0,1,0`|
+|Logout|`Shutdown.exe /l`|
+
+Do these to all of the shortcuts mentioned in the table
