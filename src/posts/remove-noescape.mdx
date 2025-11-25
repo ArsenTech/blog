@@ -2,7 +2,7 @@
 title: "How to Remove NoEscape.exe"
 description: "This guide will help you remove the trojan malware \"NoEscape.exe\" without any antivirus software or any help on your infected Windows PC."
 date: "2025-11-25"
-tags: ["noescape", "malware", "noescape.exe", "remove noescape", "delete noescape", "noescape removal", "noescape malware", "remove noescape.exe", "delete noescape.exe", "noescape.exe removal", "noescape.exe malware", "how to remove noescape", "how to delete noescape", "how to get rid of noescape"]
+tags: ["noescape", "malware", "noescape.exe", "remove noescape", "delete noescape", "noescape removal", "noescape malware", "remove noescape.exe", "delete noescape.exe", "noescape.exe removal", "computer virus", "how to remove noescape", "how to delete noescape", "how to get rid of noescape"]
 published: true
 featured: false
 categories: ["Malware Removal", "Windows", "Cybersecurity", "Troubleshooting"]
@@ -19,9 +19,7 @@ Did your PC get infected by NoEscape.exe, and you can't figure out how to remove
 
 If you prefer watching instead of reading, here's the full video guide: [Watch the video on YouTube](https://youtu.be/Y1iH7j_AFQY)
 
-## Step 1 - Recovery Using Windows PE[^1]
-
-[^1]: Windows Preinstallation Environment
+## Step 1 - Recovery Using Windows PE
 
 Before removing NoEscape.exe, you must boot into a **safe offline environment**, such as **Windows PE (Windows Preinstallation Environment)**. This ensures that the malware cannot run while you are repairing the system.
 
@@ -158,3 +156,22 @@ This ensures the registry is saved correctly.
 
 Now restart the computer normally.
 If the registry was repaired correctly, Windows should boot without NoEscape.exe reactivating.
+
+## Step 3 - Deleting Files planted by NoEscape.exe
+
+After reboot and log in, open the File Explorer, navigate to:
+```
+C:\Windows
+```
+By default, `winnt32.exe` is hidden, make sure to open Folder options → View and temporarily uncheck the following:
+- Hide protected operating system files
+- Hide empty drives
+
+And set `Hidden files and folders` to `Show hidden files, folders, and drives`.
+
+Once it's visible, delete `winnt32.exe` completely.
+
+Now mention every single file on desktop planted by NoEscape.exe using **Ctrl + A** and delete these files using **Shift + Del**. Don't forget to empty the recycle bin.
+
+## Step 4
+Navigate to `Settings → Personalization → Themes` and set the theme to your preferred theme. Set the desktop background to the preferred one.
