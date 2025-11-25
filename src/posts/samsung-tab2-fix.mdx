@@ -62,6 +62,41 @@ Download the latest version of Android 4.2.2 Jelly Bean for your model. Then dow
 > [!IMPORTANT]
 > These files are large. Downloading may take time, so be patient :-)
 
+### Firmware compatibility table
+> [!IMPORTANT]
+> Samsung Galaxy Tab 2 firmwares are NOT cross-compatible.
+> Installing the wrong firmware (e.g., P5100 firmware on a P3100 device) will cause Odin FAIL, bootloops, or complete soft-brick.
+Always verify your exact model number.
+
+| Model Number | Codename | Screen Size | Connectivity | Supported Firmware Files | Notes |
+|--------------|-----------|-------------|--------------|---------------------------|-------|
+| **GT-P3100** | espressorf | 7.0" | 3G + WiFi | `P3100_*.tar.md5` | 3G modem required; only flash P3100 firmware |
+| **GT-P3110** | espressowifi | 7.0" | WiFi-only | `P3110_*.tar.md5` | Do not flash P3100 firmware |
+| **GT-P5100** | espresso3g | 10.1" | 3G + WiFi | `P5100_*.tar.md5` | Larger 10.1" model |
+| **GT-P5110** | espressowifi | 10.1" | WiFi-only | `P5110_*.tar.md5` | Most common WiFi-only model |
+| **GT-P5113** | espressowifi | 10.1" | WiFi-only | `P5113_*.tar.md5` | US variant; P5110 firmware may work but not 100% safe |
+
+#### How to Check Your Model Number
+- Check the back cover (Model: GT-Pxxxx)
+- OR enter Download Mode → shows PRODUCT NAME
+
+#### Do NOT Mix These Models
+| Wrong Flash | Result |
+|-------------|---------|
+| P3100 ↔ P3110 | Bootloop, FAIL |
+| P5100 ↔ P5110 | FAIL, no boot |
+| 7-inch ↔ 10-inch firmware | Odin FAIL |
+| P5110 ↔ P5113 | Sometimes incompatible |
+
+#### Recommended Firmware Sources
+| Model | Download |
+|--------|----------|
+| GT-P3100 | https://samsony.net/en/firmwares/samsung/GT-P3100 |
+| GT-P3110 | https://samsony.net/en/firmwares/samsung/GT-P3110 |
+| GT-P5100 | https://samsony.net/en/firmwares/samsung/GT-P5100 |
+| GT-P5110 | https://samsony.net/en/firmwares/samsung/GT-P5110 |
+| GT-P5113 | SamFirm or AndroidFileHost |
+
 ## Step 2 - Extracting Tools and Flashing the Firmware
 After downloading:
 - Extract the firmware ZIP
@@ -114,6 +149,90 @@ Your Samsung Galaxy Tab 2 is now restored to working condition.
 
 ## Common Errors & Fixes
 These are the most common issues encountered when flashing old Samsung devices, such as the Galaxy Tab 2.
+
+### 1 - Odin Doesn't Detect the Device (No COM Port)
+Symptoms
+- Odin does not show any blue COM port
+- "Added!" does not appear
+
+Fixes
+- Reinstall Samsung USB Drivers: https://developer.samsung.com/mobile/android-usb-driver.html
+- Try a different USB port (use USB 2.0, not USB 3.0)
+- Try a different USB cable
+- Re-enter Download Mode
+- Restart PC and the tablet
+
+### 2 - Odin Stuck at “SetupConnection…”
+Symptoms
+- Progress bar does not move
+- Odin freezes at the beginning
+
+Fixes
+- Use another USB port/cable
+- Close Samsung Kies / Smart Switch if running
+- Reboot tablet & PC
+- Uncheck Auto Reboot in Odin, then:
+     1. Flash again
+     2. Manually reboot to recovery after PASS
+
+### 3 - "FAIL!" Message in Odin
+Symptoms
+- Odin shows red FAIL
+- Flashing stops immediately or halfway
+
+Possible Causes
+- Wrong firmware model
+- Corrupt .tar.md5 file
+- Bad cable or port
+
+Fixes
+- Re-download firmware
+- Extract firmware again
+- Use the correct model (P3100 vs P5100)
+- Try another version of Odin (3.07 or 3.12)
+
+### 4 - Device Bootloops After Flash
+Symptoms
+- Samsung logo loops forever
+- Tablet doesn't boot into Android
+
+Fix
+- Your Step 3 already solves this:
+     `Wipe data/factory reset → Yes → Reboot system now`
+
+# 5 - Tablet Cannot Enter Recovery Mode
+Try these combinations:
+- Power + Volume Up
+- Hold longer (10–15 seconds)
+- From Download Mode, use `Power + Volume Down → when screen turns off → switch to Volume Up`
+
+If recovery is still inaccessible, reflash firmware again.
+
+### 6 - Odin Closes Immediately After Opening
+Fixes
+- Right-click Odin → Run as administrator
+- Disable overly aggressive antivirus
+- Extract Odin to Desktop, not inside nested folders
+- Check if the ZIP wasn't blocked by Windows
+(Right-click → Properties → “Unblock”)
+
+### 7 - Odin Says “Invalid SHA256” or “MD5 Error”
+Cause: **Firmware file corrupted.**
+
+Fix
+- Re-download firmware
+- Make sure the `.tar.md5` file is complete (sometimes hosting sites fail mid-download)
+
+### 8 - No Android After Flash — Still No OS
+Cause: Rare, but happens if:
+- Wrong firmware
+- Interrupted flash
+- Partition table mismatch
+
+Fix
+- Reflash the correct firmware file
+- Ensure the file contains boot.img, system.img, recovery.img
+- Try another Jelly Bean firmware build for your exact model
 
 ## Conclusion
 And that's it! Your Samsung Galaxy Tab 2 has now been fully repaired and restored to official stock Android.
