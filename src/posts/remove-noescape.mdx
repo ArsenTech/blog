@@ -171,7 +171,55 @@ And set `Hidden files and folders` to `Show hidden files, folders, and drives`.
 
 Once it's visible, delete `winnt32.exe` completely.
 
-Now mention every single file on desktop planted by NoEscape.exe using **Ctrl + A** and delete these files using **Shift + Del**. Don't forget to empty the recycle bin.
+Now mention every single file on desktop planted by NoEscape.exe using
+<KbdGroup>
+     <Kbd>Ctrl</Kbd>
+     <span>+</span>
+     <Kbd>A</Kbd>
+</KbdGroup>
+
+and delete these files using
+<KbdGroup>
+     <Kbd>Shift</Kbd>
+     <span>+</span>
+     <Kbd>Del</Kbd>
+</KbdGroup>
+Don't forget to empty the recycle bin.
+
+Then
+- Check `Hide protected operating system files`
+- Check `Hide empty drives`
+- Set `Hidden files and folders` to `Don't show hidden files, folders, and drives`.
 
 ## Step 4
 Navigate to `Settings → Personalization → Themes` and set the theme to your preferred theme. Set the desktop background to the preferred one.
+
+## Step 5 - Deleting MORE files planted by NoEscape.exe
+Open the run command:
+<KbdGroup>
+     <Kbd>⊞</Kbd>
+     <span>+</span>
+     <Kbd>R</Kbd>
+</KbdGroup>
+and type `%localappdata%`.
+
+Delete `noescape.png`.
+
+Navigate to
+```
+%programdata%/Microsoft/User Account Pictures
+```
+and delete the modified profile pictures (or replace them with the original one if you have it)
+
+## Step 6 - Removing users created by NoEscape.exe
+Navigate to `Settings → Accounts → Other Users`, and remove every single user data created by NoEscape.exe (except the ones you've created)
+
+Now open the run command:
+<KbdGroup>
+     <Kbd>⊞</Kbd>
+     <span>+</span>
+     <Kbd>R</Kbd>
+</KbdGroup>
+and type `control`.
+
+Navigate to `User Accounts → User Accounts` and change the account name to the preferred name.
