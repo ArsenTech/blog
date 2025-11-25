@@ -22,7 +22,7 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
   h4: (props) => <h4 className="scroll-m-40 text-xl font-semibold tracking-tight" {...props} />,
   h5: (props) => <h5 className="scroll-m-40 text-lg font-semibold tracking-tight" {...props} />,
   h6: (props) => <h6 className="scroll-m-40 text-sm font-semibold tracking-tight" {...props} />,
-  p: (props) => <p className="leading-7 [&:not(:first-child)]:mt-6" {...props} />,
+  p: (props) => <p className="leading-7 [&:not(:first-child)]:mt-4" {...props} />,
   a: (props) => <Link className={cn(buttonVariants({ variant: "link" }), "px-1 py-0 whitespace-normal text-base")} {...props} />,
   blockquote: (props) => <Blockquote {...props}/>,
   small: (props) => <small className="text-sm font-medium leading-none" {...props} />,
@@ -65,6 +65,15 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
     <CodeBlockWrapper>
       {children}
     </CodeBlockWrapper>
+  ),
+  section: ({children,className, ...props}) => className==="footnotes" ? (
+    <section className="border-t-2 border-dashed" {...props}>
+      {children}
+    </section>
+  ) : (
+    <section className={className} {...props}>
+      {children}
+    </section>
   ),
   ...components
 })

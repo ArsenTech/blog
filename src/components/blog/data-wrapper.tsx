@@ -27,7 +27,7 @@ export default function BlogDataWrapper({toc, children, metaData}: BlogControlsP
           }
      }
      return (
-          <SiteSection className="!px-0 !pt-10 !pb-0 md:!pb-10" innerWidthClass={cn("space-y-4",hasTOC && "grid grid-cols-1 lg:grid-cols-[1.5fr_3fr] gap-4")} id="blog-content">
+          <SiteSection className="!px-0 !pt-10 !pb-0 md:!pb-10" innerWidthClass={cn(hasTOC ? "grid grid-cols-1 lg:grid-cols-[1.5fr_3fr] gap-4" : "space-y-3")} id="blog-content">
                <TableOfContents
                     isTablet={isTablet}
                     data={toc}
@@ -35,7 +35,7 @@ export default function BlogDataWrapper({toc, children, metaData}: BlogControlsP
                     isOpen={isOpen}
                     currTitle={metaData.title}
                />
-               <article className={cn("prose dark:prose-invert prose-code:after:content-normal prose-code:before:content-none !mt-0 relative",!hasTOC ? "max-w-full" : "max-w-5xl")}>
+               <article className={cn("prose dark:prose-invert prose-code:after:content-normal prose-code:before:content-none mt-0! relative",!hasTOC ? "max-w-full" : "max-w-5xl")}>
                     <BlogAccessibility
                          hasTOC={hasTOC}
                          currTitle={metaData.title}
