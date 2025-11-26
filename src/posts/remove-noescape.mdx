@@ -159,67 +159,152 @@ If the registry was repaired correctly, Windows should boot without NoEscape.exe
 
 ## Step 3 - Deleting Files planted by NoEscape.exe
 
-After reboot and log in, open the File Explorer, navigate to:
+After restarting the repaired system and logging into Windows, the next step is to remove the malicious files that NoEscape.exe created.
+
+### 1. Show Hidden & Protected System Files
+
+Open File Explorer and go to:
 ```
 C:\Windows
 ```
-By default, `winnt32.exe` is hidden, make sure to open Folder options → View and temporarily uncheck the following:
-- Hide protected operating system files
-- Hide empty drives
 
-And set `Hidden files and folders` to `Show hidden files, folders, and drives`.
+By default, winnt32.exe is hidden. To reveal it:
+1. Open Folder Options → **View**
+2. Temporarily disable:
+- **Hide protected operating system files (Recommended)**
+- **Hide empty drives**
+3. Under Hidden files and folders, select:
+- **Show hidden files, folders, and drives**
 
-Once it's visible, delete `winnt32.exe` completely.
+Click **Apply**.
 
-Now mention every single file on desktop planted by NoEscape.exe using
+### 2. Delete `winnt32.exe`
+
+Now that hidden system files are visible, locate and delete `winnt32.exe`
+
+This file is responsible for the EXE hijack.
+
+> [!CAUTION]
+> Make sure you **ONLY** delete the file located directly inside C:\Windows.
+> Do **NOT** delete any legitimate system files.
+
+### 3. Remove Malicious Desktop Files
+
+NoEscape.exe creates random files on the desktop to clutter the desktop with these files.
+
+To delete all of them at once, press:
 <KbdGroup>
      <Kbd>Ctrl</Kbd>
      <span>+</span>
      <Kbd>A</Kbd>
 </KbdGroup>
-
-and delete these files using
+to select all desktop items. Then permanently delete them with:
 <KbdGroup>
      <Kbd>Shift</Kbd>
      <span>+</span>
      <Kbd>Del</Kbd>
 </KbdGroup>
-Don't forget to empty the recycle bin.
 
-Then
-- Check `Hide protected operating system files`
-- Check `Hide empty drives`
-- Set `Hidden files and folders` to `Don't show hidden files, folders, and drives`.
+Empty your Recycle Bin afterward.
 
-## Step 4
-Navigate to `Settings → Personalization → Themes` and set the theme to your preferred theme. Set the desktop background to the preferred one.
+### 4. Restore File Explorer Settings
 
-## Step 5 - Deleting MORE files planted by NoEscape.exe
-Open the run command:
+When done, revert the folder settings:
+- Enable **“Hide protected operating system files”**
+- Enable **“Hide empty drives”**
+- Set “Hidden files and folders” to **Don’t show hidden files, folders, or drives**
+
+This protects your system from accidental file deletion later.
+
+## Step 4 - Restore Your Theme & Desktop Background
+NoEscape.exe replaces your wallpaper and UI theme to make your system look corrupted or hacked.
+
+To restore your theme:
+1. Open **Settings**
+2. Go to **Personalization → Themes**
+3. Choose your preferred theme
+4. Reapply your desktop background
+
+Your system should now visually return to normal.
+
+## Step 5 - Deleting More files planted by NoEscape.exe
+
+### 1. Remove LocalAppData Image
+Open the Run dialog:
 <KbdGroup>
      <Kbd>⊞</Kbd>
      <span>+</span>
      <Kbd>R</Kbd>
 </KbdGroup>
-and type `%localappdata%`.
 
-Delete `noescape.png`.
+Type `%localappdata%`. Find and delete `noescape.png`
 
-Navigate to
+This is the custom wallpaper the malware forces onto the system.
+
+2. Remove Modified User Account Pictures
+
+Navigate to:
 ```
-%programdata%/Microsoft/User Account Pictures
+%programdata%\Microsoft\User Account Pictures
 ```
-and delete the modified profile pictures (or replace them with the original one if you have it)
+Delete the modified profile icons created by NoEscape.exe.
 
-## Step 6 - Removing users created by NoEscape.exe
-Navigate to `Settings → Accounts → Other Users`, and remove every single user data created by NoEscape.exe (except the ones you've created)
+If you have your original user icon backed up, replace it here.
 
-Now open the run command:
+## Step 6 - Removing Fake Users Created by NoEscape.exe
+NoEscape.exe creates extra fake users to weaken system security and confuse the victim.
+1. Open **Settings**
+2. Go to **Accounts → Other Users**
+3. Manually delete any suspicious accounts (DO NOT delete your real account).
+
+## Step 7 - Restore Your Account
+
+### Restore your account name
+Open the Run dialog:
 <KbdGroup>
      <Kbd>⊞</Kbd>
      <span>+</span>
      <Kbd>R</Kbd>
 </KbdGroup>
-and type `control`.
 
-Navigate to `User Accounts → User Accounts` and change the account name to the preferred name.
+Type `control`. Go to:
+```
+User Accounts → User Accounts
+```
+Change your account name back to the preferred name.
+
+### Restore your profile picture
+Go to:
+```
+Settings → Accounts → Your info
+```
+Set a new profile picture or upload your old one.
+
+### Fix Your Account Password (Optional)
+If you want to reset your password to something simple or blank:
+
+Open Command Prompt as Administrator and run:
+```cmd
+net user <username> <password>
+```
+To set a blank password:
+```cmd
+net user <username> ""
+```
+Restart your PC afterward.
+
+Finally, re-add your normal desktop shortcuts if needed.
+
+## Conclusion
+And that’s it! NoEscape.exe has been completely removed from your system.
+This malware modifies registry entries, themes, user accounts, wallpapers, and core Windows settings, so restoring everything manually is critical.
+
+To prevent future infections:
+- Delete suspicious `.exe` files immediately
+- Never run unknown programs
+- Use a stronger antivirus
+- Keep real-time protection enabled
+- Always use a virtual machine for malware testing
+- Follow safe browsing habits & avoid unknown downloads
+
+Thanks for reading! If you want more malware removal guides and educational malware tests, check out my YouTube channel!
