@@ -71,20 +71,21 @@ to select all files on your desktop. Then permanently delete them:
 Empty your Recycle Bin afterward. This removes all visible leftovers from the malware.
 
 ## Step 3 - Restore Your Theme & Desktop Background
-000.exe replaces your wallpaper and UI theme to make your system look corrupted or hacked.
-To restore your theme:
-1. Open **Settings**
-2. Go to **Personalization → Themes**
-3. Choose your preferred theme
-4. Reapply your desktop background
+000.exe replaces your wallpaper with a corrupted image.
 
-Your system should now visually return to normal.
+To restore your desktop appearance:
+- Open **Settings**
+- Go to **Personalization → Themes**
+- Select your original theme
+- Reapply your preferred wallpaper
+
+Your system should now visually appear normal again.
 
 ## Step 4 - Registry changes
 > [!CAUTION]
 > Only modify the registry keys shown below. Editing unrelated values may corrupt Windows and cause boot failure.
 
-Open the run command by pressing the following keys:
+Open the run dialog:
 <KbdGroup>
      <Kbd>⊞</Kbd>
      <span>+</span>
@@ -95,33 +96,37 @@ And type `regedit`. If prompted, click **Yes**.
 ### Registry Change 1 - Enable Task Manager
 Navigate to:
 ```
-HKEY_CURRENT_USER/Software/Microsoft/Windows/CurrentVersion/Policies/System
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System
 ```
-And delete `DisableTaskMgr`
+
+Right-click and **delete** `DisableTaskMgr`
+
+Task Manager will work again after restarting your PC.
 
 ### Registry Change 2 - Change the Icon of the Text files
-Navigate to:
+000.exe points .txt icons to a malicious file. Reset it to the Windows default by navigating to:
 ```
 HKEY_CLASSES_ROOT/txtfile/DefaultIcon
 ```
-Change the **(Default)** entry:
+And changing the **(Default)** entry:
 | Before                                            | After                                   |
 | ------------------------------------------------- | --------------------------------------- |
 | `C:\Users\<username>\AppData\Local\temp\icon.ico` | `C:\Windows\system32\imageres.dll,-102` |
 
-This will change the text icon back to the original place. It'll take effect after restart.
+This restores the normal text document icon.
+Changes take effect after a restart.
 
-## Step 4 - Removing Startup Apps
-Open the file explorer and navigate to:
+## Step 5 - Remove Startup Entries
+Open File Explorer and go to:
 ```
 %programdata%/Microsoft/Windows/Start Menu/Programs/Startup
 ```
-and delete `rniw.exe`
+Delete `rniw.exe`
 
 > [!NOTE]
-> `rniw.exe` is an executable planted by 000.exe to spam message boxes every millisecond.
+> `rniw.exe` rniw.exe is a startup program created by 000.exe to re-enable its message boxes.
 
-## Step 5 - Removing Temporary files
+## Step 5 - Clear Temporary Files
 Open the Run dialog:
 <KbdGroup>
      <Kbd>⊞</Kbd>
@@ -129,37 +134,52 @@ Open the Run dialog:
      <Kbd>R</Kbd>
 </KbdGroup>
 
-Type `%temp%`, and clear every single temporary file in this folder.
+Type `%temp%`.
 
-## Step 6 - Changing the username back.
-Open the Run dialog:
-<KbdGroup>
-     <Kbd>⊞</Kbd>
-     <span>+</span>
-     <Kbd>R</Kbd>
-</KbdGroup>
+Select all files and delete everything inside the Temp folder.
+This removes leftover icons, scripts, and junk files dropped by 000.exe.
 
-Type `control`. Go to:
-```
-User Accounts → User Accounts
-```
-Change your account name back to the preferred name.
+## Step 7 - Restore Your Username
+000.exe may rename your Windows account to **UR NEXT**.
 
-Now Restart your PC.
+To restore it:
+1. Press the following keys:
+   <KbdGroup>
+        <Kbd>⊞</Kbd>
+        <span>+</span>
+        <Kbd>R</Kbd>
+   </KbdGroup>
+2. Type `control`
+3. Navigate to: `User Accounts → User Accounts`
+4. Click **Change your account name**
+
+Choose your preferred name and restart your PC.
 
 ## Conclusion
-And that's it! 000.exe has been completely removed from your system.
-This malware modifies registry entries, themes, user accounts, wallpapers, and core Windows settings, so restoring everything manually is critical.
+And that’s it!
+The 000.exe virus has been completely removed from your system.
 
-To prevent future infections:
+This malware mainly changes:
+- Registry values
+- Wallpaper & theme
+- Text icons
+- Startup programs
+- User account name
+- Temporary files
+- Message box spammers
+
+So restoring everything **manually** is essential.
+
+**To prevent future infections:**
 - Delete suspicious `.exe` files immediately
 - Never run unknown programs
 - Use a stronger antivirus
 - Keep real-time protection enabled
-- Always use a virtual machine for malware testing
-- Follow safe browsing habits & avoid unknown downloads
+- Only test malware inside virtual machines
+- Avoid downloading from untrusted websites
+- Practice safe browsing habits
 
-Thanks for reading! If you want more malware removal guides and educational malware tests, check out my YouTube channel!
+Thanks for reading! For more malware removal guides and educational malware tests, check out my YouTube channel!
 
 > GitHub [@ArsenTech][github-url] &nbsp;&middot;&nbsp;
 > YouTube [@ArsenTech][yt-url] &nbsp;&middot;&nbsp;
