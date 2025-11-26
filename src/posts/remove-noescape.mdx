@@ -295,6 +295,106 @@ Restart your PC afterward.
 
 Finally, re-add your normal desktop shortcuts if needed.
 
+## Step 8 - Repair Windows System Files (SFC & DISM)
+NoEscape.exe corrupts several Windows components, including:
+- System policies
+- Login settings
+- User profiles
+- Explorer visuals
+- Registry permissions
+- Windows shell stability
+
+To ensure your system is fully functional, run the built-in Windows repair tools.
+
+### 1. System File Checker (SFC)
+
+Open Command Prompt as Administrator and run:
+```cmd
+sfc /scannow
+```
+This will scan and repair:
+- Modified Windows files
+- Missing DLLs
+- Corrupted components
+- System shell inconsistencies
+
+> [!NOTE]
+> If SFC says that it found corrupt files and repaired them — this is normal after malware removal.
+
+### 2. Deployment Image Servicing and Management (DISM)
+
+If SFC shows errors it **cannot** fix, run DISM:
+```cmd
+DISM /Online /Cleanup-Image /RestoreHealth
+```
+DISM repairs deeper Windows components such as:
+- WinSxS store
+- System image corruption
+- Recovery files
+- Windows update components
+
+> [!IMPORTANT]
+> DISM requires an active internet connection unless you’re using an offline image.
+
+### 3. Run SFC Again
+
+After DISM completes, run:
+```cmd
+sfc /scannow
+```
+This ensures all corrupt or modified files from NoEscape.exe are fully repaired.
+
+### Optional (Strongly Recommended): Windows Update Refresh
+
+Go to **Settings → Update & Security → Windows Update**
+
+Run **Check for Updates**.
+
+Windows will reapply critical system files and drivers to guarantee system integrity.
+
+## Step 9 - Removing the Most Dangerous Variant: September 18
+Signs:
+- Opening any `exe` file leads to opening notepad and typing **THERE'S NO ESCAPE...**
+- Typing either **Yes** or **No** leads to bootloader corruption
+- Makes PC unbootable
+
+> [!IMPORTANT]
+> This variant cannot be removed using only registry fixes.
+
+### Restoring the bootloader
+1. Boot into Windows PE
+2. Back up your files (just in case)
+3. Place TestDisk Portable from a different USB: https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.2-WIP.win.zip (Make sure to download TestDisk on a secondary healthy PC and place it on the another flash drive)
+4. Copy the files into the Windows PE flash drive
+5. Launch TestDisk, select `No Log`, then navigate to:
+```
+<Your Drive Name> → EFI GPT → Analyze → Quick search
+```
+6. Once choose partition with
+- Your files
+- Less capacity
+Press the right arrow key and type **P**
+7. Open the cmd and type:
+```cmd
+bootrec /fixmbr
+bootrec /fixboot
+bootrec /rebuildbcd
+```
+8. Press Enter on TestDisk, Select write, and type **Y**
+9. Navigate to:
+```
+Advanced → MS Data → Boot → Repair MFT → OK → Rebuild BS
+```
+10. Open the CMD and type these commands to make sure the boot sector is rebuilt:
+```cmd
+bootrec /fixmbr
+bootrec /fixboot
+bootrec /rebuildbcd
+```
+11. Open Disk Manager, and refresh it.
+
+If you see the C: Disk here, that means the boot sector is restored. If **Rebuild BS** command was failed, the only option is to reinstall Windows
+
 ## Conclusion
 And that’s it! NoEscape.exe has been completely removed from your system.
 This malware modifies registry entries, themes, user accounts, wallpapers, and core Windows settings, so restoring everything manually is critical.
@@ -308,3 +408,13 @@ To prevent future infections:
 - Follow safe browsing habits & avoid unknown downloads
 
 Thanks for reading! If you want more malware removal guides and educational malware tests, check out my YouTube channel!
+
+> GitHub [@ArsenTech][github-url] &nbsp;&middot;&nbsp;
+> YouTube [@ArsenTech][yt-url] &nbsp;&middot;&nbsp;
+> Patreon [ArsenTech][patreon-url] &nbsp;&middot;&nbsp;
+> [ArsenTech's Website][website-url]
+
+[yt-url]:https://www.youtube.com/channel/UCrtH0g6NE8tW5VIEgDySYtg
+[patreon-url]:https://www.patreon.com/ArsenTech
+[github-url]: https://github.com/ArsenTech
+[website-url]: https://arsentech.github.io
