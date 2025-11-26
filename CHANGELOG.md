@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Blog page: Interactions (Powered by Giscus)
 - SEO (Title, Description, Metadata, Tags, Sitemap, Search Pages, OpenGraph)
 - Toaster to show the Share Status while Sharing the post (Success or Error)
+- 10 blog posts
 ### Changed
 - Migrated from `markdown-to-jsx` to MDX
 - Made widgets collapsible (TOC, Categories, etc.)
@@ -27,10 +28,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Updated components using the Latest ShadCN components
 ### Removed
 - “Coming Soon” placeholder
-### Added Posts
-- Linux Terminal Tutorial
-- Windows 10 Terminal Tutorial
-- Bootable USB Tutorial
 
 ## [0.1.1] - 2025-06-14 (Pre-release) 
 ### Added
