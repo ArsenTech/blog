@@ -12,14 +12,13 @@ export default async function Home({searchParams}: HomepageProps) {
   const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_PER_PAGE;
   const posts = await getAllPosts();
   const categories = await getCategories(posts);
-  const totalPages = Math.ceil(posts.length / postsPerPage)
   return (
     <PageLayout>
       <LandingPage
         pageSize={postsPerPage}
         posts={posts}
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={posts.length}
         categories={categories}
         query={query || ""}
       />

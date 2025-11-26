@@ -5,7 +5,7 @@ date: "2025-11-26"
 tags: ["noescape", "malware", "noescape.exe", "remove noescape", "delete noescape", "noescape removal", "noescape malware", "remove noescape.exe", "delete noescape.exe", "noescape.exe removal", "computer virus", "how to remove noescape", "how to delete noescape", "how to get rid of noescape"]
 published: true
 featured: false
-categories: ["Malware Removal", "Windows", "Cybersecurity", "Troubleshooting"]
+categories: ["Malware Removal", "Windows", "Cybersecurity", "Troubleshooting", "Bootable USB"]
 author: ArsenTech
 authorURL: https://github.com/ArsenTech
 ---
@@ -134,14 +134,14 @@ Remove these modifications:
 ### Registry Change 7 - Re-enable Registry Editing (UAC Policies)
 Navigate to:
 ```
-HKCU/Software/Microsoft/Windows/CurrentVersion/Policies/System
+InfectedPCUser/Software/Microsoft/Windows/CurrentVersion/Policies/System
 ```
 And Delete `DisableRegistryTools`. This re-enables Regedit on the repaired system.
 
 ### Registry Change 8 - Re-enable Command Prompt
 Navigate to:
 ```
-HKCU/Software/Policies/Microsoft/Windows/System
+InfectedPCUser/Software/Policies/Microsoft/Windows/System
 ```
 And delete `DisableCMD`. This restores access to CMD on the infected user account.
 

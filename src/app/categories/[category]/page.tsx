@@ -80,7 +80,6 @@ export default async function CategoriesPage({params, searchParams}: PageProps){
      const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_IN_SEARCH;
      const categoryDecoded = decodeURIComponent(category);
      const results = await getPostsByCategory(categoryDecoded)
-     const totalPages = Math.ceil(results.length / postsPerPage)
      return (
           <PageLayout>
                <Search
@@ -88,7 +87,7 @@ export default async function CategoriesPage({params, searchParams}: PageProps){
                     pageSize={postsPerPage}
                     category={categoryDecoded}
                     results={results}
-                    totalPages={totalPages}
+                    totalPages={results.length}
                     currentPage={currentPage}
                />
           </PageLayout>
