@@ -68,7 +68,7 @@ export function Blockquote({children}: BlockquoteProps){
      const variant = bqType ? variantMap[bqType as BlockquoteVariant] : null;
      const bqTitle = bqType ? bqType[0].toUpperCase() + bqType.slice(1) : ""
      return !variant ? (
-          <blockquote className="mt-3.5 border-l-2 pl-6 italic text-xs sm:text-sm md:text-base">{children}</blockquote>
+          <blockquote className="mt-3.5 border-l-2 pl-6 italic text-sm md:text-base">{children}</blockquote>
      ) : (
           <div aria-label={bqTitle} className={cn(
                "mt-3.5 border-2 rounded-md shadow-sm transition-all duration-200 hover:shadow-md py-5 px-4 [&>*]:my-0 space-y-2 flex flex-col items-start",
