@@ -84,7 +84,7 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
                                         {getRangeAsText(
                                              currentPage,
                                              pageSize,
-                                             search==="" ? totalPages : entries.length,
+                                             filteredPosts.length,
                                              "post"
                                         )}
                                    </p>
