@@ -18,6 +18,8 @@ import { PaginationWithLinks } from "@/components/pagination-with-links"
 import CollapsibleFilters from "../blog/widget/filters"
 import NoSearchResults from "../shrug"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
+import usePaginatedData from "@/hooks/use-pagination";
+import { getRangeAsText } from "@/lib/helpers/seo";
 
 interface LandingPageProps{
      posts: IBlogPostBase[],
@@ -39,7 +41,7 @@ function BlogPosts(props: BlogPostsProps) {
      return <Inner {...props} />
 }
 
-export default function LandingPage({posts, totalPages, currentPage, categories,pageSize, query}: LandingPageProps){
+export default function LandingPage({posts, totalPages, currentPage, categories, pageSize, query}: LandingPageProps){
      const [search, setSearch] = useState(query)
      const [selected, setSelected] = useState<string[]>([])
      const filteredPosts = useMemo(()=>{
@@ -56,10 +58,7 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
                ): currPosts;
           return flairFilters;
      },[search,posts,selected])
-     const entries = filteredPosts.slice(
-          (currentPage - 1) * pageSize,
-          currentPage * pageSize
-     )
+     const entries = usePaginatedData(filteredPosts,currentPage,pageSize);
      const featured = posts.filter(post=>post.featured).slice(0,MAX_FEATURED_POSTS);
      const toggleCategory = (category: string) => setSelected(prev=>prev?.includes(category) ? prev.filter(val=>val!==category) : [...(prev||[]),category])
      return (
@@ -79,7 +78,17 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
                {posts.length!==0 ? (
                     <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4">
                          <div className="space-y-5">
-                              <h3 className="scroll-m-20 text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight border-b border-primary pb-2">{search==="" ? "Latest Posts" : "Search Results"}</h3>
+                              <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-2.5">
+                                   <h3 className="scroll-m-20 text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight border-b border-primary pb-2">{search==="" ? "Latest Posts" : "Search Results"}</h3>
+                                   <p className="text-sm text-muted-foreground">
+                                        {getRangeAsText(
+                                             currentPage,
+                                             pageSize,
+                                             search==="" ? totalPages : entries.length,
+                                             "post"
+                                        )}
+                                   </p>
+                              </div>
                               {entries.length<=0 ? (
                                    <div className="flex !mt-0 flex-col items-center justify-center gap-3 h-full w-full">
                                         <NoSearchResults tag={search}/>

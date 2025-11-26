@@ -79,8 +79,7 @@ export default async function TagsPage({params, searchParams}: PageProps){
      const currentPage = page ? parseInt(page) : 1;
      const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_IN_SEARCH;
      const tagDecoded = decodeURIComponent(tag)
-     const results = await getPostsByTag(tagDecoded)
-     const totalPages = Math.ceil(results.length / postsPerPage)
+     const results = await getPostsByTag(tagDecoded);
      return (
           <PageLayout>
                <Search
@@ -88,7 +87,7 @@ export default async function TagsPage({params, searchParams}: PageProps){
                     pageSize={postsPerPage}
                     tag={tagDecoded}
                     results={results}
-                    totalPages={totalPages}
+                    totalPages={results.length}
                     currentPage={currentPage}
                />
           </PageLayout>

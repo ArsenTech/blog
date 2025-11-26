@@ -93,7 +93,7 @@ export const getAllTags = cache(async(limit?: number) => {
 
 export const getPostsByTag = cache(async(tag: string) => {
      const posts = await getAllPosts();
-     return posts.filter(post =>post.tags.some(t => t.toLowerCase() === tag.toLowerCase()));
+     return posts.filter(post =>post.tags.some(t => t.toLowerCase().includes(tag.toLowerCase())));
 });
 
 export const getAllSlugs = cache(async(limit?: number) => {

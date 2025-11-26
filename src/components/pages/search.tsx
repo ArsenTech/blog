@@ -16,6 +16,8 @@ import NoSearchResults from "../shrug"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
 import { BlogPostsProps } from "../blog-posts"
 import PostsLoader from "../loaders/posts"
+import { getRangeAsText } from "@/lib/helpers/seo"
+import usePaginatedData from "@/hooks/use-pagination"
  
 export const searchSchema = z.object({
      query: z.string().trim()
@@ -52,11 +54,8 @@ export default function Search(props: SearchProps){
                )
                : results.filter(val=>val.categories.some(c=>c.toLowerCase().includes(keyword.toLowerCase())))
      ,[results, keyword, mode])
-     const router = useRouter()
-     const entries = filteredPosts.slice(
-          (currentPage - 1) * pageSize,
-          currentPage + pageSize
-     )
+     const router = useRouter();
+     const entries = usePaginatedData(filteredPosts,currentPage,pageSize);
      const form = useForm<z.infer<typeof searchSchema>>({
           resolver: zodResolver(searchSchema),
           defaultValues: { query: keyword }
@@ -90,7 +89,13 @@ export default function Search(props: SearchProps){
                                                        <InputGroupAddon>
                                                             <SearchIcon/>
                                                        </InputGroupAddon>
-                                                       <InputGroupAddon align="inline-end">{entries.length} {entries.length<=1 ? "result" : "results"}</InputGroupAddon>
+                                                       <InputGroupAddon align="inline-end">
+                                                            {getRangeAsText(
+                                                                 currentPage,
+                                                                 pageSize,
+                                                                 totalPages
+                                                            )}
+                                                       </InputGroupAddon>
                                                   </InputGroup>
                                              </FormItem>
                                         )}
