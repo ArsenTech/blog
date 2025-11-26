@@ -78,7 +78,7 @@ export default function LandingPage({posts, totalPages, currentPage, categories,
                {posts.length!==0 ? (
                     <SiteSection id="blog" innerWidthClass="space-y-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4">
                          <div className="space-y-5">
-                              <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-2.5">
+                              <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-2.5">
                                    <h3 className="scroll-m-20 text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight border-b border-primary pb-2">{search==="" ? "Latest Posts" : "Search Results"}</h3>
                                    <p className="text-sm text-muted-foreground">
                                         {getRangeAsText(
