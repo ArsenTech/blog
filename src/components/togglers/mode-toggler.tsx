@@ -14,9 +14,9 @@ export default function ModeToggler({className}: ModeTogglerProps){
      },[])
      const currentTheme = theme==="system" ? systemTheme : theme
      const isDark = currentTheme ==="dark";
-     return !mounted ? null : (
+     return mounted ? (
           <button className={cn("w-[30px] h-[30px] transition-all cursor-pointer",className)} onClick={()=>setTheme(isDark ? "light" : "dark")}>
                <Image src={`/icons/${isDark ? "dark" : "light"}.svg`} alt="mode" width={30} height={30}/>
           </button>
-     )
+     ) : null
 }

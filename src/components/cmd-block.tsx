@@ -1,0 +1,30 @@
+"use client"
+import CodeBlockWrapper from "./code-block";
+import { Tabs, TabsTrigger, TabsList, TabsContent } from "./ui/tabs"
+
+interface CMDBlockProps{
+     shell?: "cmd" | "bash" | "zsh" | "text" | "bat",
+     data: {
+          [cmd: string]: string
+     }
+}
+export default function CMDBlock({shell = "text", data}: CMDBlockProps){
+     const commands = Object.entries(data);
+     const cmdTypes = commands.map(val=>val[0]);
+     return (
+          <Tabs defaultValue={cmdTypes[0]}>
+               <TabsList className="w-full h-full flex-wrap">
+                    {cmdTypes.map(type=>(
+                         <TabsTrigger value={type} key={type} className="flex-1">{type}</TabsTrigger>
+                    ))}
+               </TabsList>
+               {commands.map(([type,cmd])=>(
+                    <TabsContent key={`cmd-${type}`} value={type} asChild>
+                         <CodeBlockWrapper lang={shell} smallerMargin>
+                              {cmd}
+                         </CodeBlockWrapper>
+                    </TabsContent>
+               ))}
+          </Tabs>
+     )
+}

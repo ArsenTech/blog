@@ -1,26 +1,27 @@
 import PageLayout from "@/components/layout";
-import { SOCIAL_MEDIA_LINKS } from "@/lib/constants";
-import { getBackgroundImage } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
+import LandingPage from "@/components/pages/landing";
+import { POSTS_PER_PAGE } from "@/lib/constants";
+import { getAllPosts, getCategories } from "@/lib/helpers";
 
-export default function Home() {
+interface HomepageProps{
+  searchParams: Promise<{query?: string, page?: string, pageSize?:string}>
+}
+export default async function Home({searchParams}: HomepageProps) {
+  const {page, pageSize, query} = await searchParams;
+  const currentPage = page ? parseInt(page) : 1;
+  const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_PER_PAGE;
+  const posts = await getAllPosts();
+  const categories = await getCategories(posts);
   return (
     <PageLayout>
-      <main>
-        <section id="#banner" className="text-white flex items-center justify-center flex-col gap-5 h-screen min-h-[500px] px-4 text-center" style={getBackgroundImage()}>
-          <Link href="https://arsentech.github.io">
-            <Image src="/arsentech-dark.svg" alt="logo" width={300} height={64}/>
-          </Link>
-          <h1 className="text-4xl sm:text-6xl font-bold">Coming Soon...</h1>
-          <p className="text-lg sm:text-xl">I&apos;m working on something exciting. Stay tuned!</p>
-          <div className="flex justify-center flex-wrap gap-6">
-            {SOCIAL_MEDIA_LINKS.map(({Icon,url},i)=>(
-              <Link key={i} href={url} className="text-2xl hover:text-[#59facf] transition"><Icon/></Link>
-            ))}
-          </div>
-        </section>
-      </main>
+      <LandingPage
+        pageSize={postsPerPage}
+        posts={posts}
+        currentPage={currentPage}
+        totalPages={posts.length}
+        categories={categories}
+        query={query || ""}
+      />
     </PageLayout>
   );
 }
