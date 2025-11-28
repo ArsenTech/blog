@@ -4,7 +4,7 @@ All notable changes of my blog page will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [1.0.0] - Unreleased
+## [1.0.0] - 2025-11-28
 ### Added
 - Custom blockquote variants: `Note`, `Tip`, `Important`, `Warning`, `Caution`
 - Breadcrumbs and Buttons (Mobile TOC, Comments, Share) all in 1 component
@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Made Flair-style Categories widget collapsible
 - Made Table of Contents widget mobile compatible
 - Made Badges Clickable
-- Updated Pagination
+- Updated Pagination design
 - Updated components using the Latest ShadCN components
 ### Removed
 - “Coming Soon” placeholder
