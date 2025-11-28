@@ -4,7 +4,7 @@ export function getValueFromKey(searchParams: URLSearchParams, key: string, fall
      const hasKey = searchParams.has(key);
      return hasKey ? searchParams.get(key)?.slice(0,100) ?? fallbackValue : fallbackValue
 }
-export const absoluteURL = (path: string) => `${SITE_URL}${path}`
+export const absoluteURL = (path?: string) => !path ? SITE_URL : `${SITE_URL}${path}`
 
 export function getRangeAsText(page: number, pageSize: number, totalResults: number, itemName = 'result'): string {
   if (totalResults === 0)

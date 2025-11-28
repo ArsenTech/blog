@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { KEYWORDS } from "@/lib/constants";
 import { Toaster } from "@/components/ui/sonner";
+import { absoluteURL } from "@/lib/helpers/seo";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -12,6 +13,7 @@ const sora = Sora({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(absoluteURL()),
   title: {
     template: "%s | ArsenTech Blog",
     absolute: "Blog | ArsenTech's Website"
@@ -29,6 +31,9 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   verification: {
     google: "fO_3worN0840UBpRpX9H9HVtu-U2Z3y5LFJT5qzXpUE" 
+  },
+  alternates: {
+    canonical: absoluteURL("/")
   }
 };
 
