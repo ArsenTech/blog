@@ -2,7 +2,6 @@ import { Feed } from "feed"
 import fs from "fs"
 import path from "path"
 import { getAllPosts } from "@/lib/helpers"
-import { absoluteURL } from "@/lib/helpers/seo"
 
 const SITE_URL = "https://arsentech-blog.vercel.app"
 
@@ -14,8 +13,8 @@ const generateRSS = async() => {
           generator: "Feed for Node.js",
           language: "en",
           link: SITE_URL,
-          image: absoluteURL("/app-icon.png"),
-          favicon: absoluteURL("/favicon.ico"),
+          image: `${SITE_URL}/app-icon.png`,
+          favicon: `${SITE_URL}/favicon.ico`,
           copyright: `All rights reserved ${new Date().getFullYear()}, ArsenTech`,
           category: "Tech",
           author: {
@@ -23,9 +22,9 @@ const generateRSS = async() => {
                link: "https://arsentech.github.io",
           },
           feedLinks: {
-               rss2: absoluteURL(`/rss.xml`),
-               json: absoluteURL(`/rss.json`),
-               atom: absoluteURL(`/atom.xml`),
+               rss2: `${SITE_URL}/rss.xml`,
+               json: `${SITE_URL}/rss.json`,
+               atom: `${SITE_URL}/atom.xml`,
           },
      })
 
@@ -35,8 +34,8 @@ const generateRSS = async() => {
           feed.addItem({
                title: post.title,
                description: post.description,
-               id: absoluteURL(`/posts/${post.slug}`),
-               link: absoluteURL(`/posts/${post.slug}`),
+               id: `${SITE_URL}/posts/${post.slug}`,
+               link: `${SITE_URL}/posts/${post.slug}`,
                date: post.date,
                category: post.categories.map(cat=>({name: cat})),
                author: [
