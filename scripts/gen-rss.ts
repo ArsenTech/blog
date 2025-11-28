@@ -2,8 +2,9 @@ import { Feed } from "feed"
 import fs from "fs"
 import path from "path"
 import { getAllPosts } from "@/lib/helpers"
-import { SITE_URL } from "@/lib/constants"
 import { absoluteURL } from "@/lib/helpers/seo"
+
+const SITE_URL = "https://arsentech-blog.vercel.app"
 
 const generateRSS = async() => {
      const feed = new Feed({
