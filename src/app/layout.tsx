@@ -26,7 +26,10 @@ export const metadata: Metadata = {
     icon: "/app-icon.png",
     apple: "/app-icon.png"
   },
-  manifest: "/manifest.json"
+  manifest: "/manifest.json",
+  verification: {
+    google: "fO_3worN0840UBpRpX9H9HVtu-U2Z3y5LFJT5qzXpUE" 
+  }
 };
 
 export const viewport: Viewport = {
