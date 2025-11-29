@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "ArsenTech's Blog Site",
     short_name: "ArsenTech Blog",
-    description: "Welcome to ArsenTech's Official Blog Site — your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds."
+    description: "Welcome to ArsenTech's Official Blog Site — your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds.",
     start_url: '/',
     display: 'standalone',
     background_color: '#fff',
