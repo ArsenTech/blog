@@ -25,7 +25,10 @@ export const metadata: Metadata = {
   },
   keywords: KEYWORDS,
   icons: {
-    icon: "/app-icon.png",
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/app-icon.png", sizes: "192x192", type: "image/png"}
+    ],
     apple: "/app-icon.png"
   },
   manifest: "/manifest.json",
