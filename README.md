@@ -65,7 +65,9 @@ This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus 
 - Collapsible widgets (Flairs, Table of Contents)
 - SEO (Title, Description, Metadata, Tags, Sitemap, Search Pages)
 ### Website Speed
-Coming Soon after measuring with different tools (Pingdom, GTMetrix, Pagespeed)
+- **Google PageSpeed Insights Score**: 96 on Mobile, 100 on Desktop
+- **Pingdom Website Speed Test Score**: 84
+- **GTMetrix Score**: Performance - 99%, Structure - 100% 
 ### Built with
 - [![Next JS][nextjs-shield]][nextjs-url]
 - [![ShadCN UI][shadcn-shield]][shadcn-url]
