@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { absoluteURL } from "@/lib/helpers/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://arsentech-blog.vercel.app/sitemap.xml",
+    sitemap: absoluteURL("/sitemap.xml"),
   };
 }
