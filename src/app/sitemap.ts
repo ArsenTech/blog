@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
                url: absoluteURL(`/posts/${slug}`),
                lastModified: post?.date ?? new Date(),
                changeFrequency: "weekly",
-               priority: 0.9
+               priority: 0.8
           }
      }))
      const latestDate = searchPostPages.length>0 ? new Date(Math.max(...searchPostPages.map(p => new Date(p.lastModified as string).getTime()))) : new Date()
