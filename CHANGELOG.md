@@ -4,7 +4,16 @@ All notable changes of my blog page will be documented here.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [1.0.0] - 2025-11-28
+## 1.0.1 - 2026-01-23
+### Added
+- Edit Date (If the post was edited)
+- 7 Featured Posts from Existing Blog Posts
+### Improved
+- Featured Posts Card
+- Blog Header
+- Blog Post Card
+
+## 1.0.0 - 2025-11-28
 ### Added
 - Custom blockquote variants: `Note`, `Tip`, `Important`, `Warning`, `Caution`
 - Breadcrumbs and Buttons (Mobile TOC, Comments, Share) all in 1 component
@@ -16,7 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Blog page: Interactions (Powered by Giscus)
 - SEO (Title, Description, Metadata, Tags, Sitemap, Search Pages, OpenGraph)
 - Toaster to show the Share Status while Sharing the post (Success or Error)
-- 10 blog posts
+- 10 initial blog posts
 ### Changed
 - Migrated from `markdown-to-jsx` to MDX
 - Made widgets collapsible (TOC, Categories, etc.)
@@ -29,7 +38,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 - “Coming Soon” placeholder
 
-## [0.1.1] - 2025-06-14 (Pre-release) 
+## 0.1.1 - 2025-06-14 (Pre-release) 
 ### Added
 - Home page widgets: Flair-style Categories, Featured Posts, and Search Bar
 - Blog page: Table of Contents widget and Tag-style Categories, Related Posts section
@@ -43,6 +52,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Landing Page with feature highlights
 - Blog Post page with full Markdown support
 
-## [0.1.0] - 2025-03-28 (Pre-release)
+## 0.1.0 - 2025-03-28 (Pre-release)
 ### Initialized
 - “Coming Soon” placeholder

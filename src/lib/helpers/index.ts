@@ -52,6 +52,7 @@ export const getPostBySlug = cache(async(slug: string): Promise<IBlogPostFull | 
                slug: frontmatter.slug ?? slug,
                description: frontmatter.description,
                date: frontmatter.date ? new Date(frontmatter.date) : new Date(),
+               editDate: frontmatter.editDate,
                tags: frontmatter.tags ?? [],
                categories: frontmatter.categories ?? [],
                published: frontmatter.published ?? true,

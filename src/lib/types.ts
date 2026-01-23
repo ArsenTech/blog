@@ -4,6 +4,7 @@ export interface IBlogPostBase{
      title: string;
      description: string;
      date: Date;
+     editDate?: string;
      tags: string[];
      published: boolean;
      featured: boolean;

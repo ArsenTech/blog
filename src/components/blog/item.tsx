@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar, Edit, User } from "lucide-react";
 import { format } from "date-fns";
 import { IBlogPostBase } from "@/lib/types";
 import { useIsMobile } from "@/hooks/use-is-mobile";
@@ -10,7 +10,7 @@ export interface BlogItemProps{
      postData: IBlogPostBase
 }
 export default function BlogItem({postData}: BlogItemProps){
-     const {title, description, slug, date, author} = postData;
+     const {title, description, slug, date, author, editDate} = postData;
      const isMobile = useIsMobile();
      return (
           <div className="space-y-3 pb-3 mb-3 border-b border-b-accent last:border-b-0 last:pb-0 last:mb-0">
@@ -20,6 +20,9 @@ export default function BlogItem({postData}: BlogItemProps){
                     <p className="text-sm md:text-md lg:text-base flex items-center gap-5 font-medium">
                          <span className="flex items-center gap-2.5"><User/><Link className="text-foreground hover:text-primary hover:underline underline-offset-4" href={author.url}>{author.name}</Link></span>
                          <span className="flex items-center gap-2.5"><Calendar className="size-5"/>{format(date,"LLL do, yyyy")}</span>
+                         {!!editDate && (
+                              <span className="flex items-center gap-2.5"><Edit className="size-5"/>{format(editDate,"LLL do, yyyy")}</span>
+                         )}
                     </p>
                     {!isMobile ? (
                          <Button asChild variant="ghost">
