@@ -48,7 +48,7 @@ export default function CodeBlockWrapper({ children, lang, smallerMargin=false }
           {isCopied ? <CheckCircle /> : <Copy />}
         </Button>
       </div>
-      <pre className="m-0 bg-[#2f2f2f] rounded-none" ref={preRef}>{children}</pre>
+      <pre className="m-0 bg-[#2f2f2f] rounded-none break-all whitespace-pre-wrap" ref={preRef}>{children}</pre>
     </div>
   );
 }
