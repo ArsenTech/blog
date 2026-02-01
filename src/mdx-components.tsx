@@ -11,7 +11,9 @@ import { Kbd, KbdGroup } from "./components/ui/kbd";
 import CMDBlock from "./components/cmd-block";
 
 const customComponents: MDXComponents = {
-  CMDBlock
+  CMDBlock,
+  Kbd,
+  KbdGroup,
 }
 
 export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
@@ -26,8 +28,6 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
   a: (props) => <Link className={cn(buttonVariants({ variant: "link" }), "px-0.5 py-0 whitespace-normal text-sm md:text-base break-all")} {...props} />,
   blockquote: (props) => <Blockquote {...props}/>,
   small: (props) => <small className="text-sm font-medium leading-none" {...props} />,
-  Kbd: Kbd,
-  KbdGroup: KbdGroup,
   table: Table,
   thead: TableHeader,
   tr: TableRow,
