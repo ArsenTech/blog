@@ -98,7 +98,7 @@
     @apply bg-primary text-primary-foreground;
   }
   :not(pre) > code {
-    @apply relative rounded bg-muted text-foreground px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold
+    @apply relative rounded bg-muted text-foreground px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold break-all inline-block
   }
   [id] {
     @apply scroll-mt-20
