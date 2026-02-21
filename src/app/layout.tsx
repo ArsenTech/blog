@@ -37,7 +37,30 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: absoluteURL("/")
-  }
+  },
+  openGraph: {
+    title: "ArsenTech's Official Blog Website",
+    description: "Your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds.",
+    url: absoluteURL("/"),
+    siteName: "ArsenTech Blog",
+    locale: "en_US",
+    type: "website",
+    images: {
+      url: "/og.png",
+      width: 1200,
+      height: 630
+    }
+  },
+  twitter: {
+    images: [{
+      url: "/og.png",
+      width: 1200,
+      height: 630
+    }],
+    card: "summary_large_image",
+    title: "ArsenTech's Official Blog Website",
+    description: "Your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds.",
+  },
 };
 
 export const viewport: Viewport = {

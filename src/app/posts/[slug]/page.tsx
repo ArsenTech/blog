@@ -21,7 +21,7 @@ export const generateMetadata = async({params}: SinglePostPageProps): Promise<Me
   const {slug} = await params;
   const currPost = await getPostBySlug(slug);
   if(!currPost || !currPost.published) return notFound();
-  const ogImage = absoluteURL(`/api/og?title=${encodeURIComponent(currPost.title)}&description=${encodeURIComponent(currPost.description)}&date=${currPost.date.toISOString()}`)
+  const ogImage = absoluteURL(`/api/og?title=${encodeURIComponent(currPost.title)}&description=${encodeURIComponent(currPost.description)}&date=${currPost.date.toISOString()}&bg=image`)
   return {
     title: currPost.title,
     description: currPost.description,

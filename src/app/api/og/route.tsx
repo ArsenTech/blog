@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { getValueFromKey } from "@/lib/helpers/seo"
+import { absoluteURL, getValueFromKey } from "@/lib/helpers/seo"
 import { formatDate } from "date-fns"
 import { ImageResponse } from "next/og"
 
@@ -16,9 +16,17 @@ export async function GET(req: Request) {
     const title = getValueFromKey(searchParams,"title","ArsenTech Blog")
     const description = getValueFromKey(searchParams,"description","Learn about cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place.")
     const date = new Date(getValueFromKey(searchParams,"date",new Date().toDateString()))
-
+    const bgType = getValueFromKey(searchParams,"bg","gradient") as "image" | "gradient";
+    const bgImage: React.CSSProperties = bgType==="image" ? {
+      backgroundImage: `url(${absoluteURL("/backgrounds/og-bg.jpg")})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "contain"
+    } : {
+      backgroundImage: "linear-gradient(140deg,#22b455 25%,#1dd1a1)",
+    }
     return new ImageResponse((
-      <div style={{backgroundImage: "linear-gradient(140deg,#22b455 25%,#1dd1a1)"}} tw="flex flex-col w-full h-full items-center justify-between p-5 text-white">
+      <div style={bgImage} tw="flex flex-col w-full h-full items-center justify-between p-5 text-white">
         <img src={`${siteUrl}/arsentech-dark.svg`} alt="ArsenTech" tw="mb-3" width={300} height={64}/>
         <div tw="flex items-center justify-center flex-col">
           <h1 tw="text-[70px] my-0 font-semibold">{title}</h1>

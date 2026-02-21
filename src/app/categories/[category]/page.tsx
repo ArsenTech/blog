@@ -27,15 +27,11 @@ export const generateMetadata = async({params, searchParams}: PageProps): Promis
      const currentPage = page ? parseInt(page) : 1;
      const postsPerPage = pageSize ? parseInt(pageSize) : POSTS_IN_SEARCH;
      const totalPages = Math.ceil(results.length / postsPerPage)
-     const now = new Date()
-
-     const meta = {
+     const now = new Date(), meta = {
           title: `Top ${results.length} "${categoryDecoded}" blog posts - Updated ${now.getFullYear()}`,
           description: `Explore {results.length} posts from the "${categoryDecoded}" category — from coding tutorials to tech insights`,
      }
-
      const ogImage = absoluteURL(`/api/og?title=${encodeURIComponent(meta.title)}&description=${encodeURIComponent(meta.description)}&date=${now.toISOString()}`)
-
      return {
           title: meta.title,
           description: meta.description,
