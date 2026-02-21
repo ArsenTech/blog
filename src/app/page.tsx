@@ -20,7 +20,7 @@ export const generateMetadata = async({searchParams}: HomepageProps): Promise<Me
       next: currentPage < totalPages ? absoluteURL(`/?page=${currentPage + 1}`) : undefined
     },
     alternates: {
-      canonical: absoluteURL("/")
+      canonical: currentPage === 1 ? absoluteURL("/") : absoluteURL(`/?page=${currentPage}`)
     }
   }
 }
