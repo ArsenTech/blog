@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { SITE_URL } from "../constants";
 
 export function getValueFromKey(searchParams: URLSearchParams, key: string, fallbackValue=""):string{
@@ -18,3 +19,7 @@ export function getRangeAsText(page: number, pageSize: number, totalResults: num
 
   return `Showing ${start} - ${end} of ${totalResults} ${totalResults <= 1 ? itemName : `${itemName}s`}`;
 }
+
+export const metaAlternatives = (url?: string): Metadata["alternates"] => ({
+  canonical: absoluteURL(url)
+})

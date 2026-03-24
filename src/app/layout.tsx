@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { KEYWORDS } from "@/lib/constants";
 import { Toaster } from "@/components/ui/sonner";
-import { absoluteURL } from "@/lib/helpers/seo";
+import { absoluteURL, metaAlternatives } from "@/lib/helpers/seo";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -35,9 +35,7 @@ export const metadata: Metadata = {
   verification: {
     google: "fO_3worN0840UBpRpX9H9HVtu-U2Z3y5LFJT5qzXpUE" 
   },
-  alternates: {
-    canonical: absoluteURL("/")
-  },
+  alternates: metaAlternatives("/"),
   openGraph: {
     title: "ArsenTech's Official Blog Website",
     description: "Your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds.",

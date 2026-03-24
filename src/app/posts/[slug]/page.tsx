@@ -2,7 +2,7 @@ import PageLayout from "@/components/layout";
 import BlogPost from "@/components/pages/blog-post";
 import { KEYWORDS } from "@/lib/constants";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/helpers";
-import { absoluteURL } from "@/lib/helpers/seo";
+import { absoluteURL, metaAlternatives } from "@/lib/helpers/seo";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -62,9 +62,7 @@ export const generateMetadata = async({params}: SinglePostPageProps): Promise<Me
       title: currPost.title,
       description: currPost.description,
     },
-    alternates: {
-      canonical: absoluteURL(`/posts/${slug}`)
-    }
+    alternates: metaAlternatives(`/posts/${slug}`)
   }
 }
 

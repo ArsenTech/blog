@@ -2,7 +2,7 @@ import PageLayout from "@/components/layout";
 import LandingPage from "@/components/pages/landing";
 import { POSTS_PER_PAGE } from "@/lib/constants";
 import { getAllPosts, getCategories } from "@/lib/helpers";
-import { absoluteURL } from "@/lib/helpers/seo";
+import { absoluteURL, metaAlternatives } from "@/lib/helpers/seo";
 import type { Metadata } from "next";
 
 interface HomepageProps{
@@ -19,9 +19,7 @@ export const generateMetadata = async({searchParams}: HomepageProps): Promise<Me
       previous: currentPage > 1 ? absoluteURL(`/?page=${currentPage - 1}`) : undefined,
       next: currentPage < totalPages ? absoluteURL(`/?page=${currentPage + 1}`) : undefined
     },
-    alternates: {
-      canonical: currentPage === 1 ? absoluteURL("/") : absoluteURL(`/?page=${currentPage}`)
-    }
+    alternates: metaAlternatives(currentPage === 1 ? "/" : `/?page=${currentPage}`)
   }
 }
 export default async function Home({searchParams}: HomepageProps) {

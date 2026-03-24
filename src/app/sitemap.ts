@@ -25,7 +25,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
                url: absoluteURL(`/posts/${slug}`),
                lastModified: post?.date ?? new Date(),
                changeFrequency: "daily",
-               priority: 0.8
+               priority: 0.8,
+               images: post ? [
+                    absoluteURL(`/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description)}&date=${post.date.toISOString()}&bg=image`)
+               ] : undefined
           }
      }))
      const latestDate = searchPostPages.length>0 ? new Date(Math.max(...searchPostPages.map(p => new Date(p.lastModified as string).getTime()))) : new Date()
@@ -34,7 +37,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
                url: SITE_URL,
                lastModified: latestDate,
                changeFrequency: "monthly",
-               priority: 1
+               priority: 1,
+               images: [absoluteURL("/og.png")]
           },
           ...searchPostPages,
           ...searchTagPages,

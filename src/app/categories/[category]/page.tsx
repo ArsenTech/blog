@@ -2,7 +2,7 @@ import PageLayout from "@/components/layout"
 import Search from "@/components/pages/search"
 import { KEYWORDS, POSTS_IN_SEARCH } from "@/lib/constants"
 import { getAllCategories, getPostsByCategory } from "@/lib/helpers"
-import { absoluteURL } from "@/lib/helpers/seo"
+import { absoluteURL, metaAlternatives } from "@/lib/helpers/seo"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
@@ -63,9 +63,7 @@ export const generateMetadata = async({params, searchParams}: PageProps): Promis
                title: meta.title,
                description: meta.description,
           },
-          alternates: {
-               canonical: absoluteURL(`/categories/${category}`)
-          }
+          alternates: metaAlternatives(`/categories/${category}`)
      }
 }
 
