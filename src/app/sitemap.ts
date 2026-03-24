@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
           const post = await getPostBySlug(slug)
           return {
                url: absoluteURL(`/posts/${slug}`),
-               lastModified: post?.date ?? now,
+               lastModified: post?.editDate ?? now,
                changeFrequency: "daily",
                priority: 0.8,
                images: post ? [
