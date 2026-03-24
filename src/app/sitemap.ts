@@ -7,23 +7,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
      const allTags = await getAllTags();
      const allSlugs = await getAllSlugs();
      const allCategories = await getAllCategories();
+     const now = new Date();
      const searchTagPages: MetadataRoute.Sitemap = allTags.map(tag=>({
           url: absoluteURL(`/tags/${tag}`),
-          lastModified: new Date(),
+          lastModified: now,
           changeFrequency: "weekly",
           priority: 0.7
      }))
      const searchCategoryPages: MetadataRoute.Sitemap = allCategories.map(category=>({
           url: absoluteURL(`/categories/${category}`),
-          lastModified: new Date(),
+          lastModified: now,
           changeFrequency: "weekly",
           priority: 0.7
      }))
      const searchPostPages: MetadataRoute.Sitemap = await Promise.all(allSlugs.map(async slug=>{
-          const post = await getPostBySlug(slug);
+          const post = await getPostBySlug(slug)
           return {
                url: absoluteURL(`/posts/${slug}`),
-               lastModified: post?.date ?? new Date(),
+               lastModified: post?.date ?? now,
                changeFrequency: "daily",
                priority: 0.8,
                images: post ? [
@@ -31,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
                ] : undefined
           }
      }))
-     const latestDate = searchPostPages.length>0 ? new Date(Math.max(...searchPostPages.map(p => new Date(p.lastModified as string).getTime()))) : new Date()
+     const latestDate = searchPostPages.length>0 ? new Date(Math.max(...searchPostPages.map(p => new Date(p.lastModified as string).getTime()))) : now
      return [
           {
                url: SITE_URL,
