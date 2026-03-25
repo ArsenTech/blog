@@ -21,7 +21,6 @@ export const generateMetadata = async({params}: SinglePostPageProps): Promise<Me
   const {slug} = await params;
   const currPost = await getPostBySlug(slug);
   if(!currPost || !currPost.published) return notFound();
-  const ogImage = absoluteURL(`/api/og?title=${encodeURIComponent(currPost.title)}&description=${encodeURIComponent(currPost.description)}&date=${currPost.date.toISOString()}&bg=image`)
   return {
     title: currPost.title,
     description: currPost.description,
@@ -47,14 +46,14 @@ export const generateMetadata = async({params}: SinglePostPageProps): Promise<Me
       authors: "ArsenTech",
       tags: currPost.tags,
       images: {
-        url: ogImage,
+        url: absoluteURL(`/api/og/${slug}`),
         width: 1200,
         height: 630
       }
     },
     twitter: {
       images: [{
-        url: ogImage,
+        url: absoluteURL(`/api/og/${slug}`),
         width: 1200,
         height: 630
       }],

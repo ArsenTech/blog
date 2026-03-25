@@ -27,9 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>{
                lastModified: post?.editDate ?? now,
                changeFrequency: "daily",
                priority: 0.8,
-               images: post ? [
-                    absoluteURL(`/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description)}&date=${post.date.toISOString()}&bg=image`)
-               ] : undefined
+               images: post ? [absoluteURL(`/api/og/${slug}`)] : undefined
           }
      }))
      const latestDate = searchPostPages.length>0 ? new Date(Math.max(...searchPostPages.map(p => new Date(p.lastModified as string).getTime()))) : now
