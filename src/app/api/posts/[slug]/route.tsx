@@ -7,8 +7,8 @@ interface SinglePostPageProps{
      params: Promise<{slug: string}>
 }
 export async function GET(_: Request, {params}: SinglePostPageProps){
-     const {slug} = await params;
      try{
+          const {slug} = await params;
           const post = await getPostBySlug(slug)
           if(!post) return new NextResponse("Post not found",{status: 404});
           return NextResponse.json({

@@ -11,19 +11,19 @@ export async function GET(req: Request, {params}: ParamsType) {
   try{
     const {slug} = await params
     const siteUrl = new URL(req.url).origin;
-    const res = await fetch(`${siteUrl}/api/posts/${slug}`,{
-      next: { revalidate: 60 }
-    });
+    const [res, regular, semibold] = await Promise.all([
+      fetch(`${siteUrl}/api/posts/${slug}`,{
+        next: { revalidate: 60 }
+      }),
+      fetch(new URL("../../../../assets/Sora-Regular.ttf",import.meta.url)).then(res => res.arrayBuffer()),
+      fetch(new URL("../../../../assets/Sora-SemiBold.ttf",import.meta.url)).then(res => res.arrayBuffer())
+    ])
     if (!res.ok) return new NextResponse("Post not found",{status: 404});
     const post = await res.json() as {
       title: string,
       description: string,
       date: string
     }
-    const [regular, semibold] = await Promise.all([
-      fetch(new URL("../../../../assets/Sora-Regular.ttf",import.meta.url)).then(res => res.arrayBuffer()),
-      fetch(new URL("../../../../assets/Sora-SemiBold.ttf",import.meta.url)).then(res => res.arrayBuffer())
-    ])
     return new ImageResponse((
       <div style={{
         backgroundImage: `url(${absoluteURL("/backgrounds/og-bg.jpg")})`,
