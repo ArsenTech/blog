@@ -45,3 +45,5 @@ next-env.d.ts
 public/rss.xml
 public/rss.json
 public/atom.xml
+.env
+public/sponsors/.cache.json

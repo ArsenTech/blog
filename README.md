@@ -13,6 +13,7 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
+[![sponsors-badge]][sponsors-link]
 
 [![Issues][issues-shield]][issues-url]
 [![Discussions][discussions-shield]][discussions-url]
@@ -33,6 +34,7 @@
             </ul>
         </li>
         <li><a href="#versioning">Versioning</a></li>
+        <li><a href="#sponsors">Sponsors</a></li>
         <li>
             <a href="#contributing">Contributing</a>
             <ul>
@@ -78,6 +80,10 @@ This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus 
 
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
+
+## Sponsors
+Check out our awesome sponsors! ❤️
+[![Sponsors List][sponsors-list]][sponsors-link]
 
 ## Contributing
 Contributions are Always Welcome! Please read both [Code of Conduct][code-of-conduct-url] and [CONTRIBUTING.md][contributing-url] before contributing.
@@ -126,6 +132,9 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [discussions-url]: https://github.com/ArsenTech/blog/discussions
 [version-shield]: https://img.shields.io/github/package-json/v/ArsenTech/blog?style=for-the-badge
 [vercel-stats-shield]: https://vercelbadge.vercel.app/api/ArsenTech/blog?style=for-the-badge
+[sponsors-list]: https://raw.githubusercontent.com/ArsenTech/clamav-gui/main/public/sponsors/sponsors.svg
+[sponsors-link]: https://github.com/sponsors/ArsenTech
+[sponsors-badge]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86&style=for-the-badge
 
 <!-- Languages -->
 [nextjs-shield]: https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
