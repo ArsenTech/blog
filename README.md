@@ -46,6 +46,9 @@
     </ol>
 </details>
 
+> [!WARNING]
+> This repository is deprecated and no longer actively maintained. Please migrate to [`ArsenTech/ArsenTech`](https://github.com/ArsenTech/ArsenTech) instead.
+
 ## About
 This is an ArsenTech's Blog Page - your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech-related curious minds.
 ### Features Included

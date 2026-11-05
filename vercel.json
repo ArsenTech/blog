@@ -1,0 +1,26 @@
+
+{
+     "$schema": "https://openapi.vercel.sh/vercel.json",
+     "redirects": [
+          {
+               "source": "/",
+               "destination": "https://arsentech-yt.vercel.app/blog",
+               "permanent": true
+          },
+          {
+               "source": "/posts/:id",
+               "destination": "https://arsentech-yt.vercel.app/blog/:id",
+               "permanent": true
+          },
+          {
+               "source": "/categories/:category",
+               "destination": "https://arsentech-yt.vercel.app/categories/:category",
+               "permanent": true
+          },
+          {
+               "source": "/tags/:tag",
+               "destination": "https://arsentech-yt.vercel.app/tags/:tag",
+               "permanent": true
+          }
+     ]
+}
