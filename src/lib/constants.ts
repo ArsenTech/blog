@@ -1,9 +1,9 @@
 import {SiYoutube, SiCodepen, SiGithub, SiDeviantart, SiOdysee, SiScratch, SiPatreon} from "react-icons/si"
 
 export const LINKS = [
-     {name: "Home", url: "https://arsentech.github.io/#home"},
-     {name: "About", url: "https://arsentech.github.io/#about"},
-     {name: "Contact", url: "https://arsentech.github.io/#contact"}
+     {name: "Home", url: "https://arsentech-yt.vercel.app/#home"},
+     {name: "About", url: "https://arsentech-yt.vercel.app/#about"},
+     {name: "Contact", url: "https://arsentech-yt.vercel.app/#contact"}
 ]
 export const SOCIAL_MEDIA_LINKS = [
      {Icon: SiYoutube, url: "https://www.youtube.com/c/ArsenTech/"},

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: "Welcome to ArsenTech's Official Blog Website — your go-to hub for tech tutorials, antivirus comparisons, and in-depth guides for programmers, tech enthusiasts, and more tech related curious minds.",
   authors: {
     name: "ArsenTech",
-    url: "https://arsentech.github.io/"
+    url: "https://arsentech-yt.vercel.app/"
   },
   keywords: KEYWORDS,
   icons: {

@@ -162,4 +162,4 @@ Take a deep breath, enjoy the process, and let’s make the blog page beautiful,
 [yt-url]:https://www.youtube.com/channel/UCrtH0g6NE8tW5VIEgDySYtg
 [patreon-url]:https://www.patreon.com/ArsenTech
 [github-url]: https://github.com/ArsenTech
-[website-url]: https://arsentech.github.io
+[website-url]: https://arsentech-yt.vercel.app

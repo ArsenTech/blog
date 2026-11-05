@@ -30,7 +30,7 @@ export default function BlogAccessibility({currTitle, setIsOpen, isTablet, hasTO
                <Breadcrumb className="w-3/5">
                     <BreadcrumbList className="text-xs sm:text-sm">
                          <BreadcrumbItem>
-                              <BreadcrumbLink href="https://arsentech.github.io/">Home</BreadcrumbLink>
+                              <BreadcrumbLink href="https://arsentech-yt.vercel.app/">Home</BreadcrumbLink>
                          </BreadcrumbItem>
                          <BreadcrumbSeparator/>
                          <BreadcrumbItem>
