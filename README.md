@@ -132,7 +132,7 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [discussions-url]: https://github.com/ArsenTech/blog/discussions
 [version-shield]: https://img.shields.io/github/package-json/v/ArsenTech/blog?style=for-the-badge
 [vercel-stats-shield]: https://vercelbadge.vercel.app/api/ArsenTech/blog?style=for-the-badge
-[sponsors-list]: https://raw.githubusercontent.com/ArsenTech/clamav-gui/main/public/sponsors/sponsors.svg
+[sponsors-list]: https://raw.githubusercontent.com/ArsenTech/blog/main/public/sponsors/sponsors.svg
 [sponsors-link]: https://github.com/sponsors/ArsenTech
 [sponsors-badge]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86&style=for-the-badge
 
